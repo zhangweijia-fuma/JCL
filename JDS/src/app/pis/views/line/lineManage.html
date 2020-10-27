@@ -1,0 +1,432 @@
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .xDetailPos button
+  {
+    background: #4AB033;
+    color: white;
+    line-height: 5px;
+    /*width: 120px;*/
+  }
+
+  .screenPic{
+    width: 99.5%;
+    margin-top: 5px;
+  }
+
+  .GridHeading{
+    background: #4ab033;
+    /*height: 20px;*/
+    padding: 8px 15px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: white;
+  }
+
+  .GridHeading2{
+    background: white; 
+    color: black; 
+    border-bottom: 1px solid #ccc;
+    padding: 8px 15px;
+  }
+</style>
+
+<link href="libs/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+
+
+<div class="container pos" data-ng-init="initialData()" style="width: 98%">
+  <div class="row nomargin pos">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>线路维护</li>
+            </ul>
+
+            <div class="form-group flright xHandle" style="top: 8px; right: 0px;" ng-if="isAdmin&&lineMode">
+              <span class="ml10 ">
+                <button class="bton green"  ng-click="createLine()"><i class="icon icon-list-alt"></i> 创建线路</button> 
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group" ng-if="lineMode">
+          <span class="i-form-label ml10">选择线路：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="lineList.selected" theme="select2" ng-change="chooseLine(lineList.selected)" style="width: 161px">
+              <ui-select-match placeholder="选择全部">
+                <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+                <ui-select-choices repeat="item in (lineList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">选择类别：</span>
+          <input type="radio" name="showType" value="station" style="margin-top: 8px; margin-left:20px" ng-click="chooseShowType(true)" checked> 车站
+          <input type="radio" name="showType" value="train" style="margin-left:20px" ng-click="chooseShowType(false)"> 列车
+        </div>
+      </div>
+      <!-- 下拉列表 -->
+
+      <div class="content clear_after pos" style="top:100px;">
+        <div class="col-md-3 zPanelBox" style="width: 22%" ng-show="showType">
+          <div class="panel zPanel zPanelzzz1 pos" style="width:13%;" >
+            <div class="panel-heading " style="">车站控制器</div>
+            <div class="panel-body pos" style="top: 36px;">
+              <div class="zPanelPadding15" style="padding: 0px">
+                <div class=" xDetailPatBoxmenus clear_after" style="padding: 0px;">
+                  <div class="panel-body" id ="sel_station_tree" >
+                    <ul id="station_tree" class="ztree1 pos" style="overflow-y: auto;"></ul>
+                  </div>   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 zPanelBox" style="width: 22%" ng-show="!showType">
+          <div class="panel zPanel zPanelzzz1 pos" style="width:13%;" >
+            <div class="panel-heading " style="">列车控制器</div>
+            <div class="panel-body pos" style="top: 36px;">
+              <div class="zPanelPadding15" style="padding: 0px">
+                <div class=" xDetailPatBoxmenus clear_after" style="padding: 0px;">
+                  <div class="panel-body" id ="sel_train_tree" >
+                    <ul id="train_tree" class="ztree1 pos" style="overflow-y: auto;"></ul>
+                  </div>   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9 zWid75" style="width: 86%; font-size: 14px;" >
+          <div class="panel pos" style="border:0px; width: 86%; overflow-y: auto;">
+            <!-- 基本信息 -->
+            <div>
+              <div class="GridHeading">运营线路基本信息
+                <div style="float:right; margin-top: -5px;" ng-if="isAdmin">
+                  <span class="ml10 ">
+                    <button class="bton green"  ng-click="deleteLine()" ng-if="lineMode"><i class="icon icon-trash"></i> 删除</button> 
+                    <button class="bton green"  ng-click="updateLine()"><i class="icon icon-edit"></i> 编辑</button>
+                    <button class="bton green"  ng-click="createStation()"><i class="icon icon-list-alt"></i> 新增车站</button> 
+                    <button class="bton green"  ng-click="exportStationInfo()"><i class="icon icon-download-alt"></i> 导出车站信息</button> 
+                    <button class="bton green"  ng-click="exportControllerInfo()"><i class="icon icon-download-alt"></i> 导出列车信息</button>
+                  </span>
+                </div>
+              </div>
+
+              <div class="panel-body">
+                <div class="zPanelPadding15">
+                  <table class="table table-bordered" style="width: 100%;">
+                    <tr>
+                      <td><span>线路中文名称：</span>{{currentLine.name}}</td> 
+                      <td><span>线路英文名称：</span>{{currentLine.name_en}}</td>
+                      <td><span>运营线路编号：</span>{{currentLine.code}}</td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div style="line-height: 24px; padding: 15px;">
+                  <div ng-repeat="subLineInfo in subLineList">
+                    <table class="table table-bordered" style="width: 100%; margin-bottom: 15px;">
+                      <tr>
+                        <td><span>支线中文名称：</span>{{subLineInfo.sub_line_name}}</td> 
+                        <td><span>支线英文名称：</span>{{subLineInfo.sub_line_name_en}}</td>
+                      </tr>
+                      <tr>
+                        <td><span>上行起点站点：</span>{{subLineInfo.up_start_station_name}}</td> 
+                        <td><span>上行终点站点：</span>{{subLineInfo.up_end_station_name}}</td> 
+                        <td><span>上行首班时间：</span>{{subLineInfo.up_start_time}}</td> 
+                        <td><span>上行末班时间：</span>{{subLineInfo.up_end_time}}</td> 
+                      </tr>
+                      <tr>
+                        <td><span>下行起点站点：</span>{{subLineInfo.down_start_station_name}}</td> 
+                        <td><span>下行终点站点：</span>{{subLineInfo.down_end_station_name}}</td> 
+                        <td><span>下行首班时间：</span>{{subLineInfo.down_start_time}}</td> 
+                        <td><span>下行末班时间：</span>{{subLineInfo.down_end_time}}</td> 
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- 车站信息 -->
+            <div ng-if="showType&&showLevel==2">
+              <div class="GridHeading" >车站信息
+                <div style="float:right; margin-top: -5px;" ng-if="isAdmin">
+                  <span class="ml10 ">
+                    <button class="bton green"  ng-click="deleteStation()"><i class="icon icon-trash"></i> 删除</button> 
+                    <button class="bton green"  ng-click="updateStation()"><i class="icon icon-edit"></i> 编辑</button> 
+                    <button class="bton green"   style="margin-left: 30px;" ng-click="createController()"><i class="icon icon-list-alt"></i> 新增控制器</button> 
+                  </span>
+                </div>
+              </div>
+
+              <div style="line-height: 24px; padding: 15px;">
+                <div>
+                  <table class="table table-bordered" style="width: 100%;">
+                    <tr>
+                      <td><span>中文名称：</span>{{currentNode.show_name}}</td> 
+                      <td><span>英文名称：</span>{{currentNode.name_en}}</td> 
+                    </tr>
+                    <tr>
+                      <td><span>车站编号：</span>{{currentNode.code}}</td>
+                      <td><span>IP&#12288;地址：</span>{{currentNode.ip_address}}</td>
+                    </tr>
+                    <tr>
+                      <td><span>车站序号：</span>{{currentNode.sort}}</td>
+                      <td><span>车站类型：</span>{{currentNode.type_name}}</td>
+                    </tr>
+                    <tr>
+                      <td><span>上行首班：</span>{{currentNode.up_start_time}}</td>
+                      <td><span>上行末班：</span>{{currentNode.up_end_time}}</td>
+                    </tr>
+                    <tr>
+                      <td><span>下行首班：</span>{{currentNode.down_start_time}}</td>
+                      <td><span>下行末班：</span>{{currentNode.down_end_time}}</td>
+                    </tr>                                    
+                    <tr>
+                      <td><span>在线状态：{{currentNode.status_name}}</span></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- 列车信息 -->
+            <div ng-if="!showType&&showLevel==2">
+              <div class="GridHeading" >列车信息
+                <div style="float:right; margin-top: -5px;" ng-if="isAdmin">
+                  <span class="ml10 ">
+                    <button class="bton green"  ng-click="createTrain()"><i class="icon icon-list-alt"></i> 新增</button> 
+                    <button class="bton green"  ng-click="deleteTrain()"><i class="icon icon-trash"></i> 删除</button> 
+                    <button class="bton green"  ng-click="updateTrain()"><i class="icon icon-edit"></i> 编辑</button> 
+                    <button class="bton green" style="margin-left: 30px;" ng-click="createController()"><i class="icon icon-list-alt"></i> 新增控制器</button> 
+                  </span>
+                </div>
+              </div>   
+              <div style="line-height: 24px; padding: 15px;">
+                <div class="">
+                  <table class="table table-bordered" style="width: 100%;">
+                    <tr>
+                      <td><span>中文名称：</span>{{currentNode.show_name}}</td> 
+                      <td><span>英文名称：</span>{{currentNode.name_en}}</td> 
+                    </tr>
+                    <tr>
+                      <td><span>列车编号：</span>{{currentNode.code}}</td>
+                      <td><span>归属线路：</span>{{currentNode.line_name}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div> 
+
+            <!-- 控制器信息 -->
+            <div ng-if="showLevel==3">
+              <div class="GridHeading" >控制器信息
+                <div style="float:right; margin-top: -5px;" >
+                  <span class="ml10 " > 
+                    <button class="warnBtn"  ng-click="rebootController()"><i class="icon icon-rocket"></i> 重启</button>
+                  </span>
+                  <span class="ml10 " style="margin-left: 30px;" ng-if="isAdmin">
+                    <button class="bton green"  ng-click="deleteController()"><i class="icon icon-trash"></i> 删除</button> 
+                  </span>
+                  <span class="ml10 "> 
+                    <button class="bton green"  ng-click="updateController()"><i class="icon icon-edit"></i> 编辑</button>
+                  </span>
+                </div>
+              </div>
+              <div style="line-height: 24px; padding: 15px;">
+                <div>
+                  <table class="table table-bordered" style="width: 100%;">
+                    <tr>
+                      <td><span>设备编号：</span>{{currentController.code}}</td>
+                      <td><span>设备地址：{{currentController.ip_address}}</span></td>
+                    </tr>
+                    <tr>
+                      <td><span>安装地点：</span>{{currentController.install_name}}</td>
+                      <td><span>安装类型：</span>{{currentController.install_type_name}}</td>
+                    </tr>
+                    <tr>
+                      <td><span>唤醒时间：</span>{{currentController.open_time}}</td>
+                      <td><span>休眠时间：</span>{{currentController.close_time}}</td>
+                    </tr>
+                    <tr>
+                      <td><span>在线状态：{{currentController.status_name}}</span></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <!-- 控制器运行状态 -->
+              <div class="GridHeading2">控制器运行状态</div>   
+              <div ng-controller="lineManageCtrl">
+                <highchart config="serverChart"> </highchart>
+              </div>
+
+              <!-- 控制器日志显示 -->
+              <div class="GridHeading2">控制器日志</div>   
+              <div>
+                <div style="overflow-y: auto;">
+                  <table class="table table-bordered tbRow" style="width: 100%;" cellspacing="5">
+                    <thead>
+                      <tr>
+                        <th style="width: 6%">No.</th>
+                        <th style="width: 20%">时间</th>
+                        <th style="width: 15%">日志级别</th>
+                        <th style="width: 20%">日志标题</th>
+                        <th style="width: 39%">日志内容</th>
+                      </tr>
+                    </thead>
+
+                    <tr><td class="ctdLine" colspan="9" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+                    <tbody>
+                      <tr ng-repeat="item in logList" class="hovershow trHover" style="color: {{item.color}}">
+                        <td class="" style="text-align: center;">{{item.no}}</td>
+                        <td class="" style="text-align: center;">{{item.sendTime}}</td>
+                        <td class="" style="text-align: center;">{{item.level_name}}</td>
+                        <td class="" style="text-align: left;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.title}}</td>
+                        <td class="" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.content}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="row text-center floatRight" style="margin-right: 10px;">
+                  <ul class="pager" id="pager">
+                    <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+                    <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+                    <li ><a href="" id="beforeSL">...</a></li>
+                    <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+                    <li ><a href="" id="afterSL">...</a></li>
+                    <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+                    <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+                    <li class="xColor" ng-show="totalPage">|</li>
+                    <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 控制器消息显示 -->
+              <div class="GridHeading2">控制器消息</div>   
+              <div >
+                <div style="overflow-y: auto; overflow-x: hidden;">
+                  <table class="table table-bordered tbRow" cellspacing="5" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th style="width: 6%">No.</th>
+                        <th style="width: 20%">时间</th>
+                        <th style="width: 15%">消息类别</th>
+                        <th style="width: 49%">消息内容</th>
+                        <th style="width: 10%">发送状态</th>
+                      </tr>
+                    </thead>
+
+                    <tr><td class="ctdLine" colspan="7" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+                    <tbody>
+                      <tr ng-repeat="item in messageList" class="hovershow trHover" style="color: {{item.color}}">
+                        <td class="" style="text-align: center;">{{item.no}}</td>
+                        <td class="" style="text-align: center;">{{item.sendTime}}</td>
+                        <td class="" style="text-align: center;">{{item.message_type_name}}</td>
+                        <td class="" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.text_content}}</td>
+                        <td class="" style="text-align: center;">{{item.send_status_name}}</td>
+                        <td class="showdelete" ng-show="item.send_status!='1'">
+                          <i class="icon icon-share" title="重发" ng-click="reSendMessage(item)"></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="row text-center floatRight" style="margin-right: 10px;">
+                  <ul class="pager" id="pager2">
+                    <li class="previous" ><a href="" id="first" ng-click="page2($event)">首页</a></li>
+                    <li class="previous" ><a href="" id="prev" ng-click="page2($event)">上一页</a></li>
+                    <li ><a href="" id="beforeSL">...</a></li>
+                    <li ng-repeat="pageNumber in pager2.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page2($event)">{{pageNumber}}</a></li>
+                    <li ><a href="" id="afterSL">...</a></li>
+                    <li class="next"><a href="" id="next" ng-click="page2($event)">下一页</a></li>
+                    <li class="next"><a href="" id="last" ng-click="page2($event)">尾页</a></li>
+                    <li class="xColor" ng-show="totalPage2">|</li>
+                    <li class="xColor" ng-show="totalPage2">共{{totalPage2}}页</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 控制器视频监播 -->
+              <div class="GridHeading2">控制器视频监播</div>   
+              <div class="showScreen" style="margin-top: 20px;" >
+                <div style="width: 100%; height: 420px;" ng-if="showType">
+                  <video src="{{controllerSurv.video_url}}" style="width: 100%" autoplay="autoplay" controls="controls" muted ng-show="controllerSurv.video_url!=''"></video>
+                  <!-- <video src="http://192.168.0.180:82/live?port=1935&app=live&stream=film" style="width: 100%" autoplay="autoplay" controls="controls" muted></video> -->
+                </div>
+                <div class="screenPic" ng-if="showType==false">
+                  <img class="screenPic" src="{{controllerSurv.file_path}}">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- 新增列车 -->
+<div class="modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog" style="width: 360px;" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon icon-info-sign"></i> 列车信息</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="padding: 20px;">
+
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px; width: ">
+              <div style="height: 40px;"><span>中文名称：</span>
+                <input id="train_name" type="text" class="form-date form-control" style="text-indent: 2px;width: 160px; height: 20px;" ng-model="newTrain.name">
+              </div>
+              <div style="height: 40px;"><span>英文名称：</span>
+                <input id="name_en" type="text" class="form-date form-control" style="text-indent: 2px;width: 160px; height: 20px;" ng-model="newTrain.name_en">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grn" ng-click="confirmToSaveTrainInfo()">确定</button>
+        <button type="button" class="btn btn-grn" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

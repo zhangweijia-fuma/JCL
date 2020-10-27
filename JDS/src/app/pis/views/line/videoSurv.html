@@ -1,0 +1,145 @@
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .showScreen{
+    width:50%;
+    margin:auto;
+    float: left;
+    display: inline;
+  }
+
+  .screenPic{
+    width: 98%;
+    height: 240px;
+  }
+
+</style>
+
+<link href="libs/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+
+<div class="container pos" data-ng-init="initialData()" style="width: 98%">
+  <div class="row nomargin pos">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>视频监播</li>
+            </ul>
+            
+            <div class="form-group flright xHandle" style="top: 8px; right: 0px;">
+              <span class="ml10 ">
+                <button class="bton green"  ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button> 
+              </span> 
+              <span class="ml10 "><button class="bton green"  ng-click="sendMessage()"><i class="icon icon-check"></i> 发送</button> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+
+        <div class="form-group" ng-if="lineMode">
+          <span class="i-form-label ml10">选择线路：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="lineList.selected" theme="select2" ng-change="chooseLine(lineList.selected)" style="width: 161px">
+              <ui-select-match placeholder="选择全部">
+                <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+                <ui-select-choices repeat="item in (lineList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">选择类别：</span>
+          <input type="radio" name="showType" value="station" style="margin-top: 10px; margin-left:20px" ng-click="chooseShowType(true)" checked> 车站
+          <input type="radio" name="showType" value="train" style="margin-top: 10px; margin-left:20px" ng-click="chooseShowType(false)"> 列车
+        </div>
+
+        <div class="form-group" ng-show="showType">
+          <!-- <span class="i-form-label ml10">监播方式：</span> -->
+          <input type="radio" name="liveMode" value="video" style="margin-top: 10px; margin-left:40px" ng-click="chooseLiveMode(true)" checked> 视频
+          <input type="radio" name="liveMode" value="picture" style="margin-top: 10px; margin-left:20px" ng-click="chooseLiveMode(false)"> 图片
+        </div>
+
+
+      </div>
+      <!-- 下拉列表 -->
+
+      <div class="content clear_after pos" style="top:100px;">
+
+        <div class="col-md-3 zPanelBox" style="width: 22%" ng-show="showType">
+          <div class="panel zPanel zPanelzzz1 pos" style="width:200px;" >
+            <div class="panel-heading " style="width: 84%;">车站控制器</div>
+            <div class="panel-body pos" style="top: 36px;">
+              <div class="zPanelPadding15" style="padding: 0px">
+                <div class=" xDetailPatBoxmenus clear_after" style="padding: 0px;">
+                  <div class="panel-body" id ="sel_station_tree" >
+                    <ul id="station_tree" class="ztree2 pos" style="overflow-y: auto; width: 94%;"></ul>
+                  </div>   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 zPanelBox" style="width: 22%" ng-show="!showType">
+          <div class="panel zPanel zPanelzzz1 pos" style="width:200px;" >
+            <div class="panel-heading " style="width: 84%;">列车控制器</div>
+            <div class="panel-body pos" style="top: 36px;">
+              <div class="zPanelPadding15" style="padding: 0px">
+                <div class=" xDetailPatBoxmenus clear_after" style="padding: 0px;">
+                  <div class="panel-body" id ="sel_train_tree" >
+                    <ul id="train_tree" class="ztree2 pos" style="overflow-y: auto; width: 94%;"></ul>
+                  </div>   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9 zWid75" style="width: 80%" >
+          <div class="panel pos" style="border:0px; width: 80%;">
+            
+            <div class="zPanel1 pos" style="border: 0px;">
+              <div class="panel-heading ">视频监播</div>
+              <div class="pos" style="overflow-y: auto; top: 36px;">
+                <div class="" ng-repeat="surv in videoSurvList track by $index" style="width: 80px; display: inline; margin-top: 20px;">
+                  <div class="showScreen" style="margin-top: 20px;" >
+                    <span>{{surv.name}}</span>
+                    <i class="icon icon-remove-sign" style="cursor: pointer;" ng-click="cancelController(surv)"></i>
+                    <div style="width: 98%;height: 300px;" ng-show="liveMode">
+                      <video src="{{surv.video_url}}" style="width: 100%" autoplay="autoplay" controls="controls" muted></video>
+                      <!-- <video src="rtmp://192.168.0.140:1935/hls/film" style="width: 100%" autoplay="autoplay" controls="controls" muted></video> -->
+                    </div>
+                    <div class="screenPic" ng-show="!liveMode">
+                      <img class="screenPic" src="{{surv.file_path}}" ng-show="surv.file_path!=''">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="xTop30"></div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

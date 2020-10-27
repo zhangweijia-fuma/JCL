@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- Camera is a Pixedelic free jQuery slideshow | Manuel Masia (designer and developer) -->
+<html ng-app="myloginApp" >
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+    <title>{{projConfig.projNameZh}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="stylesheet" href="/libs/zui/css/normalize.css"/>
+    <link rel="stylesheet" href="/resource/styles/login.css">
+  </head>
+<body>
+  <div class="homepage" ng-controller="loginCtrl" >
+    <div class="header">
+      <img src="{{projConfig.ownerLogoURL}}" style="width: 200px;height: 100px;" />
+    </div>
+    <div class="loginOut">
+      <div class="login" style="left: 80%; margin-top: 8%">
+        <div class="loginBoder" style="background-color:#ffffff;">
+          <div>
+            <form  name="frmLogin" ng-model="objLoginInfo" >
+              <div class="logo">
+                <img src="{{projConfig.ownerLogoURL}}" style="width: 200px; height: 100px" />
+              </div>
+              <div class="mylogin" style="">
+                <div class="myUsername">
+                  <label for="username">
+                    <img src="/resource/images/loginTip_name.png"/>
+                    <!-- <i class="icon icon-user"></i> -->
+                    <span>|</span>
+                  </label>
+                  <input type="text" id="username" placeholder="请输入用户名" ng-model="objLoginInfo.username">
+                </div>
+                <div class="myPassword">
+                  <label for="password">
+                    <img src="/resource/images/loginTip_password.png"/>
+                    <span>|</span>
+                  </label>
+                  <input type="password" id="password" placeholder="请输入密码"  ng-model="objLoginInfo.password">
+                </div>
+              </div>
+
+              <div class="loginsTip">
+                <div id="msg">
+                  <p>{{msg}}</p>
+                </div>
+              </div>
+              <div class="regLink">
+              </div>
+
+              <button  class="btn btn-success btn-block loginButton" ng-disabled="frmLogin.$invalid" ng-click="gotologin(objLoginInfo)">登录</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="downTip" id="downTip1"><a>{{vendorName}} 提供技术支持</a></div>
+  </div>
+
+</body>
+
+<script type="text/javascript" src="libs/zui/lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="libs/angular/angular/angular.js"></script>
+<script type="text/javascript" src="libs/angular/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="libs/angular/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="libs/zui/js/zui.min.js"></script>
+<script type="text/javascript" src="libs/common/base64.js"></script>
+<script type="text/javascript" src="libs/common/function.js"></script>
+<script type="text/javascript" src="libs/cryptojslib/rollups/md5.js"></script>
+<script type="text/javascript" src="libs/cryptojslib/rollups/aes.js"></script>
+<script type="text/javascript" src="libs/cryptojslib/components/pad-zeropadding-min.js"></script>
+<script type="text/javascript" src="libs/common/angular/svcLogin.js"></script>
+<script type="text/javascript" src="libs/common/angular/svcCommon.js"></script>
+<!-- <script type="text/javascript" src="libs/common/fileUploader.js"></script> -->
+
+<script type="text/javascript" src="/config.js"></script>
+<script type="text/javascript" src="public/scripts/ctrLogin.js"></script>
+
+<script type="text/javascript">
+  if (window.innerHeight)
+    winHeight = window.innerHeight;
+
+  $("#downTip1").css({"min-height":winHeight-260});
+  </script>
+
+  <script type="text/javascript">
+    $("#loginlogo").attr("src", projConfig.ownerLoginURL);
+  </script>
+</html>

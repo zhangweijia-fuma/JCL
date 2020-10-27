@@ -1,0 +1,251 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr,
+acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong,
+sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, form, label, legend, table, caption, tbody, tfoot,
+thead, tr, th, td{
+    margin: 0;
+    padding: 0;
+}
+input{
+    padding: 0 0 0 0;
+}
+h2{
+    font-size: 19px;
+}
+h3{
+    font-size: 17px;
+
+}
+h2,h3 a{
+    color: #333;
+}
+input,button,textarea{
+    outline:none;
+}
+
+img{border: 0;display: block;}
+a{
+    text-decoration: none;
+    color: #333;
+}
+body {
+    word-wrap:break-word;
+    font-family:  'Microsoft YaHei', '宋体','helvetica', 'Arial';
+    font-size: 16px;
+    color: #000;
+    /*height: 100%;*/
+    width: 100%;
+    background: #f5f5f5;
+}
+li{
+    list-style: none;
+}
+.body{
+    width: 1280px;
+    margin: 0 auto;
+}
+.clear_after:after{
+    content:"";
+    width: 0;
+    height: 0;
+    display: block;
+    clear: both;
+    overflow: hidden;
+}
+.clear_after{
+    zoom: 1;
+}
+.xTop30{
+    margin-top: 30px;
+}
+nav.navbar{
+    width: 100%;
+    height: 60px;
+    background: url("/resource/images/navTop.png");
+    color: #fff;
+}
+.navLeft{
+    height: 60px;
+    float: left;
+}
+.navLeft a img{
+    width: 60px;
+    margin-left: 5px;
+    margin-top: -6px;
+    float: left;
+}
+.navLeft a span{
+    color: #fff;
+    display: inline-block;
+    line-height: 60px;
+}
+.navRight{
+    float: right;
+    margin-right: 20px;
+}
+.xNavUl{
+
+}
+.xNavUl li a{
+    color: #fff;
+}
+.xNavUl li{
+    width: 130px;
+    float: left;
+    list-style: none;
+    padding: 10px 0;
+    line-height: 40px;
+}
+.xNavUl li a{
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+}
+/*.xNavUl li:nth-of-type(6){
+    padding: 10px 15px;
+}*/
+.xNavUl li a img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    float: left;
+}
+.xNavUl li a strong.xArrow{
+    display: inline-block;
+    background: url("/resource/images/arrow.png");
+    width: 18px;
+    height: 18px;
+    margin-bottom: -3px;
+    margin-left: 10px;
+}
+.xNavUl li:nth-of-type(6) a span{
+    line-height: 40px;
+    padding: 0 3px;
+}
+.navRightUlTop li{
+    float: left;
+}
+.xNavUlLi{
+    width: 150px;
+    position: relative;
+    margin-left: 100px;
+}
+.xNavUlLi .navRightUlTop{
+    width: 100%;
+    position: absolute;
+    top:100%;
+    right: 0;
+    background: #ccc;
+    z-index: 999;
+}
+.dropdown-menu{
+    display: none;
+}
+
+.xNavUlLi .navRightUlTop li{
+    width: 100%;
+    clear: both;
+    padding: 0;
+}
+.xNavUlLi .navRightUlTop li a{
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+.main-wraper{
+    width: 100%;
+}
+.main-view{
+    width: 100%;
+}
+.left-nav{
+    width: 204px;
+    float: left;
+    background: url("/resource/images/navLeft.png");
+}
+.left-nav{
+
+}
+.left-nav nav{
+    width: 100%;
+}
+.left-nav nav ul{
+    width: 100%;
+}
+.left-nav nav.menu ul.nav-primary li{
+    list-style: none;
+    padding: 18px 0;
+    position: relative;
+    border-bottom: rgba(226, 219, 219, 0.2) 1px solid;
+}
+.left-nav nav.menu ul.nav-primary li a{
+    color: #fff;
+    width: 100%;
+    margin-left: 70px;
+}
+.left-nav .left_menus_div{
+    overflow: hidden;
+}
+.left-nav nav.menu ul.nav-primary li a i.icon-user{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 30px;
+}
+.left-nav nav.menu ul.nav-primary li a i.icon-user[title*="我的患者"]{
+    background: url("/resource/images/patient.png") no-repeat;
+}
+.left-nav nav.menu ul.nav-primary li a i.icon-user[title*="远程门诊"]{
+    background: url("/resource/images/OutDep.png") no-repeat;
+}
+.left-nav nav.menu ul.nav-primary li a i.icon-user[title*="双向转诊"]{
+    background: url("/resource/images/Referral.png") no-repeat;
+}
+.left-nav nav.menu ul.nav-primary li a i.icon-user[title*="双向转诊审批"]{
+    /*background: url("/resource/images/patient.png") no-repeat;*/
+}
+.left-nav nav.menu ul.nav-primary li a i.icon-user[title*="远程会诊"]{
+    background: url("/resource/images/consultation.png") no-repeat;
+}
+.left-nav nav.menu ul.nav-primary li a i.icon-user[title*="院内MDT"]{
+    background: url("/resource/images/MDT.png") no-repeat;
+}
+.left-nav nav.menu ul.nav-primary li a i.icon-user[title*="远程影像"]{
+    background: url("/resource/images/RemoteImg.png") no-repeat;
+}
+.left-nav nav.menu ul.nav-primary li a i.icon-user[title*="远程心电"]{
+    background: url("/resource/images/ECG.png") no-repeat;
+}
+button{
+    background: #4AB033;
+    border: none;
+    color: #fff; 
+    padding: 5px 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+.clear{
+    
+}
+.xPaddBot10{
+    padding-bottom: 10px;
+}
+.xPaddTop20{
+    padding-top: 20px;
+}
+.left-nav nav.menu ul.nav-primary li ul{
+    position:absolute;
+    top: 58px;
+    background: #d9e8f8;
+}
+.left-nav nav.menu ul.nav-primary li ul li{
+/*    width: 130px;*/
+    margin-left: 70px;
+    border-bottom: #4AB033 1px solid;
+}
+.left-nav nav.menu ul.nav-primary li ul li a{
+    color: #333;
+    margin-left: 0;
+}
+.xColor{
+    color: #858585;
+}

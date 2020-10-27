@@ -1,0 +1,128 @@
+<style>
+.break{
+    word-break: break-all;  
+    word-wrap: break-word; 
+}
+.xDetailPatBoxData .xDetailPatBoxDataTop div{
+  width:25%;
+}
+</style>
+<link href="libs/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request" data-ng-init="">
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail">
+              <li ng-class="{true: 'active'}[tab==0]" ng-click="changeTab(0)"><a href="#/groupManage">用户组管理</a></li>
+              <li><span>></span></li>
+              <li>详情</li>
+            </ul>           
+          </div>
+        </div>
+
+        <div class="form-group flright xHandle">
+          <span class="ml10 " > 
+            <button class="bton green"  ng-click="updateGroupInfo()" ><i class="icon icon-edit"></i> 编辑</button> 
+          </span>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row" style="margin-top:20px;">
+          <div class="xmenusname">
+            <span style="float:left;">中文组名：</span>
+            <div class="xmenuscheck">{{group.c_name}}</div>
+          </div>
+
+          <div class="xmenusname">
+            <span style="float:left;">英文组名：</span>
+            <div class="xmenuscheck">{{group.name}}</div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:20px;">
+          <div class="xmenusdesc">
+            <span style="float:left;">描&#8195;&#8195;述：</span>
+            <div class="xmenuscheck" style="width:600px;">{{group.description}}</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group xDetailPat">
+            <label class="i-form-label ml10 inline-title">用户组成员</label>
+            <div class="xTriangle" style="left:110px;"></div>
+            <div class="AddMainHeaderTanchang" style="top:2px; right: 0px;">
+              <input type="text" ng-model="memberName" placeholder="在此检索姓名" ng-change="searchMember()"  style="right:0px; height: 25px; ">             
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contentmenus xDetailPatBoxmenus clear_after">
+        <div class="block-item" name="dia"  id="gm{{groupMember.id}}" ng-repeat="groupMember in groupMemberList"> 
+          <div class="xImgBox">
+            <div class="xPhoto">
+              <img src="{{groupMember.photo_path}}">
+            </div>
+            <div class="bi-item">
+              <div class="bi-value"><span>姓名：</span>{{groupMember.name}}</div>
+            </div>
+            <div class="bi-item">
+              <div class="bi-value"><span >公司：</span>{{groupMember.company}}</div>
+              <div class="bi-value"><span >部门：</span>{{groupMember.dept_name}}</div>
+            </div>
+          </div>
+        </div> 
+
+        <div class="row text-center floatRight">
+          <ul class="pager" id="pager">
+            <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+            <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+            <li ><a href="" id="beforeSL">...</a></li>
+            <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+            <li ><a href="" id="afterSL">...</a></li>
+            <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+            <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+            <li class="xColor" ng-show="totalPage">|</li>
+            <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row">
+          <div class="form-group xDetailPat">
+            <label class="i-form-label ml10 inline-title">用户组权限</label>
+            <div class="xTriangle" style="left: 110px"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contentmenus xDetailPatBoxmenus clear_after" data-ng-init="getmytree()">
+        <div class="panel-body"  id="sel_menu_tree" > 
+          <ul id="menu_tree" class="ztree1" ng-click="treeClicked()"></ul>
+        </div>   
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd'
+  });   
+</script>

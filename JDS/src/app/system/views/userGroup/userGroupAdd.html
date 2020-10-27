@@ -1,0 +1,237 @@
+<style>
+  
+
+.break
+{
+    word-break: break-all;  
+    word-wrap: break-word; 
+}
+
+.xDetailPatBoxData .xDetailPatBoxDataTop div
+{
+  width:25%;
+}
+</style>
+
+
+<link href="libs/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request" data-ng-init="">
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail">
+              <li ng-class="{true: 'active'}[tab==0]" ng-click="changeTab(0)"><a href="#/groupManage">用户组管理</a></li>
+              <li><span>></span></li>
+              <li>{{editMode}}用户组</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group flright xHandle">
+          <span class="ml10 " > 
+            <button type="button" class="bton green" data-dismiss="modal" ng-click="goBack()"><i class="icon icon-circle-arrow-left"></i> 返回</button>
+            <button type="button" class="bton green" data-dismiss="modal" ng-click="saveGroup()"><i class="icon icon-check"></i> 确定</button>              
+          </span>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form">
+
+        <div class="sub-title form-condensed inline-form" >
+          <div class="form-group cDetailPat">
+            <label class="clabel">用户组基本信息</label>
+            <div class="cTriangle"></div>
+          </div>
+        </div>
+
+        <div class="JCLBox">
+
+          <div class="JCLBoxData">
+
+            <div class="JCLBoxDataRow">
+
+              <div>
+                <span style="float:left;">中文组名：</span>
+                <input type="text" id="c_name" class="JCLInputStyle" style="text-indent: 2px; height: 24px;" ng-model="group.c_name" name="cname"  ng-disabled="iskey">
+              </div>
+
+              <div>
+                <span style="float:left;">英文组名：</span>
+                <input type="text" id="e_name" class="JCLInputStyle" style="text-indent: 2px; height: 24px;" ng-model="group.name" name="name" ng-readonly="isSystemGroup">
+              </div>
+
+              <div>
+                <span style="float:left;">描&#8195;&#8195;述：</span>
+                <input type="text" id="description" class="JCLInputStyle" style="text-indent: 2px; height: 24px; width: 416px" ng-model="group.description" name="description" >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="form-group cDetailPat">
+          <label class="clabel">用户组成员</label>
+          <div class="cTriangle"></div>
+          <div class="AddMainHeaderTanchang">
+            <a class="bton green btnAdd" ng-click="addMemberDlg()">
+              <img src = "/resource/images/add.png" > 新增
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contentmenus xDetailPatBoxmenus clear_after " style="min-height: 110px; border: lightGray 1px solid;">
+        <div class="block-item" name="dia"  id="gm{{groupMember.id}}" ng-repeat="groupMember in memberList" style="overflow:initial;"> 
+          <img style="display:inline-block;" class="xmenusdelete" src="/resource/images/cha1.png" ng-click="showDeleteMemberDlg(groupMember)" >
+          <div class="xImgBox">
+            <div class="xPhoto">
+              <img src="{{groupMember.photo_path}}">
+            </div>
+            <div class="bi-item">
+              <div class="bi-value"><span>姓名：</span>{{groupMember.name}}</div>
+            </div>
+            <div class="bi-item">
+              <div class="bi-value"><span >公司：</span>{{groupMember.company}}</div>
+              <div class="bi-value"><span >部门：</span>{{groupMember.dept_name}}</div>
+            </div>
+          </div>
+        </div> 
+
+        <div class="row text-center floatRight">
+          <ul class="pager" id="pager">
+            <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+            <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+            <li ><a href="" id="beforeSL">...</a></li>
+            <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+            <li ><a href="" id="afterSL">...</a></li>
+            <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+            <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+            <li class="xColor">|</li>
+            <li class="xColor">共{{totalPage}}页</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form" data-ng-init="getGroupMenu()" >
+        <div class="form-group cDetailPat">
+          <label class="clabel">用户组权限</label>
+          <div class="cTriangle"></div>
+            <span  class="ml10 xmenuaddu" >
+              <img  style="display:inline-block;cursor:pointer;"  ng-click="checkAll()" id="selectall">
+              <a href="" ng-click="checkAll()" style="font-size: 14px;"><i class="icon icon-exchange"></i> {{checkMsg}}</a>
+            </span>
+        </div>
+      </div>
+
+      <div class="contentmenus xDetailPatBoxmenus clear_after" style="border: lightGray 1px solid;">
+        <div class="panel-body" id="sel_menu_tree"> 
+          <ul id="menu_tree" class="ztree2"></ul>
+        </div>   
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd'
+  });   
+</script>
+
+<!-- 选择用户组成员用户 -->
+<div class="modal fade" id="selectAccountDlg" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true">
+  <div class="xMask"></div>
+  <div class="modal-dialog sel-item-dialog" style="width: 880px;" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon-off"></i> 选择用户</h4>
+      </div>
+      
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="overflow:initial;">
+            <div class="sub-title form-condensed inline-form marginBottom20">
+              <div class="xSea" style="overflow:initial;">
+                <div class="flright">
+                  <div class="form-group flright">
+                    <span class="ml20 flright"><button class="bton green" ng-click="getShowAccountList()"><i class="icon-search"></i> 搜索</button> </span>
+                  </div>
+
+                  <div class="form-group flright">
+                    <label class="i-form-label ml20">姓名：</label>
+                    <div class="i-form-field">
+                      <input type="text" class="form-control gre" placeholder="请输入姓名" ng-model="accountName" style="text-indent: 2px">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="content">
+              <div class="block-item" ng-repeat="item in accountList track by $index" style="width: 240px;" name="accountList" id="{{item.id}}" style="border:red 2px solid; background: black;">
+                <div class="bi-avatar">
+                    <img src="{{item.photo_path}}"/>
+                </div>
+                
+                <div class="bi-info" style="width: 160px;">
+                    <div class="bi-item" style="color:black;">
+                      <div class="bi-label">姓名：</div>
+                      <div class="bi-value">{{item.name}}</div>
+                    </div>
+                    <div class="bi-item" style="color:black;">
+                      <div class="bi-label">公司：</div>
+                      <div class="bi-value"><li style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 100px">{{item.company}}</li></div>
+                    </div>
+                    <div class="bi-item" style="width: 140px;color:black;">
+                      <div class="bi-label">部门： </div>
+                      <div class="bi-value">{{item.dept}}</div>
+                    </div>
+                </div>
+                <div class="bi-btn-wraper">
+                  <button class="bton green" title="选择" ng-click="onSelectAccount(item)">选择</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row text-center floatRight">
+                  <ul class="pager" id="pager2">
+                    <li class="previous" ><a href="" id="first" ng-click="page2($event)">首页</a></li>
+                    <li class="previous" ><a href="" id="prev" ng-click="page2($event)">上一页</a></li>
+                    <li ><a href="" id="beforeSL">...</a></li>
+                    <li ng-repeat="pageNumber in pager2.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page2($event)">{{pageNumber}}</a></li>
+                    <li ><a href="" id="afterSL">...</a></li>
+                    <li class="next"><a href="" id="next" ng-click="page2($event)">下一页</a></li>
+                    <li class="next"><a href="" id="last" ng-click="page2($event)">尾页</a></li>
+                    <li class="xColor" ng-show="totalPage2">|</li>
+                    <li class="xColor" ng-show="totalPage2">共{{totalPage2}}页</li>
+                  </ul>
+              </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer" style="margin-top: 20px">
+<!--         <button type="button" class="bton green" ng-click="selectAccountOK()" data-dismiss="modal">确认</button>
+        <button type="button" class="bton green" data-dismiss="modal" style="margin-left: 30px">取消</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+

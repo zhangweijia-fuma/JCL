@@ -1,0 +1,139 @@
+<!-- 账户管理主页 -->
+
+<style type="text/css">
+  .row{
+    overflow: initial;
+  }
+</style>
+<div class="container xList" data-ng-init="initialData()">
+  <div class="row nomargin" >
+    <div class="mytab xList">
+      <ul class="htab nav nav-tabs">
+        <li >账户管理</li>
+      </ul>
+    </div>
+
+    <div >
+      <div style="min-height: 540px;">
+        <div class="sub-title form-condensed inline-form">
+          <div class="row">
+            <div class="form-group flright xHandle">
+              <span class="ml10 "> <button class="bton green"  ng-click="createAcount()"><i class="icon icon-list-alt"></i> 创建账户</button> </span>
+            </div>
+          </div>
+
+          <!-- 下拉列表 -->
+          <div class="row xAcount">
+            <div class="form-group">
+              <span class="i-form-label ml10">所在公司：</span>
+              <div class="i-form-field">
+                <ui-select ng-model="companyList.selected" theme="select2" ng-change="searchByCompany()" style="width: 300px">
+                  <ui-select-match placeholder="选择全部">
+                    <span ng-bind="$select.selected.name"></span>
+                  </ui-select-match>
+                    <ui-select-choices repeat="item in (companyList | filter: $select.search) track by item.name">
+                      <span ng-bind="item.name"></span>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <span class="i-form-label ml10">所在部门：</span>
+              <div class="i-form-field">
+                <ui-select ng-model="deptList.selected" theme="select2" ng-change="searchByDept()" style="width: 300px">
+                  <ui-select-match placeholder="选择全部">
+                      <span ng-bind="$select.selected.name"></span>
+                  </ui-select-match>
+                  <ui-select-choices repeat="item in (deptList | filter: $select.search) track by item.name">
+                      <span ng-bind="item.name"></span>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <span class="i-form-label ml10">用户组：</span>
+              <div class="i-form-field">
+                <ui-select ng-model="groupList.selected" theme="select2" ng-change="searchByGroup()" style="width: 300px">
+                  <ui-select-match placeholder="选择全部">
+                      <span ng-bind="$select.selected.name"></span>
+                  </ui-select-match>
+                  <ui-select-choices repeat="item in (groupList | filter: $select.search) track by item.id">
+                      <span ng-bind="item.name"></span>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>     
+
+            <div class="form-group">
+              <span class="i-form-label ml10">姓名：</span>
+              <div class="i-form-field">
+                <ui-select ng-model="userNameList.selected" theme="select2" ng-change="searchByName()" style="width: 300px">
+                  <ui-select-match placeholder="选择姓名">
+                      <span ng-bind="$select.selected.name"></span>
+                  </ui-select-match>
+                  <ui-select-choices repeat="item in (userNameList | filter: $select.search) track by item.id">
+                      <span ng-bind="item.name"></span>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+          <!-- 下拉列表 -->
+        </div>
+
+        <div class="content clear_after">
+          <div class="block-item" ng-repeat="account in accountList track by $index" id="account{{account.id}}" ng-dblclick="updateAccountInfo(account)">
+            <div class="xItemBox">
+              <div class="bi-item">
+                <div class="bi-value">{{account.company}}</div>
+                <div class="xTriangle"></div>
+              </div>
+
+            </div>
+
+            <div class="xImgBox">
+              <div class="xPhoto">
+                <img src="{{account.photo_path}}">
+              </div>
+
+              <div class="bi-item">
+                <div class="bi-value"><span>姓&#12288;名：</span>{{account.name}}</div>
+              </div>
+
+              <div class="bi-item">
+                <div class="bi-value"><span>所在部门：</span>{{account.dept_name}}</div>
+              </div>
+
+              <div class="bi-item" style="width:374px;">
+                <div class="bi-value"><span>用户组：</span>{{account.group_name_list}}</div>
+              </div>
+
+              <div class="bi-btn-wraper " ng-if="account.deleteFlag==1">
+                <img class="bton green deleteIcon" title="删除" data-target="#tishi" ng-click="showDeleteAccount(account)" src="/resource/images/delete.png">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="footer">
+          <ul class="pager" id="pager">
+            <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+            <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+            <li ><a href="" id="beforeSL">...</a></li>
+            <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+            <li ><a href="" id="afterSL">...</a></li>
+            <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+            <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+            <li class="xColor" ng-show="totalPage">|</li>
+            <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,20 @@
+#/bin/bash
+
+# cn.pool.ntp.org是位于中国的公共NTP服务器
+echo
+echo Sync time from cn.pool.ntp.org
+echo
+echo
+ntpdate cn.pool.ntp.org
+
+#将系统时间写入硬件时间
+echo
+echo
+echo Write time to hardware
+echo
+hwclock --systohc
+echo
+echo
+date
+echo
+

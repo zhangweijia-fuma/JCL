@@ -1,0 +1,374 @@
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .xDetailPos button
+  {
+    background: #4AB033;
+    color: white;
+    line-height: 5px;
+    /*width: 120px;*/
+  }
+
+</style>
+
+<link href="libs/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+
+<div class="container pos" data-ng-init="initialData()" style="width: 98%">
+  <div class="row nomargin pos">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>发送{{showMessage}}</li>
+            </ul>
+            
+            <div class="form-group flright xHandle" style="top: 8px; right: 0px;">
+              <span class="ml10 ">
+                <button class="bton green"  ng-click="goback()" ng-show="showMode=='list'"><i class="icon icon-circle-arrow-left"></i> 返回</button> 
+                <button class="bton green"  ng-click="sendMessage()"><i class="icon icon-check"></i> 发送</button> 
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+
+        <div class="form-group" ng-if="lineMode">
+          <span class="i-form-label ml10">选择线路：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="lineList.selected" theme="select2" ng-change="chooseLine(lineList.selected)" style="width: 161px">
+              <ui-select-match placeholder="选择全部">
+                <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+                <ui-select-choices repeat="item in (lineList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">消息类别：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="msgTypeList.selected" theme="select2" ng-change="chooseMsgType()" style="width: 161px">
+              <ui-select-match placeholder="选择全部" >
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (msgTypeList | filter: $select.search) track by item.code" style="max-height: 300px;">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+      </div>
+      <!-- 下拉列表 -->
+
+      <div class="content clear_after pos" style="top:100px;">
+
+        <div class="col-md-3 zPanelBox" style="width: 28%">
+          <div class="panel zPanel zPanelzzz1 pos" style="width:260px;border-right: 1px solid #ccc;" >
+            <div class="panel-heading " style="width: 220px;color: black">车站控制器
+              <div style="float:right; margin-top: -5px;">
+                <input type="checkbox" name="checkStationCtrl" value="选择车站" style="margin-top: 8px; " ng-click="checkStationCtrl(0)"> 全部
+                <input type="checkbox" name="checkStationCtrl" value="选择车站" style="margin-top: 8px; " ng-click="checkStationCtrl(1)"> 站台
+                <input type="checkbox" name="checkStationCtrl" value="选择车站" style="margin-top: 8px; " ng-click="checkStationCtrl(2)"> 站厅
+              </div>
+            </div>
+            <div class="panel-body pos" style="top: 40px;">
+              <div class="zPanelPadding15" style="padding: 0px">
+                <div class=" xDetailPatBoxmenus clear_after">
+                  <div class="panel-body" id ="sel_station_tree" >
+                    <ul id="station_tree" class="ztree2 pos" style="overflow-y: auto; width: 88%;"></ul>
+                  </div>   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9 zWid75" style="width: 28%; float: left; margin-left: 280px;" >
+          <div class="panel zPanel zPanelzzz1 pos" style="width:260px;border-right: 1px solid #ccc;" >
+            <div class="panel-heading " style="width: 220px;color: black">列车控制器
+              <div style="float:right; margin-top: -5px;">
+                <input type="checkbox" name="checkTrainCtrl" value="选择列车" style="margin-top: 8px; " ng-click="checkTrainCtrl(0)"> 全部
+              </div>
+            </div>
+            <div class="panel-body pos" style="top: 40px;">
+              <div class="zPanelPadding15" style="padding: 0px">
+                <div class=" xDetailPatBoxmenus clear_after">
+                  <div class="panel-body" id ="sel_train_tree" >
+                    <ul id="train_tree" class="ztree2 pos" style="overflow-y: auto; width: 88%;"></ul>
+                  </div>   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9 zWid75" style="width: 47%" >
+          <div class="panel pos" style="height:580px;border:0px; width: 47%;">
+            
+            <!-- 节目单列表 -->
+            <div class="zPanel1 " style="border: 0px; " ng-show="showMode=='list'">
+              <div class="panel-heading ">节目单列表</div>
+              <div class="cItemBoxMine">
+                <table style="margin-top: 10px;" class="tbRow">
+                  <thead>
+                    <tr>
+                      <th style="width: 30px"></th>
+                      <th style="width: 40px">序号</th>
+                      <th style="width: 180px">节目单名称</th>
+                      <th style="width: 120px">生效日期</th>
+                      <th style="width: 120px">发送状态</th>
+                    </tr>
+                  </thead>
+                  <tr><td class="ctdLine" colspan="18" rowspan="1" headers=""></td></tr>
+
+                  <tbody>
+                    <tr ng-repeat="item in programList" class="hovershow trHover" >
+                      <td style="text-align: center;">
+                        <input type="radio" name="list" value="{{item.id}}" style="margin-left: 10px;" ng-click="chooseProgramList(item)">
+                      </td>
+                      <td style="text-align: center;">{{item.no}}</td>
+                      <td style="text-align: center;">{{item.name}}</td>
+                      <td style="text-align: center;">{{item.valid_date}}</td>
+                      <td style="text-align: center;">{{item.send_status_name}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="row text-center floatRight" style="margin-right: 10px; margin-top: 20px;">
+                <ul class="pager" id="pager">
+                  <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+                  <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+                  <li ><a href="" id="beforeSL">...</a></li>
+                  <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+                  <li ><a href="" id="afterSL">...</a></li>
+                  <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+                  <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+                  <li class="xColor" ng-show="totalPage">|</li>
+                  <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+                </ul>
+              </div>
+
+            </div> 
+
+            <!-- 版式文件列表 -->
+            <div class="zPanel1 " style="border: 0px;" ng-show="showMode=='format_file'">
+              <div class="panel-heading ">版式文件列表</div>
+              <div class="cItemBoxMine">
+                <table style="margin-top: 10px;" class="tbRow">
+                  <thead>
+                    <tr>
+                      <th style="width: 20px"></th>                       
+                      <th style="width: 40px">序号</th>
+                      <th style="width: 180px">节目名称</th>
+                      <th style="width: 280px">上传时间</th>
+                    </tr>
+                  </thead>
+                  <tr><td class="ctdLine" colspan="18" rowspan="1" headers=""></td></tr>
+
+                  <tbody>
+                    <tr ng-repeat="item in formatFileList" class="hovershow trHover">
+                      <td style="text-align: center;">
+                        <input type="radio" name="format_file{{item.id}}" value="" style="margin-left: 10px;" ng-click="chooseFormatFile(item)">
+                      </td>
+                      <td style="text-align: center;">{{item.no}}</td>
+                      <td style="text-align: center;">{{item.name}}</td>
+                      <td style="text-align: center;">{{item.upload_date}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="row text-center floatRight" style="margin-right: 10px; margin-top: 20px;">
+                <ul class="pager" id="pager2">
+                  <li class="previous" ><a href="" id="first" ng-click="page2($event)">首页</a></li>
+                  <li class="previous" ><a href="" id="prev" ng-click="page2($event)">上一页</a></li>
+                  <li ><a href="" id="beforeSL">...</a></li>
+                  <li ng-repeat="pageNumber in pager2.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+                  <li ><a href="" id="afterSL">...</a></li>
+                  <li class="next"><a href="" id="next" ng-click="page2($event)">下一页</a></li>
+                  <li class="next"><a href="" id="last" ng-click="page2($event)">尾页</a></li>
+                  <li class="xColor" ng-show="totalPage2">|</li>
+                  <li class="xColor" ng-show="totalPage2">共{{totalPage2}}页</li>
+                </ul>
+              </div>
+            </div> 
+            
+            <!-- 新闻 -->
+            <div class="zPanel1 " style="border: 0px;" ng-show="showMode=='news'">
+              <div class="panel-heading ">新闻信息</div>
+                <div style="padding: 15px;">
+                  <span>新闻内容：</span>
+                  <div style="border: 1px solid #ccc;">
+                    <textarea ng-model="newsContent" style="width:98%;min-height:150px;resize: vertical;border: 0px; margin: 5px;"></textarea>
+                  </div>
+                  <span>注意：在内容中不能包含英文单引号 ' </span>
+                  <div style="margin-top: 20px">
+                    <span > 有效时间：</span>
+                    <input type="number" min='0' required class="form-control xEdit" ng-model="newsLifeTime" style="width: 40px;padding-left: 2px;" > 秒（0 秒表示内容一直存在）
+                  </div>
+                </div>
+            </div> 
+
+            <!-- 紧急消息 -->
+            <div class="zPanel1 " style="border: 0px;" ng-show="showMode=='emergnce'">
+              <div class="panel-heading ">紧急消息</div>
+                <div style="padding: 15px;">
+                  <div class="form-group">
+                    <span class="i-form-label ml10">显示方式：</span>
+                    <input type="radio" name="showType" value="0" ng-model="emergnceMode" style="margin-top: 8px; margin-left:20px" checked> 滚动条
+                    <input type="radio" name="showType" value="1" ng-model="emergnceMode" style="margin-left:20px" ng> 全屏
+                  </div>
+                  <div style="border: 1px solid #ccc;">
+                    <textarea ng-model="emergnceContent" style="width:98%;min-height:150px;resize: vertical;border: 0px; margin: 5px;"></textarea>
+                  </div>
+                  <span>注意：在内容中不能包含英文单引号 ' </span>
+                  <div style="margin-top: 20px">
+                    <span > 有效时间：</span>
+                    <input type="number" min='0' required class="form-control xEdit" ng-model="emgcLifeTime" style="width: 40px;padding-left: 2px;" > 秒（0 秒表示内容一直存在）
+                  </div>
+                </div>
+            </div>
+
+            <!-- 重启控制器 -->
+            <div class="zPanel1 " style="border: 0px;" ng-show="showMode=='reboot'">
+              <div class="panel-heading ">重启控制器</div>
+              <div style="margin-top: 20px">
+                <span > 重启方式：</span>
+                <input type="radio" name="rebootMode" value="1" style="margin-left: 10px;" ng-click="chooseRebootMode(1)">  重启服务器
+                <input type="radio" name="rebootMode" value="0" style="margin-left: 10px;" ng-click="chooseRebootMode(0)">  重启应用软件
+              </div>
+              <div style="margin-top: 20px">
+                <span > 延时时间：</span>
+                <input type="number" min='0' required class="form-control xEdit" ng-model="rebootDelayTime" style="width: 40px;padding-left: 2px;" > 秒
+              </div>
+            </div> 
+
+            <!-- 更新控制器软件 -->
+            <div class="zPanel1 " style="border: 0px;" ng-show="showMode=='update'">
+              <div class="panel-heading ">更新控制器软件</div>
+              <div style="padding: 15px;">
+                <div>
+                  <span>消息参数：</span>
+
+                  <div style="padding: 10px;">
+                    <span > 版本文件名：  {{softwareFileName}}
+                      <div class="xDetailPos" style="margin-top: -25px;">           
+                        <span>
+                          <button class="fileUpload bton green" style="cursor: pointer">上传文件
+                            <input type="file" class="upload" id="local_upload" nv-file-select uploader="uploader" multiple accept="*">
+                          </button>
+                        </span>
+                      </div>
+                    </span>
+                    
+                    <div style="margin-top: 20px">
+                      <span > 更新模式：</span>
+                      <input type="radio" name="updateMode" value="0" style="margin-left: 10px;" ng-click="chooseUpdateMode(0)">  重启时更新
+                      <input type="radio" name="updateMode" value="1" style="margin-left: 10px;" ng-click="chooseUpdateMode(1)">  立刻更新并重启
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> 
+
+            <!-- 更新控制器休眠时间 -->
+            <div class="zPanel1 " style="border: 0px;" ng-show="showMode=='work_time'">
+              <div class="panel-heading ">更新控制器休眠时间</div>
+                <div style="padding: 15px;">
+                  <span>消息参数：</span>
+                  <div style="padding: 5px;">
+                    <span>开机时间：</span>
+                    <input type="text" id="dstime" class="form-date form-control choosetime" style="text-indent: 2px;width: 150px;" ng-model="open_time" data-date-format="HH:mm" placeholder="开机时间">
+                  </div>
+                  <div style="padding: 5px;">
+                    <span>关机时间：</span>
+                    <input type="text" id="detime" class="form-date form-control choosetime" style="text-indent: 2px;width: 150px;" ng-model="close_time" data-date-format="HH:mm" placeholder="休眠时间">
+                  </div>
+                </div>
+            </div>
+
+            <!-- 安全垫片列表 -->
+            <div class="zPanel1 " style="border: 0px;" ng-show="showMode=='safe_video_file'">
+              <div class="panel-heading ">安全垫片文件列表</div>
+              <div class="cItemBoxMine">
+                <table style="margin-top: 10px;" class="tbRow">
+                  <thead>
+                    <tr>
+                      <th style="width: 20px"></th>                       
+                      <th style="width: 40px">序号</th>
+                      <th style="width: 180px">节目名称</th>
+                      <th style="width: 280px">上传时间</th>
+                    </tr>
+                  </thead>
+                  <tr><td class="ctdLine" colspan="18" rowspan="1" headers=""></td></tr>
+
+                  <tbody>
+                    <tr ng-repeat="item in safeFileList" class="hovershow trHover">
+                      <td style="text-align: center;">
+                        <input type="radio" name="safe_file" value="" style="margin-left: 10px;" ng-click="chooseSafeVideoFile(item)">
+                      </td>
+                      <td style="text-align: center;">{{item.no}}</td>
+                      <td style="text-align: center;">{{item.file_name}}</td>
+                      <td style="text-align: center;">{{item.upload_date}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="row text-center floatRight" style="margin-right: 10px; margin-top: 20px;">
+                <ul class="pager" id="pager3">
+                  <li class="previous" ><a href="" id="first" ng-click="page3($event)">首页</a></li>
+                  <li class="previous" ><a href="" id="prev" ng-click="page3($event)">上一页</a></li>
+                  <li ><a href="" id="beforeSL">...</a></li>
+                  <li ng-repeat="pageNumber in pager3.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page3($event)">{{pageNumber}}</a></li>
+                  <li ><a href="" id="afterSL">...</a></li>
+                  <li class="next"><a href="" id="next" ng-click="page3($event)">下一页</a></li>
+                  <li class="next"><a href="" id="last" ng-click="page3($event)">尾页</a></li>
+                  <li class="xColor" ng-show="totalPage3">|</li>
+                  <li class="xColor" ng-show="totalPage3">共{{totalPage3}}页</li>
+                </ul>
+              </div>
+            </div> 
+            
+            <div class="xTop30"></div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 0,
+    minView: 0,
+    forceParse: 0,
+    format: 'hh:ii',
+  });
+</script>

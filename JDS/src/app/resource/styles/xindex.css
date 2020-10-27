@@ -1,0 +1,1700 @@
+
+/* common */
+
+/*****************************************/
+
+.xClinic .ui-select-choices-row-inner {
+	line-height: normal;
+}
+.xClinic .ui-select-choices-row-inner{
+	float: none;
+}
+.xDetailInf .ui-select-choices-row-inner {
+	line-height: normal;
+}
+.xDetailInf .ui-select-container span{
+	margin-right:0px;
+	float: none;
+}
+/*远程影像*/
+.content-view{
+	float: right;
+    width: 1036px;
+    padding: 10px 20px;
+    position: relative;
+    overflow: hidden;
+}
+.container{
+    width: 100%;
+}
+.container .mytab{
+     height: 40px; 
+     line-height: 40px; 
+     border-bottom: #4AB033 1px solid; 
+}
+.container .mytab ul li{
+    float: left;
+    list-style: none;
+    padding: 0 3px;
+}
+.container .mytab ul li a:hover{
+	color: #4AB033;
+}
+.container .xHandle{
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+.container span button{
+	cursor: pointer;
+	border-radius: 5px;
+}
+.xListMarBot{
+	margin-bottom: 20px;
+}
+.content .block-item{
+	font-size: 14px;
+	float: left;
+	width: 508px;
+	overflow: hidden;
+	margin-bottom: 20px;
+    position: relative;
+}
+.content .block-item:nth-child(2n){
+	margin-left: 20px;
+}
+.content .xDetailPatBox .block-item .bi-item{
+	/*margin-top: 20px;	*/
+	/*width: 508px;*/
+	/*height: 100px;*/
+	float: left;
+}
+.xSee{
+	position: absolute;
+	right: 0;
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+}
+.xSee button, .sub-title .row .xDetailPat .xDetailPatRig span button{
+	background: none;
+	color: #4AB033;
+	font-size: 14px;
+	padding: 0;
+}
+.content .block-item .xItemBox{
+	width: 508px;
+	border-bottom: #4AB033 1px solid;
+    height: 34px;
+}
+.content .block-item .xItemBox .bi-item:nth-of-type(1), .sub-title .row .xDetailPat label, .sub-title .row label{
+	display: inline-block;
+	height: 34px;
+	background: #4AB033;
+	line-height: 34px;
+	color: #fff;
+	padding:0 15px;
+	position: relative;
+	float: left;
+}
+.content .block-item .xItemBox .bi-item:nth-of-type(2){
+	line-height: 34px;
+	margin-left: 30px;
+	display: inline-block;
+	height: 34px;
+	color: #4AB033;
+}
+.content .block-item .xTriangle{
+	width:0;
+    height:0;
+    border-left:0px solid transparent;
+    border-right:20px solid #4AB033;
+    border-bottom:34px solid transparent;
+    transform:rotate(180deg);
+    /*background: #4AB033;*/
+    position: absolute;
+    right: -20px;
+    top: 0;
+}
+.sub-title .row .xDetailPat .xTriangle, .xTriangle1{
+	width:0;
+    height:0;
+    border-left:0px solid transparent;
+    border-right:20px solid #4AB033;
+    border-bottom:34px solid transparent;
+    transform:rotate(180deg);
+    /*background: #4AB033;*/
+    position: absolute;
+    left: 94px;
+    bottom: 0;
+}
+.xTriangle110{
+	width:0;
+    height:0;
+    border-left:0px solid transparent;
+    border-right:20px solid #4AB033;
+    border-bottom:34px solid transparent;
+    transform:rotate(180deg);
+    /*background: #4AB033;*/
+    position: absolute;
+    left: 110px;
+    bottom: 0;
+}
+.content .block-item .xItemBox .bi-item:nth-of-type(1) .bi-label{
+	float: left;
+	display: inline-block;
+}
+.content .block-item .xItemBox .bi-item:nth-of-type(1)  .bi-value{
+	float: left;
+}
+.content .block-item .xListBox{
+
+}
+.content .block-item .xListBox .bi-item{
+
+}
+.content .block-item .xPhoto{
+	display: inline-block;
+	float: left;
+    padding: 5px 0;
+}
+.content .block-item  .xPhoto img{
+	width: 40px;
+	height: 40px;
+	padding: 0 15px;
+
+}
+.content .block-item .xImgBox{
+    padding: 10px 0;
+    border: #4AB033 1px solid;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+.content .block-item .xImgBox .bi-item div{
+	float: left;
+}
+.content .block-item .xImgBox .bi-item{
+	float: left;
+	height: 25px;
+	line-height: 25px;
+}
+.content .block-item .xImgBox .bi-item:nth-of-type(2n){
+	width: 164px;
+	display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+	height: 25px;
+	line-height: 25px;
+}
+.content .block-item .xImgBox .bi-item:nth-of-type(2n-1){
+	width: 272px;
+	display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+	height: 25px;
+	line-height: 25px;
+}
+.content .block-item .xImgBox .bi-item .bi-label, .xDetailPatBoxData .xDetailPatBoxDataTop div span, .xDetailPatBoxData .xDetailPatBoxDataBot div span, .xDetailInf span, .content label{
+	color: black;
+	font-size: 14px;
+	/*margin-right:10px;*/
+}
+.content .block-item .xImgBox .bi-item .bi-value, .xDetailPatBoxData .xDetailPatBoxDataTop div, .xDetailPatBoxData .xDetailPatBoxDataBot div, .xDetailInf{
+	color: #333333;
+	font-size: 14px;
+}
+.content .block-item .xImgBox .bi-item div {
+	width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.bi-btn-wraper{
+	position: absolute;
+	right: 5px;
+	bottom: 10px;
+	display: none;
+}
+.content .block-item .xImgBox:hover .bi-btn-wraper, .block-item:hover .bi-btn-wraper{
+	display: block;
+}
+.text-center {
+    text-align: center;
+    overflow: hidden;
+
+}
+.floatRight{
+	float: right;
+	width: 100%;
+}
+.pager {
+    margin: 5px 0px;
+}
+.pager {
+    display: inline-block;
+    padding-left: 0;
+    margin: 5px 0;
+    border-radius: 4px;
+    float: right;
+}
+.pager>li {
+    display: inline;
+    margin-left: 2px;
+}
+.pager>li a{
+    color: #333;
+    border-radius: 3px;
+    font-size: 13px;
+    display: inline-block;
+    min-width: 23px;
+    height: 25px;
+    line-height: 25px;
+	border-radius:3px;
+	text-align: center;
+}
+.xPagerBox{
+
+}
+.content-summery{
+	font-size: 13px;
+	border-top: #ccc 1px solid;
+}
+
+
+
+/*远程影片详情*/
+.row .form-group ul.xDetail li{
+	float: left;
+	display: inline-block;
+	padding-right: 5px;
+}
+.row .form-group ul.xDetail li a{
+}
+.row .form-group ul.xDetail li span{
+	cursor: pointer;
+}
+.row .form-group ul.xDetail{
+	width: 100%;
+	border-bottom: #4AB033 1px solid;
+	height: 60px;
+	line-height: 60px;
+}
+.sub-title .row .xDetailPat{
+	position: relative;
+	width: 100%;
+	margin-top: 20px;
+	border-bottom: #4AB033 1px solid;
+	height: 34px;
+}
+.sub-title .row .xDetailPat .xDetailPatRig{
+	position: absolute;
+	right: 0;
+}
+.sub-title .row .xDetailPat .xDetailPatRig span button{
+	line-height: 34px;
+}
+.xDetailPatBox{
+	/*width: 1036px;*/
+	border: #4AB033 1px solid;
+	overflow: hidden;
+}
+.xDetailPatBoxImg{
+	float: left;
+	padding: 15px;
+	width: 40px;
+	height: 40px;
+}
+.xDetailPatBox .xDetailPatBoxImg img{
+	width: 40px;
+	height: 40px;
+}
+.xDetailPatBoxData{
+    line-height: 25px;
+    padding: 10px 0;
+    display: inline-block;
+}
+.xDetailPatBoxData .xDetailPatBoxDataTop, .xDetailPatBoxData .xDetailPatBoxDataBot{
+	word-break:break-all; /*支持IE，chrome，FF不支持*/
+	word-wrap:break-word;/*支持IE，chrome，FF*/
+	overflow: hidden;
+}
+.xDetailPatBoxData .xDetailPatBoxDataTop div{
+	width: 149px;
+	float: left;
+	overflow: hidden;
+	height: 30px;
+    line-height: 30px;
+}
+.xDetailPatBoxData .xDetailPatBoxDataBot div{
+	width: 298px;
+	float: left;
+	height: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.xDetailInf{
+	border: #4AB033 1px solid;
+	line-height: 28px;
+	padding: 10px;
+	overflow: hidden;
+}
+.xDetailInfOne, .xDetailInfT, .xDetailInfF{
+	line-height: 28px;
+	height: 28px;
+}
+.xDetailInfS{
+	line-height: 28px;
+}
+.xDetailInf .xDetailInfOne div{
+	float: left;
+	width: 25%;
+    height: 28px;
+    overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.xDetailInf .xDetailInfT div, .xDetailInfF div{
+	width: 25%;
+	float: left;
+/*	padding-right: 25px;*/
+}
+.xDetailInf .xDetailInfS, .xDetailInfF{
+	width: 100%;
+	overflow: hidden;
+}
+.xDetailInfS div.ng-binding{
+	line-height: 28px;
+}
+.xDetailInfS a{
+	color: #4AB033;
+}
+.xMarAuto{
+	margin: 0 auto;
+}
+.xDetailCon{
+    text-align: center;
+}
+.xDetailCon22{
+	display: inline-block;
+	text-align: center;
+}
+.xDetailCon button, .xDetailCon input{
+	padding: 0;
+	width: 92px;
+	height: 35px;
+	line-height: 35px;
+	border-radius: 5px;
+	margin: 0 15px;
+}
+.xDetailCon input{
+	border: none;
+	background: #4AB033;
+	color: #fff;
+}
+.xDetailCon span{
+	/*margin: 0 15px;*/
+}
+#zAddTo, #rejectmodal, #selectPatient,#selectAccountDlg,#submitComfirm, #selectHos{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+    top:0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+    display: none;
+}
+#selectPatient .modal-dialog,#selectAccountDlg .modal-dialog, #selectUser .modal-dialog, #selectHos .modal-dialog{
+	width: 980px;
+	margin: 0 auto;
+	background: #fff;
+}
+#getHisModal1 .modal-dialog .modal-content, #rejectmodal .modal-dialog .modal-content, #addProgram .modal-content, #selectUserGroup .modal-content, #changepassport .modal-content{
+	width: 530px;
+/*	min-height: 260px;*/
+	margin: auto;
+   	opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    overflow: hidden;
+    background-color: #fff;
+    /*position: relative;*/
+}
+#zAddTo .modal-dialog .modal-content{
+		width: 655px;
+/*	min-height: 260px;*/
+	margin: auto;
+   	opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    overflow: hidden;
+    background-color: #fff;
+    /*position: relative;*/
+}
+.modal-header, #logout .modal-dialog .modal-header{
+	height: 40px;
+	background: #4882e4;
+    padding: 0;
+}
+button.close{
+    float: right;
+    background: none;
+    font-size: 40px;
+    padding: 0;
+    margin-right: 10px;
+}
+.xMask{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+    background: #000;
+    top:0;
+    left: 0;
+    opacity: .2;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=20);
+    -moz-opacity: .2;
+    -khtml-opacity: .2;
+    overflow: hidden;
+    z-index: -1;
+}
+.modal-header h4,#selectRPDoctor .modal-dialog .modal-header h4#resizedModalTitle, .clear .modal-header{
+	font-weight: 400;
+	padding: 0 15px;
+	line-height: 40px;
+	color: #fff;
+}
+.clear .modal-header{
+	background: #4882e4;
+}
+.clear .modal{
+/*	width: 30%;
+	margin: auto;
+	height: 200px;
+	background: #fff;*/
+}
+.modal-body p{
+	padding: 20px;
+}
+.modal-body table{
+	margin: 20px auto;
+}
+#rejectmodal .modal-dialog .modal-content .modal-body table td textarea{
+	width: 491px;
+	height: 120px;
+	border: #ccc 1px solid;
+	resize: none;
+}
+#rejectmodal .modal-footer, .modal-footer{
+	text-align: center;
+}
+#rejectmodal .modal-footer button, .modal-footer button{
+	width: 80px;
+	height: 30px;
+	text-align: center;
+	border-radius: 5px;
+}
+#rejectmodal .modal-footer button:nth-of-type(2), #selectRPDoctor .modal-footer button:nth-of-type(2){
+	margin-left: 20px;
+}
+#getHisModal1, #tishi1, #selectRPDoctor, #logout, #submitmodal, #msg, #del, #addProgram, #selectUserGroup, 
+	#selectAccountDlg, #changepassport, #tishi, #selectUser, #addPage, #editInformation, #addDoctorForService, 
+	#delExsist, #commonDialog{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+    top:0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+    display: none;
+}
+#selectRPDoctor .modal-dialog{
+	width: 740px;
+	min-height: 220px;
+	margin: 0 auto;
+	background: #fff;
+}
+#selectRPDoctor .modal-dialog .modal-content .modal-body{
+	width: 700px;
+	overflow: hidden;
+	padding: 0 20px;
+}
+#selectRPDoctor .modal-dialog .modal-content .modal-body form .container .content .block-item, #selectPatient .block-item, #selectAccountDlg .block-item, #selectUser .block-item{
+	width: 196px;
+	height: 74px;
+	padding: 7px;
+	border: #ccc 1px solid;
+	position: relative;
+	margin-right: 20px;
+	margin-left: 0;
+}
+#selectHos .block-item{
+	width: 196px;
+	height: 94px;
+	padding: 7px;
+	border: #ccc 1px solid;
+	position: relative;
+	margin-right: 20px;
+	margin-left: 0;
+}
+#selectRPDoctor .modal-dialog .modal-content .modal-body form .container .content .block-item .bi-avatar, .bi-info .bi-item div, #selectPatient .block-item .bi-avatar, #selectAccountDlg .block-item .bi-avatar, #selectUser .block-item .bi-avatar{
+	float: left;
+}
+#selectHos .block-item .bi-item div:nth-child(2){
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 110px;
+}
+#selectRPDoctor .modal-dialog .modal-content .modal-body form .container .content .block-item .bi-info, #selectPatient .block-item .bi-info, #selectAccountDlg .block-item .bi-info, #selectUser .block-item .bi-info{
+	overflow: hidden;
+	line-height: 24px;
+	width: 117px;
+	padding-left: 8px;
+    float: left;
+}
+#selectHos .block-item .bi-info{
+	overflow: hidden;
+	line-height: 24px;
+	width: 185px;
+	padding-left: 8px;
+    float: left;
+}
+#selectRPDoctor .modal-dialog .modal-content .modal-body form .container .content .block-item .bi-info .bi-item, #selectPatient .block-item .bi-info .bi-item, #selectAccountDlg .block-item .bi-info .bi-item, #selectUser .block-item .bi-info .bi-item, #selectHos .block-item .bi-info .bi-item{
+	overflow: hidden;
+}
+#selectRPDoctor .modal-dialog img, #selectPatient .bi-avatar img, #selectAccountDlg .block-item .bi-avatar img, #selectUser .block-item .bi-avatar img{
+	width: 70px;
+	height: 70px;
+}
+.bi-info .bi-item .bi-label{
+	color: #858585;
+}
+.xBoder{
+    border: #4AB033 1px solid;
+    padding: 10px;
+    width: 1243px;
+}
+.content label{
+	float: left;
+}
+.content .row textarea{
+	width: 880px;
+    height: 55px;
+    resize: none;
+}
+.red_star{
+	color: red;
+}
+
+a#mbTitle {
+	color: #fff;
+}
+
+#msg .modal-dialog, #del .modal-dialog, #submitmodal .modal-dialog, #logout .modal-dialog,#submitComfirm .modal-dialog, #tishi .modal-dialog, #tishi1 .modal-dialog, #delExsist .modal-dialog,  #commonDialog .modal-dialog{
+	width: 380px;
+	height: 155px;
+	background: #fff;
+	color: #333;
+	position: relative;
+    margin: 0 auto;
+}
+#addPage .modal-dialog{
+	width: 574px;
+    height: 310px;
+    background: #fff;
+    color: #333;
+    position: relative;
+    margin: 0 auto;
+}
+
+
+#editInformation .modal-dialog, #addDoctorForService .modal-dialog{
+	width: 574px;
+    min-height: 210px;
+    background: #fff;
+    color: #333;
+    position: relative;
+    margin: 0 auto;
+}
+
+#addPage .modal-body {
+	width: 544px;
+    position: relative;
+    padding: 15px;
+    height: 190px;
+}
+
+#addPage .modal-body table {
+	 table-layout: fixed;
+     margin: initial;
+     width: 100%;
+     font-size: 14px;
+     line-height: 28px;
+}
+#addPage .modal-body table td:nth-child(2n+1){
+    padding: 4px;
+    width: 92px;
+}
+#addPage .modal-body table td:nth-child(2n){
+    padding: 4px;
+    /* width: 420px; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+#addProgram .modal-dialog{
+	width: 574px;
+    height: 310px;
+    background: #fff;
+    color: #333;
+    position: relative;
+    margin: 0 auto;
+}
+
+
+#addProgram .modal-body {
+	width: 544px;
+    position: relative;
+    padding: 15px;
+    height: 190px;
+}
+
+#addProgram .modal-body table {
+	 table-layout: fixed;
+     margin: initial;
+     width: 100%;
+     font-size: 14px;
+     line-height: 28px;
+}
+#addProgram .modal-body table td:nth-child(2n+1){
+    padding: 4px;
+    width: 92px;
+}
+#addProgram .modal-body table td:nth-child(2n){
+    padding: 4px;
+    /* width: 420px; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+#msg .modal-dialog .modal-footer{
+	bottom: 10px;
+	text-align: center;
+}
+.xDetailInf .row .form-group{
+
+}
+.xDetailInf .row .form-group label{
+	float: left;
+}
+.xDetailInf .row .form-group select{
+/*	width: 100px;*/
+	height: 28px;
+	line-height: 28px;
+	color: #4AB033;
+}
+
+.xPanel table{
+	width: 100%;
+	padding: 0 1%;
+	font-size: 14px;
+}
+.xPanel table tr th{
+ 	font-weight: 400;
+ 	padding: 8px 0;
+ 	color: #858585;
+ 	text-align: left;
+}
+.xPanel table tr td{
+	padding-bottom: 8px;
+	width: 20%;
+	text-align: center;
+	clear: #333333;
+	text-align: left;
+}
+{
+	border:#4AB033 1px solid;
+}
+.xPanel tr:first-child th:nth-child(5){text-align:center;}
+.xPanel tr:first-child td:nth-child(5){text-align:center;}
+.xEditS{
+	/*height: 30px;*/
+}
+.xEditS h5{
+    color: #858585;
+    font-size: 14px;
+    display: inline-block;
+    font-weight: 400;
+    float: left;
+    line-height: 30px;
+}
+.xEditS .flright .i-form-field{
+	float: left;
+}
+.xEditS .flright .i-form-field input{
+	height: 12px;
+	padding: 7px 3px;
+}
+.xEditS button{
+	width: 83px;
+	height: 30px;
+	margin: 0 15px;
+	border-radius: 5px;
+}
+.xDetailPatBox .block-item{
+	width: 100%;
+	margin-bottom: 0;
+}
+.xDetailPatBox .block-item .bi-info{
+	width: 92%;
+	overflow: hidden;
+}
+.xDetailPatBox .block-item .bi-info .bi-item{
+	float: left;
+	width: 33%;
+}
+.xDetailPosA11{
+    display: inline-block;
+}
+.xDetailPos button, .xDetailPosA11 button{
+	position: relative;
+	width: 92px;
+	height: 28px;
+	line-height: 28px;
+	background: transparent;
+	color: #4AB033;
+	font-size: 14px;
+}
+
+.xDetailPos button input, .xDetailPosA11 button input{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+}
+.xDoctor .block-item{
+	width: 226px;
+    height: 74px;
+    padding: 7px;
+    border: #ccc 1px solid;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    float: left;
+}
+.xDoctor .block-item .bi-avatar{
+	float: left;
+}
+.xDoctor .block-item .bi-avatar img{
+	width: 70px;
+	height: 70px;
+}
+.xDoctor .block-item .bi-info{
+    overflow: hidden;
+    line-height: 22px;
+    width: 140px;
+    padding: 0 8px;
+    float: left;
+}
+.xDoctor .block-item .bi-info .bi-item{
+	overflow: hidden;
+}
+.xDoctor .bi-btn-wraper button{
+}
+#selectAccountDlg{
+
+}
+#selectAccountDlg .modal-dialog, #selectUser .modal-dialog{
+	width: 1000px;
+	margin: 0 auto;
+}
+#selectAccountDlg .modal-dialog .modal-content, #selectUser .modal-dialog .modal-content{
+    background: #fff;
+}
+#selectAccountDlg .modal-body, #selectUser .modal-body{
+	padding: 20px;
+}
+#selectAccountDlg .modal-body .container, #selectUser .modal-body .container{
+    overflow: hidden;
+    width:calc(100%-40px)
+}
+#selectAccountDlg .modal-body .container .sub-title .xSea, #selectUser .modal-body .container .sub-title .xSea{
+	overflow: hidden;
+    /*padding-bottom: 10px;*/
+    height: 35px;
+    line-height: 35px;
+}
+#selectAccountDlg .modal-body .container .sub-title .xSea>div, #selectUser .modal-body .container .sub-title .xSea>div{
+	float: left;
+}
+#selectAccountDlg .modal-body .container .sub-title .xSea>div>div, #selectUser .modal-body .container .sub-title .xSea>div>div{
+	float: right;
+	padding-right: 35px;
+}
+#selectAccountDlg .modal-body .container .sub-title .xSea>div>div>label, #selectUser .modal-body .container .sub-title .xSea>div>div>label{
+    display: inline-block;
+    height: 34px;
+    background: transparent;
+    line-height: 34px;
+    color: #333;
+    padding: 0;
+    position: relative;
+    float: left;
+}
+#selectAccountDlg .modal-body .container .sub-title .xSea>div>div>div, #selectUser .modal-body .container .sub-title .xSea>div>div>div{
+	float: left;
+    display: inline-block;
+    line-height: 34px;
+}
+#selectAccountDlg .modal-body .container .sub-title .xSea>div>div>div>select, #selectUser .modal-body .container .sub-title .xSea>div>div>div>select{
+	height: 25px;
+	color: #4AB033;
+}
+#selectAccountDlg .modal-body .container .sub-title .xSea>div>div>div>input, #selectUser .modal-body .container .sub-title .xSea>div>div>div>input{
+	height: 21px;
+}
+#selectAccountDlg .content, #selectUser .content{
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/*远程门诊之我的门诊*/
+.xImgBox .bi-item span, .xExpBox span{
+	color: #858585;
+}
+p.xExpBox{
+	display: block;
+	margin-left: 70px;
+	font-size: 13px;
+}
+.xClinic{
+	width: 100%;
+	overflow: hidden;
+/*	line-height: 30px;*/
+	padding-bottom: 20px;
+	height: 30px;
+}
+.xClinic div{
+	float: left;
+}
+.xEditS{
+	margin-right: 18px;
+}
+.xEditS>div.i-form-field{
+	height: 30px;
+    line-height: 26px;
+}
+.xEditS>div.i-form-field select{
+	height: 30px;
+/*    line-height: 30px;*/
+    color: #4AB033;
+    text-align: center;
+}
+.xEditS>div.i-form-field input{
+	width: 100px;
+	height: 28px;
+    line-height: 28px;
+    color: #4AB033;
+    padding: 0 5px;
+    border: #aaa 1px solid;
+}
+.xClinic>div.form-group span>button{
+	width: 80px;
+	height: 30px;
+}
+.progress{
+    height: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+.progress .progress-bar{
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    background-color: #4AB033;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+    -webkit-transition: width .6s ease;
+    -o-transition: width .6s ease;
+    transition: width .6s ease;
+}
+.progress-bar { background-image:-webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #4AB033), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, #4AB033), color-stop(.75, #4AB033), color-stop(.75, transparent), to(transparent)); background-image:-webkit-linear-gradient(45deg, #4AB033 25%, transparent 25%, transparent 50%, #4AB033 50%, #4AB033 75%, transparent 75%, transparent); background-image:-o-linear-gradient(45deg, #4AB033 25%, transparent 25%, transparent 50%, #4AB033 50%, #4AB033 75%, transparent 75%, transparent); background-image:linear-gradient(45deg, #4AB033 25%, transparent 25%, transparent 50%, #4AB033 50%, #4AB033 75%, transparent 75%, transparent); -webkit-background-size:40px 40px; background-size:40px 40px }
+.progress-bar { -webkit-animation:progress-bar-stripes 2s linear infinite; -ms-animation:progress-bar-stripes 2s linear infinite; -o-animation:progress-bar-stripes 2s linear infinite; animation:progress-bar-stripes 2s linear infinite }
+}
+.has-remark table tr th{
+    width: initial;
+}
+.has-remark table tr td{
+    width: initial;
+    padding-right: 10px;
+}
+.progress { height:20px; margin-bottom:20px; overflow:hidden; background-color:#4AB033; border-radius:4px; -webkit-box-shadow:inset 0 1px 2px rgba(0, 0, 0, .1); box-shadow:inset 0 1px 2px rgba(0, 0, 0, .1) }
+.progress-bar { float:left; width:0; height:100%; font-size:12px; color:#fff; text-align:center; background-color:#4AB033; -webkit-box-shadow:inset 0 -1px 0 rgba(0, 0, 0, .15); box-shadow:inset 0 -1px 0 rgba(0, 0, 0, .15); -webkit-transition:width .6s ease;
+-o-transition:width .6s ease;
+transition:width .6s ease
+}
+.progress-striped .progress-bar { background-image:-webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #4AB033
+	), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, #4AB033), color-stop(.75, #4AB033), color-stop(.75, transparent), to(transparent)); background-image:-webkit-linear-gradient(45deg, #4AB033 25%, transparent 25%, transparent 50%, #4AB033 50%, #4AB033 75%, transparent 75%, transparent); background-image:-o-linear-gradient(45deg, #4AB033 25%, transparent 25%, transparent 50%, #4AB033 50%, #4AB033 75%, transparent 75%, transparent); background-image:linear-gradient(45deg, #4AB033 25%, transparent 25%, transparent 50%, #4AB033 50%, #4AB033 75%, transparent 75%, transparent); -webkit-background-size:40px 40px; background-size:40px 40px }
+.progress.active .progress-bar { -webkit-animation:progress-bar-stripes 2s linear infinite; -ms-animation:progress-bar-stripes 2s linear infinite; -o-animation:progress-bar-stripes 2s linear infinite; animation:progress-bar-stripes 2s linear infinite }
+.progress-bar-success { background-color:#229f24 }
+.progress-striped .progress-bar-success { background-image:-webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(255, 255, 255, .15)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .15)), color-stop(.75, rgba(255, 255, 255, .15)), color-stop(.75, transparent), to(transparent)); background-image:-webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent); background-image:-o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent); background-image:linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent) }
+.progress-bar-info { background-color:#39b3d7 }
+.progress-striped .progress-bar-info { background-image:-webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(255, 255, 255, .15)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .15)), color-stop(.75, rgba(255, 255, 255, .15)), color-stop(.75, transparent), to(transparent)); background-image:-webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent); background-image:-o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent); background-image:linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent) }
+.progress-bar-warning { background-color:#e48600 }
+.progress-striped .progress-bar-warning { background-image:-webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(255, 255, 255, .15)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .15)), color-stop(.75, rgba(255, 255, 255, .15)), color-stop(.75, transparent), to(transparent)); background-image:-webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent); background-image:-o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent); background-image:linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent) }
+.progress-bar-danger { background-color:#d2322d }
+.progress-striped .progress-bar-danger { background-image:-webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(255, 255, 255, .15)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .15)), color-stop(.75, rgba(255, 255, 255, .15)), color-stop(.75, transparent), to(transparent)); background-image:-webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent); background-image:-o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent); background-image:linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent) }
+.item-select{
+    background-color: #E4DFD7;
+}
+.red{
+    color:red
+}
+.xEditS .i-form-field .ui-select-container input{
+	padding:0px;
+}
+
+.changeEditInformation .container{
+	width: 559px;
+    margin: 15px 40px;
+}
+
+.changeEditInformation .container .i-form-field{
+	float: left;
+    margin-right: 82px;
+}
+
+.changeEditInformation .container .i-form-field .span{
+	padding-left:4px;
+}
+.changeEditInformation .container .etime{
+	width: 100px;
+	text-align: center;
+	line-height: 1.5;
+}
+.changeEditInformation .modal-footer{
+	display: block;
+    margin: auto;
+    clear: both;
+}
+.erows{
+	height:25px;
+	margin-bottom: 10px;
+}
+.erowsre{
+	margin: 5px 17px;
+}
+.ehide{
+	display:none;
+	font-size:10px;
+	float: right;
+    margin-right: 61px;
+}
+.echangebyselect{
+	margin: 10px 0px;
+}
+
+.echangebyselect input{
+	width: 100px;
+    line-height: 1.5;
+    margin-right: 77px;
+    text-align:center;
+}
+
+.enoname{
+	display:none;
+	font-size:10px;
+	color: red;
+}
+.omission{
+	width: 180px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.omissionforseldoc{
+	width: 70px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.prescription{
+	height: 22px;
+    margin-bottom: 10px;
+}
+
+.prescription > div{
+	float: left;
+	padding-right: 20px;
+}
+
+.pantibact{
+	width: 35%;
+}
+.pantibact span{
+	float:left;
+}
+.pantibact > div{
+	float: left;
+    min-width: 40%;
+    border-bottom: #a9a9a9 1px solid;
+    text-align: center;
+    height: 22px;
+}
+.pdept{
+	width: 28%
+}
+.pdept span{
+	float:left;
+}
+.pdept div{
+	float: left;
+    width: 55%;
+    border-bottom: #a9a9a9 1px solid;
+    text-align: center;
+    height: 22px;
+}
+.ptextarea{
+    border: none;
+    resize: none;
+    width: 95%;
+    vertical-align: top;
+    min-height:715px;
+}
+
+
+.rappForminner{
+	line-height: 2;
+	text-align: center;
+	border: none;
+	border-collapse: collapse;
+}
+.rappForminner tr{
+	border: #000 1px solid;
+}
+.rappFormSign{
+	height: 240px;
+    border: #000 1px solid;
+    border-top: none;
+}
+.rappFormSignDiv{
+	height: 180px;
+}
+.rappFormSignDiv label{
+	margin:10px;
+}
+.rappFormSignBot{
+	float: right;
+    right: 100px;
+    position: relative;
+    bottom: 10px;
+}
+.rappFormSignBot > div:nth-of-type(2){
+	margin-top: 20px;
+    position: relative;
+}
+.rshowtime >div{
+	display: inline-block;
+	width: 38px;
+	text-align: center;
+}
+.rappFormSignBotT{
+    position: relative;
+    bottom: 10px;
+}
+
+.rappFormSignBotTL{
+	float: left;
+	left: 10px;
+    position: relative;
+}
+.rappFormSignBotTR{
+	float: right;
+	right: 100px;
+    position: relative;
+}
+
+.rappFormSignBotTR > div:nth-of-type(2){
+	margin-top: 20px;
+    position: relative;
+}
+.rappFormSignBotTL > div:nth-of-type(2){
+	margin-top: 20px;
+    position: relative;
+}
+.rappForminner .rone{
+	width:11.8%;
+}
+.rappForminner .rtwo{
+	width:14.2%;
+}
+.rappForminner .rthree{
+	width:7.7%;
+}
+.rappForminner .rfour{
+	width:9.3%;
+}
+.rappForminner .rfive{
+	width:7.7%;
+}
+.rappForminner .rsix{
+	width:5.2%;
+}
+.rappForminner .rseven{
+	width:19.8%;
+}
+.rappForminner .reight{
+	width:24.3%;
+}
+.rappForminner .rtdcheck{
+	display: inline-block;
+	margin: 0 50px;
+}
+.rformCount{
+	position: absolute;
+    margin-left: 40px;
+}
+/*四川省医疗机构双向转诊单*/
+.rstub{
+	height: 260px;
+    border-top: 1px dashed;
+    border-bottom: 1px dashed;
+    line-height: 1.5;
+    letter-spacing: 2px;
+}
+.rstub > div:nth-of-type(1){
+	height: 20px;
+}
+.rstub > div:nth-of-type(2){
+	text-align: center;
+    padding: 20px 0px;
+    width: 225px;
+    display: inline-block;
+    left: 35%;
+    position: relative;
+    border-top: 1px dashed;
+}
+.rstubinfo{
+	padding-left: 37px;
+	clear: both;
+}
+.rstubinfo label{
+	float: left;
+}
+.rstubinfo div{
+	border-bottom: #a9a9a9 1px solid;
+    height: 21px;
+    float: left;
+    text-align: center;
+}
+.rstubinfo div:nth-of-type(1){
+	width:14.8%;
+}
+.rstubinfo div:nth-of-type(2){
+	width:13.2%;
+}
+
+.rstubinfo div:nth-of-type(3){
+	width:9.3%;
+}
+
+.rstubinfo div:nth-of-type(4){
+	width:23%;
+}
+.rstubfami{
+	clear: both;
+}
+
+.rstubfami label{
+	float: left;
+}
+.rstubfami label:nth-of-type(1){
+    padding-left: 37px;
+}
+.rstubfami div{
+	border-bottom: #a9a9a9 1px solid;
+    height: 21px;
+    float: left;
+    text-align: center;
+}
+.rstubfami div:nth-of-type(1){
+	width:45.5%;
+}
+.rstubfami div:nth-of-type(2){
+	width:23%;
+}
+.rstubfami div:nth-of-type(3){
+	width:10%;
+}
+.rstubfami div:nth-of-type(4), .rstubfami div:nth-of-type(5){
+	width:7%;
+}
+.rstubfami div:nth-of-type(6){
+	width:29.4%;
+}
+.rstub > div:nth-of-type(4){
+	float: right;
+	clear: both;
+	margin: 21px 0px;
+    position: relative;
+    right: 30%;
+}
+.rstub > div:nth-of-type(5){
+	clear: both;
+}
+.rstubtime{
+	float: right;
+    width: 30%;
+}
+.rstubtime div{
+	float: left;
+    height: 21px;
+    width: 24%;
+}
+.rstubtime label{
+	float: left;
+}
+.routForm{
+	border-top: none;
+	height: 49.6%;
+}
+.routForm>div:nth-of-type(1){
+	width: 275px;
+    border-bottom: 1px dashed;
+}
+.routForm>div:nth-of-type(2){
+	border-top: none;
+}
+.routForm .rstubinfo{
+	padding-left: 0px;
+}
+
+.routForm .rstubfami div:nth-of-type(1){
+	width: 18%;
+}
+.routForm .rstubfami div:nth-of-type(2){
+	width: 10%;
+}
+.routForm .rstubfami div:nth-of-type(3){
+	width: 10%;
+}
+.routForm > div:nth-of-type(4) {
+    float: initial;
+    clear: both;
+    margin: 0px;
+    right: 0px;
+}
+.rordimpress{
+	clear: both;
+	padding-left: 37px;
+	float: initial;
+	margin: 0px;
+}
+.rordimpress label{
+	float: left;
+}
+.rordimpress div{
+	float: left;
+    width: 87%;
+    min-height: 50px;
+}
+.rordimpress div:nth-of-type(2){
+	width: 70%;
+}
+.rdoctor{
+	clear: both;
+	/*display: inline-block;*/
+    float: right;
+    width: 60%;
+}
+.rdoctor>div:nth-of-type(1), .rdoctor>div:nth-of-type(2){
+	margin-left: 80px;
+}
+.radminis div{
+	border-bottom: #a9a9a9 1px solid;
+    height: 21px;
+    width: 200px;
+    float: left;
+}
+.routForm >div:nth-of-type(9){
+	width: 100%;
+	display: inline-block;
+}
+.rhelp{
+	border-bottom: 1px dashed;
+	width: 100%;
+	clear:both;
+}
+.rhelp >div:nth-of-type(1){
+	width: 275px;
+    border-bottom: 1px dashed;
+    height: 20px;
+}
+
+.rflSummaryPanel {
+	width: 33.33333%;
+	min-height: 600px;
+	float: left;
+	padding-bottom: 10px;
+}
+
+.rflSummaryBlock {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.rflSummaryPanel hr {
+	border-top: 1px solid #ddd;
+	border-bottom: 0px;
+}
+
+.rflSummaryPanel:nth-child(2n) {
+	background: aliceblue;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	width: calc(33.33333% - 2px);
+}
+
+.rflSummaryPanel:nth-child(2n+1) {
+	background: ivory;
+}
+
+.rflspTitle {
+	text-align: center;
+	font-size: 20px;
+	/*color: cornflowerblue;*/
+	color: #4ab033;
+    text-shadow:0 1px 1px rgba(0, 0, 0, 0.75);
+}
+
+.rflspCount {
+	width: 100px;
+	height: 100px;
+	/*background: #4AB033;*/
+	border: 1px solid #4ab033;
+	border-radius: 100px;
+	line-height: 100px;
+	display: block;
+	text-align: center;
+	font-style: normal;
+	color: #4ab033;
+	font-size: 40px;
+	margin: auto;
+	margin-top: 15px;
+
+	font-family: cursive;
+/*
+	-webkit-box-shadow: 0 0 5px #4AB033;
+	-moz-box-shadow: 0 0 5px #4AB033;
+	box-shadow: 0 0 5px #4AB033;
+*/
+/*
+	-webkit-text-shadow: 0 0 20px red;
+	-moz-text-shadow: 0 0 20px red;
+	text-shadow: 0 0 10px red;
+	text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de;
+*/
+
+    -webkit-text-shadow:0 1px 3px rgba(0, 0, 0, 0.75);
+    -moz-text-shadow:0 1px 3px rgba(0, 0, 0, 0.75);
+    text-shadow:0 1px 3px rgba(0, 0, 0, 0.75);
+}
+
+.rflspBtnMore {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.rflFromLine {
+  overflow: hidden;
+  line-height: 30px;
+  margin-left: 20px;
+}
+
+.rflFormLabel {
+	float: left;
+}
+
+.rflFormValue {
+	float: left;
+}
+
+.rflSummaryBlock .form-group {
+	margin-right: 0px;
+	margin-top: 20px;
+	margin-left: 30px;
+}
+
+.rflTableSearch {
+	padding: 10px 0px;
+	border-bottom: 1px solid #eee;
+	margin: 0 10px;
+	width: calc(100% - 20px);
+}
+
+.rflTableSearch .form-group {
+	margin-left: 10px;
+}
+
+.rflTableSearch .clearBtn {
+	float: right;
+	margin-left:0px;
+	margin-right: 15px;
+}
+
+.rflTableSearch .clearBtn button {
+	margin:0px;
+}
+
+.rflTableSearch:last-child {
+}
+
+.rflTableSearch.xClinic {
+}
+
+.rflTableSearch div {
+	float:left;
+}
+
+.noBottomPading {
+	border-bottom: 0px;  padding-bottom: 0px;
+}
+
+.rflTableSearch .ui-select-container {
+	width : 160px;
+}
+
+.rflSelectChanged a.select2-choice {
+	background: antiquewhite;
+}
+
+input.rflSelectChanged{
+	background: antiquewhite;
+}
+
+
+/**********************************************************/
+
+nav.navbar{
+    height: 50px;
+    color: #fff;
+	background: #8f8f8f;
+}
+.navLeft{
+    height: 50px;
+}
+.navLeft a img{
+    width: 50px;
+}
+.navLeft a span{
+    line-height: 50px;
+}
+.xNavUl>li{
+    padding: 10px 30px;
+    line-height: 30px;
+}
+.xNavUl>li a img{
+    width: 30px;
+    height: 30px;
+}
+
+.left-nav {
+	background: transparent;
+	/*width: 180px;*/
+	/*background : #4AB033;*/
+}
+
+.main-view {
+	margin-top: 5px;
+}
+
+.mainViewBg {
+	background: #eee;
+	overflow:hidden;
+}
+
+.left-nav nav.menu ul.nav-primary li a {
+	color: #333;
+}
+
+.content-view {
+	background: #FFF;
+}
+
+.left-nav nav.menu ul.nav-primary li ul {
+	background: transparent;
+}
+
+.left-nav nav.menu ul.nav-primary li {
+	line-height: 50px;
+}
+
+.left-nav nav.menu ul.nav-primary li ul li {
+	margin-left: 60px;
+}
+
+.zPanel>.panel-heading, .zPanel1>.panel-heading, .zPorot a {
+	color: #fff;
+}
+/*
+.sub-title .row .xDetailPat .xTriangle, .xTriangle1 {
+	float: left;
+	position: inherit;
+	left: 0px;
+}
+*/
+.left-nav nav.menu ul.nav-primary li ul li:last-child {
+	border-bottom: 0px;
+}
+
+.left-nav nav.menu ul.nav-primary li {
+	border-bottom: rgba(255, 255, 255, 0.8) 1px solid;
+}
+
+.xNavUlLi .navRightUlTop {
+	background: #555;
+}
+
+.xNavUl>li a span.myName {
+	line-height: 30px;
+	height: 30px;
+}
+
+.groupMenuList.ztree2>li:nth-child(6) {
+	clear : both
+}
+
+/**********************************************************/
+.rstubdown{
+	height: 20%;
+    border-bottom: 1px solid;
+    line-height: 2;
+    letter-spacing: 2px;
+}
+.rstubdown .rstubinfo div {
+    height: 26px;
+}
+.rstubdown .rstubfami div {
+    height: 26px;
+}
+.rstubdown .rstubfamithree div {
+    height: 26px;
+}
+.rstubdown .rstubinfo div:nth-of-type(4) {
+    width: 30%;
+}
+.rstubdown .rstubfami div:nth-of-type(2) {
+    width: 28%;
+}
+
+.rstubdown > div:nth-of-type(2){
+	text-align: center;
+    padding-top: 20px;
+    width: 225px;
+    display: inline-block;
+    left: 45%;
+    position: relative;
+}
+.rstubdown > div:nth-of-type(3) {
+    clear: both;
+    display: inline-block;
+    width: 100%;
+}
+
+.rstubfamithree{
+	clear: both;
+}
+
+.rstubfamithree label{
+	float: left;
+}
+.rstubfamithree label:nth-of-type(1){
+    padding-left: 37px;
+}
+.rstubfamithree div{
+	border-bottom: #a9a9a9 1px solid;
+    height: 21px;
+    float: left;
+    text-align: center;
+}
+
+.rstubdown .rstubfamithree div:nth-of-type(1){
+	width:10%;
+}
+.rstubdown .rstubfamithree div:nth-of-type(2), .rstubdown .rstubfamithree div:nth-of-type(3){
+	width:7%;
+}
+.rstubdown .rstubfamithree div:nth-of-type(4){
+	width:29.4%;
+}
+
+.routFormDown{
+	border-top: none;
+	height: 60%;
+	clear: both;
+}
+.routFormDown > div:nth-of-type(1) {
+    height: 20px;
+}
+.routFormDown>div:nth-of-type(3){
+	line-height: 2;
+}
+.routFormDown .rstubfami div:nth-of-type(1){
+	width: 18%;
+}
+.routFormDown .rstubfami div:nth-of-type(2){
+	width: 40%;
+}
+
+.routFormDown .rstubinfo div {
+    height: 26px;
+}
+.routFormDown .rstubfami div {
+    height: 26px;
+}
+.routFormDown > div:nth-of-type(4) {
+    float: initial;
+    right:initial;
+    clear: both;
+    padding-left: 37px;
+    margin: 0px;
+}
+.routFormDown .rordimpress div {
+    float: left;
+    width: 87%;
+    min-height: 110px;
+}
+.routFormDown >div:nth-of-type(7) {
+    width: 100%;
+    display: inline-block;
+}
+.routFormDown > div:nth-of-type(2) {
+    padding: 30px 0px;
+}

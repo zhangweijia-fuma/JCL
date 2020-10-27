@@ -1,0 +1,110 @@
+<!-- 定位模块管理 -->
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .xDetailPos button
+  {
+    background: #4AB033;
+    color: white;
+    line-height: 5px;
+    /*width: 120px;*/
+  }
+
+</style>
+
+<div class="container" style="width: 102%" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>定位模块位置地图</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        
+        <div class="form-group">
+          <span class="i-form-label ml10">安装批次：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="batchList.selected" theme="select2" ng-change="searchModule()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.batch"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (batchList | filter: $select.search) track by item.batch">
+                  <span ng-bind="item.batch"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">安装类型：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="installTypeList.selected" theme="select2" ng-change="searchModule()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (installTypeList | filter: $select.search) track by item.code">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">模块编号：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="codeList.selected" theme="select2" ng-change="searchModule()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.code"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (codeList | filter: $select.search) track by item.code">
+                  <span ng-bind="item.code"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+      </div>      
+      <!-- 下拉列表 -->
+
+      <div class="pos" style="top:120px;">
+        <div id="gpsModuleMap" class="pos"  style="width:98%; border: 1px solid #DDDDDD; display: block;"></div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd',
+  });
+</script>
+
+

@@ -1,0 +1,191 @@
+<!-- 日志查询主页 -->
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .tds{
+    margin:15px;
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData()" >
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>日志查询</li>
+            </ul>
+            
+            <div class="form-group flright xHandle" style="top: 8px; right: 0px;">
+              <span class="ml10 "><button class="bton green"  ng-click="exporToFile()"><i class="icon icon-download-alt"></i> 导出</button> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group">
+          <span class="i-form-label ml10">操作人：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="operatorList.selected" theme="select2" ng-change="searchByOpeartor()" style="width: 200px">
+              <ui-select-match placeholder="选择全部">
+                <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+                <ui-select-choices repeat="item in (operatorList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">操作项：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="OperationMenuCodeList.selected" theme="select2" ng-change="searchByOpeartionMenuCode()" style="width: 200px">
+              <ui-select-match placeholder="选择全部">
+                <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+                <ui-select-choices repeat="item in (OperationMenuCodeList | filter: $select.search) track by item.menu_code">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label search">开始时间：</span>
+          <div class="i-form-field search">
+            <input type="text" class="form-date form-control choosetime" style="text-indent: 2px;" ng-model="StartTime" data-date-format="yyyy-mm-dd" placeholder="开始时间" ng-change="searchByTime(StartTime,EndTime)"  >
+            <span class="cancel" ng-click="resetTime(1)">&times;</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">结束时间：</span>
+          <div class="i-form-field search">
+            <input type="text" class="form-date form-control choosetime" style="text-indent: 2px;" ng-model="EndTime" data-date-format="yyyy-mm-dd" placeholder="结束时间" ng-change="searchByTime(StartTime,EndTime)" >
+            <span class="cancel" ng-click="resetTime(2)">&times;</span>
+          </div>
+        </div>
+      </div>
+      <!-- 下拉列表 -->
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel">日志清单</label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="cItemBoxMine">
+        <table class="tbRow" border="0" cellpadding="0" cellspacing="0">
+          <thead>
+            <tr>
+              <th style="width: 4%">No.</th>
+              <th style="width: 6%">操作人</th>
+              <th style="width: 12%">操作日期</th>
+              <th style="width: 78%">操作内容</th>
+            </tr>
+          </thead>
+          <tr><td class="ctdLine" colspan="15" rowspan="1" headers=""></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in operationLogList" class="hovershow trHover" >
+              <td class=" tds" style="text-align: center; margin: 5px;">{{item.no}}</td>
+              <td class=" tds" style="text-align: center;">{{item.operator_name}}</td>
+              <td class=" tds" style="text-align: center;">{{item.create_time}}</td>
+              <td class=" tds" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.operation_context}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- <div class="row text-center floatRight"> -->
+      <div class="footer">
+        <ul class="pager" id="pager" style="margin-right: 10px;">
+          <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+          <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+          <li ><a href="" id="beforeSL">...</a></li>
+          <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+          <li ><a href="" id="afterSL">...</a></li>
+          <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+          <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+          <li class="xColor" ng-show="totalPage">|</li>
+          <li class="xColor" ng-show="totalPage">共 {{totalPage}} 页</li>
+        </ul>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  //zui日历插件
+  $('.form-date').datetimepicker(
+          {
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            format: 'yyyy-mm-dd'
+          });
+
+</script>
+
+<div class="modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon-eye-open"></i> 操作日志信息</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" >
+            <table class="table table-bordered" style="margin-bottom:0px">
+              <tr>
+                  <td style="width:100px;">操作人：</td>
+                  <td>{{operation_logs1.operator_name}}</td>
+              </tr>
+              <tr>
+                  <td style="width:100px;">操作项：</td>
+                  <td>{{operation_logs1.menu_name}}</td>
+              </tr>
+              <tr>
+                <td style="width:100px;">创建时间：</td>
+                <td>{{operation_logs1.create_time}}</td>
+              </tr>
+              <tr>
+                <td style="width:100px;">操作内容：</td>
+                <td title="{{operation_logs1.operation_context}}">{{operation_logs1.operation_context}}</td>
+              </tr>
+            </table>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grn" data-dismiss="modal">确定</button>
+      </div>
+    </div>
+  </div>
+</div>

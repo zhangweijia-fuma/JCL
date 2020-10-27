@@ -1,0 +1,235 @@
+<!-- 组件属性编辑信息 -->
+
+<style>
+.break{
+    word-break: break-all;  
+    word-wrap: break-word; 
+}
+.xDetailPatBoxData .xDetailPatBoxDataTop div{
+  width:25%;
+}
+.xDetailPat a{
+  background: #4AB033;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="libs/area-picker/css/city-picker.css">
+<link rel="stylesheet" type="text/css" href="libs/area-picker/css/main.css">
+
+<script type="text/javascript" src="libs/area-picker/js/area-picker.data.js"></script>
+<script type="text/javascript" src="libs/area-picker/js/area-picker.js"></script>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request" id="html5Form" validate>
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail">
+              <li ng-class="{true: 'active'}[tab==0]" ng-click="changeTab(0)"><a href="#/vendorManage">供应商管理</a></li>
+              <li><span>></span></li>
+              <li><a href="" style="color: #4AB033;">{{editMode}}供应商信息</a></li>
+              <span  class="ml10" style="float:right;margin-left: 10px;"> 
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button>
+              </span>
+              <span class="ml10 " ng-show="editMode=='新增'||editMode=='更新'" style="float:right;margin-left: 10px;">
+                <button class="bton green"  ng-click="submitToCheck()"><i class="icon icon-check"></i> 提交申请</button> 
+              </span>
+              <span class="ml10 " ng-show="editMode=='审批'" style="float:right;margin-left: 10px;">
+                <button type="button" class="bton green" ng-click="showCheckDlg()"><i class="icon icon-ok"></i> 审核</button>
+              </span>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row">
+          <div class="form-group xDetailPat">
+            <label class="i-form-label ml10 inline-title">供应商信息</label>
+            <div class="xTriangle"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content xDetailPatBox clear_after">
+
+        <div class="xDetailPatBoxData" style="width: 100%">
+          <div class="xDetailPatBoxDataTop" style="margin-left: 15px;">
+            <div style="width: 50%">
+              <span>中文名称：</span>
+              <span ng-show="editMode=='审批'||editMode=='浏览'">{{vendorInfo.vendor_name}}</span>
+              <input type="text" class="form-control xEdit" ng-model="vendorInfo.vendor_name" id="vendor_name" style="width: 375px;" ng-show="editMode=='新增'||editMode=='更新'">
+            </div>
+
+            <div style="width: 50%">
+              <span>英文名称：</span>
+              <span ng-show="editMode=='审批'||editMode=='浏览'">{{vendorInfo.vendor_name_en}}</span>
+              <input type="text" class="form-control xEdit" ng-model="vendorInfo.vendor_name_en" id="vendor_name_en" style="width: 375px;" ng-show="editMode=='新增'||editMode=='更新'">
+            </div>
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-left: 15px;">
+            <div>
+              <span>名称缩写：</span>
+              <span ng-show="editMode=='审批'||editMode=='浏览'">{{vendorInfo.vendor_abbr}}</span>
+              <input type="text" class="form-control xEdit" ng-model="vendorInfo.vendor_abbr" id="vendor_abbr" placeholder="英文名称缩写" ng-show="editMode=='新增'||editMode=='更新'">
+            </div>
+
+            <div>
+              <span>类&#12288;&#12288;型：</span>
+              <span ng-show="editMode=='审批'||editMode=='浏览'">{{vendorInfo.vendor_type_name}}</span>
+              <select class="form-control" ng-model="vendorInfo.vendor_type" ng-options = "option.code as option.name for option in vendorTypeList" id='vendor_type' placeholder='供应商类型' ng-show="editMode=='新增'||editMode=='更新'">
+              </select>
+            </div>
+
+            <div style="width: 50%">
+              <span>编&#12288;&#12288;码：</span>
+              <span ng-show="editMode=='审批'||editMode=='浏览'">{{vendorInfo.vendor_code}}</span>
+              <input type="text" class="form-control xEdit" ng-model="vendorInfo.vendor_code" placeholder="代码自动生成" readonly style="width: 375px;" ng-show="editMode=='新增'||editMode=='更新'">
+            </div>
+
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-left: 15px;">
+            <div>
+              <span>联系人员：</span>
+              <span ng-show="editMode=='审批'||editMode=='浏览'">{{vendorInfo.vendor_contactor}}</span>
+              <input type="text" class="form-control xEdit" ng-model="vendorInfo.vendor_contactor" ng-show="editMode=='新增'||editMode=='更新'">
+            </div>
+
+            <div>
+              <span>联系电话：</span>
+              <span ng-show="editMode=='审批'||editMode=='浏览'">{{vendorInfo.vendor_phone}}</span>
+              <input type="text" class="form-control xEdit" ng-model="vendorInfo.vendor_phone" ng-show="editMode=='新增'||editMode=='更新'">
+            </div>
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-left: 15px;" ng-show="editMode=='审批'||editMode=='浏览'">
+            <div style="width: 100%">
+              <span>公司地址：</span>
+              <span ng-show="editMode=='审批'||editMode=='浏览'">{{vendorInfo.vendor_full_addr}}</span>
+            </div>
+          </div>
+
+          <div class="" style="margin-left: 15px;" ng-show="editMode=='新增'||editMode=='更新'">
+            <div style="display: inline-flex; font-size: 14px; width: 100%; ">
+              <div style="width: 50%; display: inline-flex; ">
+                <span>公司地址：</span>
+                <div style="position: relative; margin-top: 3px; margin-left: 15px;">
+                  <input readonly type="text" data-toggle="city-picker" ng-model="address" data-country='0' placeholder="公司地址"  id='area_selector' style="width: 375px; margin-left: 10px;">
+                </div>
+              </div>
+              <div>
+                <span>详细地址：</span>
+                <input type="text" class="form-control xEdit" ng-model="vendorInfo.vendor_addr" style="width: 375px; margin-left: 10px" placeholder="街道门牌地址" id='vendor_addr'>
+              </div>
+            </div>           
+          </div>
+        </div>
+
+        <div class="xDetailDesc">
+          <span>供应商介绍：</span>
+          <span ng-show="editMode=='审批'||editMode=='浏览'">{{vendorInfo.vendor_desc}}</span>
+          <textarea ng-model="vendorInfo.vendor_desc" style="width:972px;height:120px;resize: vertical;" ng-show="editMode=='新增'||editMode=='更新'"></textarea>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row">
+          <div class="form-group xDetailPat">
+            <label class="i-form-label ml10 inline-title">认证信息</label>
+            <div class="xTriangle"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content xDetailPatBox clear_after">
+        <div class="xDetailPatBoxData" style="width: 100%">
+          <div class="xDetailPatBoxDataTop" style="margin-left: 15px;">
+
+            <div><span>认证状态：{{vendorInfo.status_name}}</span>
+            </div>
+
+            <div>
+              <span class="i-form-label search">开始日期：</span>
+              <span ng-show="editMode=='审批'||editMode=='浏览'">{{vendorInfo.start_date}}</span>
+              <input type="text" class="form-date form-control choosetime" style="text-indent: 2px; width: 120px;" ng-model="vendorInfo.start_date" data-date-format="yyyy-mm-dd" placeholder="开始时间" id='start_date' ng-show="editMode=='新增'||editMode=='更新'">
+            </div>
+
+            <div>
+              <span class="i-form-label search">结束日期：</span>
+              <span ng-show="editMode=='审批'||editMode=='浏览'">{{vendorInfo.end_date}}</span>
+              <input type="text" class="form-date form-control choosetime" style="text-indent: 2px; width: 120px;" ng-model="vendorInfo.end_date" data-date-format="yyyy-mm-dd" placeholder="结束时间" id='end_date' ng-show="editMode=='新增'||editMode=='更新'">
+            </div>
+          </div>
+        </div>
+
+        <div class="xDetailDesc">
+          <span>认证说明：</span>
+          <span ng-show="editMode=='审批'||editMode=='浏览'" style="min-height: 40px;">{{vendorInfo.certication_desc}}</span>
+          <textarea ng-model="vendorInfo.certifaction_desc" style="width:972px; height:120px;resize: vertical;" ng-show="editMode=='新增'||editMode=='更新'"></textarea>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- 审核供应商 -->
+<div class="modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog" style="width: 360px;" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon icon-check"></i> 供应商审批</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="padding: 20px;">
+
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px; width: ">
+              <div style="height: 40px;"><span>审批结果</span>
+                <input type="radio" id="result" value="pass" ng-model="checkResult" required checked >通过
+                <input type="radio" id="result" value="reject" ng-model="checkResult" style="margin-left: 10px">驳回
+              </div>
+              <div style="height: 40px;"><span>审批意见：</span>
+                 <input id="opinion" type="text" class="form-control xEdit" max="10" style="text-indent: 2px;width: 160px; height: 20px;" ng-model="checkOpinion" placeholder="审批意见">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grn" ng-click="confirmCheckList()"><i class="icon icon-check-circle"></i> 确定</button>
+        <button type="button" class="btn btn-grn" data-dismiss="modal"><i class="icon icon-remove-sign"></i> 取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd'
+  });
+</script>

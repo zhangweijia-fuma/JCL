@@ -1,0 +1,183 @@
+<!-- 数据字典管理页面 -->
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .GridHeading{
+    background: #4ab033;
+    /*height: 20px;*/
+    padding: 8px 15px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: white;
+  }
+
+  .GridHeading2{
+    background: white; 
+    color: black; 
+    border-bottom: 1px solid #ccc;
+    padding: 8px 15px;
+  }
+</style>
+
+<link href="libs/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>菜单管理</li>
+            </ul>
+            <div class="form-group flright xHandle" style="top: 15px;">           
+              <span class="ml10 "><button class="bton green"  ng-click="addRootMenu()"><i class="icon icon-plus"></i> 新增顶层菜单</button> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content clear_after">
+        <div class="col-md-3 zPanelBox">
+          <div class="panel zPanel zPanelzzz1 pos" style="width:250px; top: 70px" >
+            <div class="panel-heading">菜单列表</div>
+            <div class="panel-body pos" style="top: 40px;">
+              <div class="zPanelPadding15" style="padding: 0px">
+                <div class=" xDetailPatBoxmenus clear_after" style="padding: 0px;">
+                  <div class="panel-body" id ="sel_menu_tree" >
+                    <ul id="menu_tree" class="ztree pos" style="overflow-y: auto; width: 99%;"></ul>
+                  </div>   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9 zWid75" style="width: 80%; font-size: 14px;" >
+          <div class="panel pos" style="border:0px; width: 770px; top:70px; margin-left: 60px; overflow-y: auto;">
+            <div>
+              <div class="GridHeading" >菜单信息
+                <div style="float:right; margin-top: -5px;" >
+                  <span class="ml10"><button class="bton green"  ng-click="addMenu()"><i class="icon icon-plus"></i> 新增子菜单</button></span>
+                  <span class="ml10"><button class="bton green"  ng-click="updateMenu()"><i class="icon icon-edit"></i> 修改</button></span>
+                  <span class="ml10"><button class="bton green"  ng-click="showDeleteMenu()"><i class="icon icon-trash"></i> 删除</button></span>
+                </div>
+              </div>
+
+              <div style="line-height: 24px; padding: 15px; margin-bottom: 20px;">
+                <div>
+                  <table class="table table-bordered" style="width: 100%;">
+                    <tr>
+                      <td style="width: 50%"><span>菜单名称：</span>{{currentMenu.name}}</td> 
+                      <td><span>菜单编码：</span>{{currentMenu.code}}</td>
+                    </tr>
+                    <tr>
+                      <td><span>排&emsp;&emsp;序：</span>{{currentMenu.sort}}</td>
+                      <td><span>上层菜单：</span>{{currentMenu.parent_name}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div class="GridHeading" ng-show="showMenuItem==1" >菜单项
+                <div style="float:right; margin-top: -5px;" >
+                  <span class="ml10 " > 
+                    <button class="bton green"  ng-click="addMenuItem()"><i class="icon icon-list-alt"></i> 新增菜单项</button>
+                  </span>
+                </div>
+              </div>
+
+              <div ng-show="showMenuItem==1">
+                <div style="overflow-y: auto;">
+                  <table class="table table-bordered tbRow" style="width: 100%" cellspacing="5" >
+                    <thead>
+                      <tr>
+                        <th>路径</th>
+                        <th>创建人</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="item in menuItemList" class="hovershow trHover" ng-dblclick="updateMenuItem(item)">
+                        <td style="text-align: center;">{{item.path}}</td>
+                        <td style="text-align: center;">{{item.create_name}}</td>
+                        <td style="text-align: center;">{{item.create_time}}</td>
+                        <td class="showdelete" style="text-align: center; top: 0px;">
+                          <i class="icon icon-edit" style="margin-left: 5px" title="修改" ng-click="updateMenuItem(item)"></i>
+                          <i class="icon icon-trash" style="margin-left: 5px" title="删除" ng-click="showDeleteMenuItem(item)"></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>                
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 新增、修改菜单、菜单项 -->
+<div class="modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog" style="width: 360px; " >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon-list-alt"></i> {{editMode}}{{editType}}</h4>
+      </div>
+      <div class="modal-body" style="">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="padding: 20px;">
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;" ng-show="editType=='菜单'">
+              <div style="height: 40px;"><span>菜单编码：</span>
+                <input id="menu_code" type="text" ng-model="editedMenu.code" style="width: 160px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 40px;"><span>菜单名称：</span>
+                <input id="menu_name" type="text" ng-model="editedMenu.name" style="width: 160px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 40px;"><span>菜单排序：</span>
+                <input id="menu_sort" type="number" ng-model="editedMenu.sort" style="width: 160px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 35px;"><span>上层菜单：</span>
+                <input type="text" ng-model="editedMenu.parent_name" style="width: 160px; height: 20px; text-indent: 2px;" readonly>
+              </div>
+            </div>
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;" ng-show="editType=='菜单项'">
+              <div style="height: 35px;"><span>菜单编码：</span>
+                <input type="text" ng-model="editedMenuItem.menu_code" style="width: 160px; height: 20px; text-indent: 2px;" readonly>
+              </div>
+              <div style="height: 35px;"><span>菜单名称：</span>
+                <input type="text" ng-model="editedMenuItem.menu_name" style="width: 160px; height: 20px; text-indent: 2px;" readonly>
+              </div>
+              <div style="height: 35px;"><span>路&#12288;&#12288;径：</span>
+                <input id="item_path" type="text" ng-model="editedMenuItem.path" style="width: 160px; height: 20px; text-indent: 2px;" required/>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grn" ng-click="confirmToSave()">确定</button>
+        <button type="button" class="btn btn-grn" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+

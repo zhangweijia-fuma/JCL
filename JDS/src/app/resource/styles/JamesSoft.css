@@ -1,0 +1,270 @@
+
+.generalDialog
+{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+    top:0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+} 
+
+.cItemBoxMine{
+    border-bottom:1px solid lightGray;
+    font-size: 14px;
+}
+
+.ctdLine{
+  border-top: 1px solid black;
+}
+
+
+.dDetailPat{
+	position: relative;
+	height: 34px;
+	margin-top: 20px;
+}
+.dDetailPat .dTriangle{
+	width:0;
+    height:0;
+    border-left:0px solid transparent;
+    border-right:20px solid #4AB033;
+    border-bottom:34px solid transparent;
+    transform:rotate(180deg);
+    position: relative;
+    left: 200px;
+    bottom: 0;
+}
+
+.dDetailPat .dlabel{
+	width: 170px;
+	display: inline-block;
+	height: 34px;
+	background: #4AB033;
+	line-height: 34px;
+	color: #fff;
+	padding:0 15px;
+	position: relative;
+	float: left;
+}
+
+.cDetailPat{
+	position: relative;
+	border-bottom: solid 1px lightGray;
+	height: 34px;
+	margin-top: 20px;
+}
+.cDetailPat .cTriangle{
+	width:0;
+    height:0;
+    border-left:0px solid transparent;
+    border-right:20px solid #4AB033;
+    border-bottom:34px solid transparent;
+    transform:rotate(180deg);
+    position: absolute;
+    left: 200px;
+    bottom: 0;
+}
+
+.cDetailPat .clabel{
+	width: 170px;
+	display: inline-block;
+	height: 34px;
+	background: #4AB033;
+	line-height: 34px;
+	color: #fff;
+	padding:0 15px;
+	position: relative;
+	float: left;
+}
+
+/* 显示按钮 */
+.showdelete{
+    visibility:hidden;
+    position:relative;
+    right:5px;
+    /*width: 10px;*/
+    text-align: center;
+}
+
+.showdelete img{
+    color: green;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    color: green; 
+    cursor: pointer; 
+    font-size: 20px;
+}
+
+.showdelete i{
+    color: green; 
+    cursor: pointer; 
+    font-size: 18px; 
+    text-align: center;
+    margin-left: 5px;
+}
+
+.hovershow:hover .showdelete{
+    visibility:visible;
+}
+
+/* 鼠标在表格行上移动时出现灰色背景*/
+.trHover:hover {
+    background-color: #f7f7f7;
+}
+
+.pos{
+  top:0px;
+  bottom: 0px;
+  position: absolute;
+  width: 100%;
+}
+
+
+/* 表格内容超出时隐藏，需要指定宽度*/
+.tbRow
+{
+  border-collapse:separate;
+  border-spacing:0px 6px;
+  margin-top: 10px; 
+  table-layout: fixed;
+  width: 100%;
+}
+
+
+
+/*在日期输入框中增加取消按钮*/
+.search{
+  position: relative;
+}
+.cancel{
+  position: absolute;
+  top: 1px;
+  right: 4px;
+  /*z-index: 99;*/
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.warnBtn{
+  background: #a11111;
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.deleteIcon{
+    /*width: 50px;*/
+    /*height: 25px;*/
+    /*background: #FFAD3C;*/
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.AddMainHeaderTanchang{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.AddMainHeaderTanchang a{
+    color: #4AB033;
+    font-size: 14px;
+}
+
+
+.btnAdd{
+    position: relative;
+    top: -5px;
+    cursor: pointer;
+}
+.btnAdd img{
+    position: absolute;
+    top: 0;
+    left: -25px;
+}
+
+/* 底部页码 */
+.footer{
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+}
+
+
+/* *********************************************************************
+
+定义页面风格 
+
+***********************************************************************/
+
+/* 公共部分 */
+
+
+
+/* 列表类 */
+
+
+/* 属性编辑类 */
+
+/* 外框部分 */
+.JCLBox{
+
+  border: lightGray 1px solid;
+  overflow: hidden;
+}
+
+.JCLBoxData{
+  line-height: 30px;
+  display: inline-block;
+  width: 100%;
+  margin: 10px;
+  font-size: 14px;
+}
+
+.JCLBoxData .JCLBoxDataRow{
+  word-break:break-all; /*支持IE，chrome，FF不支持*/
+  word-wrap:break-word;/*支持IE，chrome，FF*/
+  overflow: hidden;
+  height: 40px;
+  display: inline-flex;
+  width: 100%;
+}
+
+/* 每行分4个部分 */
+.JCLBoxDataRow div {
+  width: 25%;
+}
+
+/* 每部分的标题*/
+.JCLBoxDataRow .div span {
+  width: 20%;
+}
+
+/* 每部分的输入部分*/
+.JCLBoxDataRow .div .div {
+  width: 80%;
+}
+
+/* 每部分的输入部分*/
+.JCLBoxDataRow .div .input {
+  width: 80%;
+}
+
+
+.JCLSelectStyle {
+  width: 76%;
+  height: 25px;
+}
+
+.JCLInputStyle
+{
+  width: 76%; 
+  height: 20px; 
+  text-indent: 2px;
+}
+
+/* 对话框类 */

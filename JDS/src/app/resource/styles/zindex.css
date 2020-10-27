@@ -1,0 +1,651 @@
+/*.content{
+	overflow: hidden;
+	width: 100%;
+}*/
+.xTab table{
+	width: 100%;
+	border:solid #4AB033;
+	border-width:1px 0px 0px 1px;
+	margin: 0;
+    border-collapse: collapse;
+}
+.xTab table tr th{
+	border:solid #4AB033;
+	border-width:0px 1px 1px 0px;
+	height:30px;
+	line-height: 30px;
+}
+.xTab table tr td:nth-of-type(1){
+	width: 9%;
+}
+.xTab table tr td{
+	width: 13%;
+	height:35px;
+	line-height: 35px;
+	border:#4AB033 1px solid ;
+	border-width:0px 1px 1px 0px;
+	text-align: center;
+}
+.xTriangle142{
+    width: 0;
+    height: 0;
+    border-left: 0px solid transparent;
+    border-right: 20px solid #4AB033;
+    border-bottom: 34px solid transparent;
+    transform: rotate(180deg);
+    /* background: #4AB033; */
+    position: absolute;
+    left: 142px;
+    bottom: 0;
+}
+.xDualDetailPat{
+    position: relative;
+    width: 100%;
+    border-bottom: #4AB033 1px solid;
+    height: 34px;
+}
+.xDoctor .xDoctorBox .bi-value{
+    max-width: 98px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.xDoctor .xDoctorBox{
+	margin-top: 20px;
+	margin-bottom: 0px;
+	margin-right: 9px;
+}
+.xDoctor{
+	overflow: hidden;
+    border: #4AB033 1px solid;
+    padding: 0 0px 20px 20px;
+}
+.xDetailHor3 div{
+    float: left;
+    width: 33%;
+    line-height: 28px;
+    overflow: hidden;
+}
+.xDetailHor>div{
+    float: left;
+    width: 100%;
+    line-height: 28px;
+    overflow: hidden;
+}
+.xDetailHor2 div{
+    float: left;
+    width: 50%;
+    line-height: 28px;
+    overflow: hidden;
+}
+.xDetailHor4 div{
+    float: left;
+    width: 25%;
+    line-height: 28px;
+    overflow: hidden;
+}
+.xDetailHor>div span{
+	float: left;
+}
+.xDetailHorExp{
+	display: inline-block;
+	width: 924px;
+	line-height: 28px;
+}
+.xLineHight28{
+	line-height: 28px;
+	overflow: hidden;
+}
+.xDetailInf input{
+	height: 25px;
+}
+.xDetailInf span{
+    float: left;
+}
+.xDetailPos{
+	position: absolute;
+    right: 0;
+}
+.panels{
+
+}
+.panels table {
+    width: 100%;
+    padding: 0 1.3%;
+    font-size: 14px;
+}
+.panels table tr th {
+    font-weight: 400;
+    padding: 8px 0;
+    /*width: 14%;*/
+    color: #858585;
+    text-align: left;
+}
+.panels table tr th:last-child{
+	text-align: center;
+	width: 10%;
+}
+.panels table tr td,a{
+	color: #858585;
+}
+.xEditSName{
+    float: left;
+}
+.xEditSName input{
+	height: 12px;
+    padding: 7px 3px;
+}
+.xPor{
+    position: relative;
+}
+.xDetailConDY a{
+    color: #fff;
+}
+.xDetailCon a{
+    color: #fff;
+}
+.xPageTit{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.xPageTit button{
+    width: 90px;
+    height: 28px;
+    padding: 0;
+    font-size: 14px;
+}
+.xPageHead{
+    width: 100%;
+}
+.xPageSort button{
+    float: left;
+    width: 60px;
+    line-height: 28px;
+    padding: 0;
+    border-radius: 0;
+    border:#ccc 1px solid;
+}
+.fff{
+    background: #fff;
+    color: #333;
+}
+.xPageQuery span, .xPageQuery div{
+    float: left;
+}
+.xPageQuery input{
+    height: 28px;
+    line-height: 28px;
+    color: #4AB033;
+    padding: 0 5px;
+    border: #aaa 1px solid;
+}
+.xPageHead>div{
+    float: left;
+    margin-right: 50px;
+}
+.xTimePlacCenter .i-form-field{
+    float: left;
+}
+.xTimePlacCenter input::-webkit-input-placeholder { /* WebKit browsers */
+　　color:#4AB033;
+    text-align: center;
+　　}
+.xTimePlacCenter input{
+    text-align: center;
+}
+.xColorSpan{
+    color: #858585;
+    font-size: 14px;
+    display: inline-block;
+    font-weight: 400;
+    float: left;
+    line-height: 30px;
+}
+.xBtn80 button{
+    width: 80px;
+    height: 30px;
+    padding: 0;
+}
+.xPageImgBox{
+    padding: 10px 0;
+    border: #4AB033 1px solid;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+/*.xPageImgBox .xPageDiv3{
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 25px;
+    line-height: 25px;
+}*/
+.xTabBorder{
+    height: 25px;
+    border-right: #4AB033 1px solid;
+    border-left: #4AB033 1px solid;
+}
+.xPageDiv{
+    margin-left: 70px;
+    overflow: hidden;
+}
+.xPageDiv>div{
+    line-height: 25px;
+}
+.xPageDiv .bi-value span{
+    color: #858585;
+}
+.xPageDiv .xPageDiv3 .bi-value{
+    width: 33%;
+    float: left;
+}
+.xPageDiv .xPageDiv2 .bi-value {
+    width: 50%;
+    float: left;
+}
+.xPatPag{
+
+}
+.xPatNav{
+
+}
+.xPatNav ul{
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+.xPatNav ul li{
+    width: 130px;
+    height: 40px;
+    float: left;
+    list-style: none;
+    line-height: 40px;
+    text-align: center;
+    background: #f40;
+    margin-right: 16px;
+}
+.xPatNav ul li a{
+    color: #fff;
+}
+.xPatNav ul li.active{
+    transform:scale(1.1,1.1);
+    -moz-transform:scale(1.1,1.1);
+    -webkit-transform:scale(1.1,1.1);
+    -o-transform:scale(1.1,1.1);
+    box-shadow: 2px 3px 3px #989494;
+}
+.xPatNav ul li[title*="患者信息"]{
+    background: #ff615d;
+}
+.xPatNav ul li[title*="门诊病历"]{
+    background: #906eff;
+}
+.xPatNav ul li[title*="住院记录"]{
+    background: #2ec3ea;
+}
+.xPatNav ul li[title*="实验室检验"]{
+    background: #77c943;
+}
+.xPatNav ul li[title*="影像学检查"]{
+    background: #f6ae02;
+}
+.xPatNav ul li[title*="病理学检查"]{
+    background: #18d0a7;
+}
+.xPatNav ul li[title*="心电检查"]{
+    background: #cc44b9;
+}
+.xPatTit{
+    position: relative;
+    width: 100%;
+    border-bottom: #4AB033 1px solid;
+    height: 34px;
+}
+.xPatTit .xTitleName{
+    display: inline-block;
+    height: 34px;
+    background: #4AB033;
+    line-height: 34px;
+    color: #fff;
+    padding: 0 15px;
+    position: relative;
+    float: left;
+    font-size: 16px;
+}
+.xPatTit .xTriangle{
+    width: 0;
+    height: 0;
+    border-left: 0px solid transparent;
+    border-right: 20px solid #4AB033;
+    border-bottom: 34px solid transparent;
+    transform: rotate(180deg);
+    /* background: #4AB033; */
+    position: absolute;
+    left: 94px;
+    bottom: 0;
+}
+.xPatBox .xPatTitRig{
+    line-height: 34px;
+    margin-left: 30px;
+    display: inline-block;
+    height: 34px;
+    color: #4AB033;
+}
+.xPatTitRig label{
+    width: 310px;
+    display: inline-block;
+    color: #77c943;
+}
+.xPatBoxCon{
+    border: #4AB033 1px solid;
+    overflow: hidden;
+        padding: 15px;
+}
+.xPatBoxConBox{
+    width: 100%;
+    overflow: hidden;
+    line-height: 35px;
+}
+.xPatBoxConBox div{
+    float: left;
+}
+.xPatBoxConBox span{
+    color: #858585;
+    float: left;
+}
+.xPatBoxConBox input{
+    line-height: 28px;
+    height: 14px;
+    padding: 7px 0;
+}
+.x-part118{
+    width: 118px;
+}
+.x-part90{
+    width: 90px;
+}
+.x-part66{
+    width: 66px;
+}
+.x-part268{
+    width: 263px;
+}
+.x-part78{
+    width: 78px;
+}
+.xPatBoxConBox375{
+    width: 375px;
+}
+.x-row60{
+    width: 260px;
+}
+.x-row40{
+    width: 115px;
+}
+.xPatBoxConBox395{
+    width: 395px;
+}
+.xPatBoxConBox40{
+    width: 37px;
+    height: 35px;
+    overflow: hidden;
+}
+.x-row50{
+    width: 50%;
+}
+.xPatBoxConBox150{
+    width: 150px;
+}
+.xPatBox{
+    font-size: 14px;
+}
+.xPatBoxConBox345{
+    width: 348px;
+}
+.xPatBoxConBox185{
+    width: 220px;
+}
+.xPatBoxConBox230{
+    width: 230px;
+}
+.x-part321{
+    width: 321px;
+}
+.x-part162{
+    width: 164px;
+}
+.x-part232{
+    width: 230px;
+}
+.x-part306{
+    width: 302px;
+}
+.xPatTitRigBtn{
+    background: transparent;
+    color: #77c943;
+    font-size: 16px;
+    float: right;
+    line-height: 35px;
+    padding: 0;
+}
+.xPatSave{
+    overflow: hidden;
+    width: 100%;
+}
+/*.xPatSaveBox{
+    line-height: 45px;
+}*/
+.xPatSaveBox span{
+    color: #858585;
+    font-size: 14px;
+}
+.xPatSaveBox input{
+    width: 900px;
+    height: 14px;
+    padding: 7px;
+}
+.xDetailPatFlet{
+    position: absolute;
+    left: 150px;
+    bottom: 5px;
+    font-size: 14px;
+}
+.xPatSaveCase .xDetailPatFlet input{
+    border: none;
+    color: #4AB033;
+}
+.xPatSaveCase .xDetailPatFlet>div{
+    float: left;
+    color: #4AB033;
+}
+.xDetailPatTit{
+    position: relative;
+    width: 100%;
+    border-bottom: #4AB033 1px solid;
+    height: 34px;
+}
+.xPatData{
+
+}
+.xPatDataBox{
+    padding: 10px;
+    width: 212px;
+    height: 100px;
+    border: #ccc 1px solid;
+    font-size: 14px;
+    line-height: 25px;
+    margin-right: 17px;
+    float: left;
+    margin-bottom: 20px;
+}
+.xPatDataBox span{
+    color: #858585;
+}
+.xPatDataBox>div{
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.xfloatRight{
+    position: absolute;
+    right: 0;
+}
+.xPatBoxConTab{
+    width: 100%;
+    overflow: hidden;
+    line-height: 28px;
+    font-size: 14px;
+}
+.xPatBoxConTab>div{
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+}
+.xPatBoxConTabTr272{
+    width: 272px;
+}
+.xPatBoxConTabTr200{
+    width: 200px;
+}
+.xPatBoxConTabTr180{
+    width: 180px;
+}
+.xPatBoxConTabTr150{
+    width: 130px;
+}
+.xPatBoxConPanel table{
+    line-height: 25px;
+}
+.xPatBoxConPanel table tr, .xPatBoxConPanel table td{
+    line-height: 25px;
+}
+.xPatBoxConPanel table tr th:nth-of-type(1){
+    text-align: left;
+}
+.xPatBoxConPanel table tr th{
+    text-align: center;
+}
+.xPatBoxConPanel table tr td:nth-of-type(1){
+    text-align: left;
+}
+.xPatBoxConPanel table tr td{
+    text-align: center;
+}
+.xPatBoxConPanel{
+    font-size: 14px;
+}
+.W100{
+    width: 100%;
+    font-size: 14px;
+}
+.W100SpanI{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    line-height: 30px;
+    color: #f40;
+    font-style: normal;
+}
+.xPatBoxConBox .W100 .W100Input208{
+    width: 208px;
+}
+.xPatBoxConBox .W100 .W100Input70{
+    width: 70px;
+}
+.xPatBoxConBox .W100 .W100Input160{
+    width: 160px;
+}
+.xPatBoxConBox .W100 .W100Input450{
+    width: 450px;
+}
+.xPatBoxConBox .W100 .W100Input305{
+    width: 305px;
+}
+.xPatBoxConBox .W100 .W100Input161{
+    width: 161px;
+}
+.xPatBoxConBox .W100 .W100Input302{
+    width: 302px;
+}
+.xPatBoxConBox .W100 .W100Input140{
+    width: 140px;
+}
+.xPatBoxConBox .W100>div{
+    margin-bottom: 6px;
+}
+#xPatSubmit{
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    border-radius: 5px;
+    background: #4AB033;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.zRefZS{
+    display: inline-block;
+    margin-left: 70px;
+    font-size: 14px;
+    color: #333333;
+}
+.zRefZS span{
+    color: #858585;
+}
+.zBtnA{
+    background: #4AB033;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.zMaskBox{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+    display: none;
+}
+.lineHeight28{
+    line-height: 28px;
+}
+.zXxPageDivHzSC{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.zDetailInfSpan span{
+    margin-right: 0;
+}
+.xDetailPatTitRight{
+    position: absolute;
+    right: 10px;
+    color: #4AB033;
+    bottom: 5px;
+}
+.xPatSaveBoxA11>div{
+    padding-bottom: 10px;
+}
+.xDetailPatPoRight{
+    position: absolute;
+    right: 0;
+}
+.xDetailPatPoRight button{
+    width: 75px;
+    height: 30px;
+    margin: 2px 10px;
+}
+div .patHref{
+    margin-right: 20px;
+    float: left;
+}

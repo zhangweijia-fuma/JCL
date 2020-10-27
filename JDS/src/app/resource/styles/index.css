@@ -1,0 +1,479 @@
+
+.content-view{
+    width: 1036px;
+    margin-left: 204px;
+    padding: 10px 20px;
+    position: relative;
+}
+.container{
+    width: 100%;
+}
+.container .mytab{
+    height: 60px;
+    line-height: 60px;
+    border-bottom: #4AB033 1px solid; 
+}
+.container .mytab ul li{
+    float: left;
+    list-style: none;
+    padding: 0 3px;
+}
+.container .mytab ul li a:hover{
+	color: #4AB033;
+}
+.container .xHandle{
+	position: absolute;
+	right: 20px;
+	top: 30px;
+}
+.container span button{
+	cursor: pointer;
+}
+.xList{
+	margin-bottom: 20px;	
+}
+.content .block-item{
+	font-size: 14px;
+	float: left;
+	width: 508px;
+	overflow: hidden;
+	margin-bottom: 20px;
+    cursor: pointer;
+}
+.content .block-item:nth-child(2n){
+	margin-left: 20px;
+}
+.content .block-item .bi-item{
+	/*margin-top: 20px;	*/
+	/*width: 508px;*/
+	/*height: 100px;*/
+
+}
+.xSee{
+	float: right;
+	display: inline-block;
+	height: 35px;
+	line-height: 35px;
+}
+.xSee button, .sub-title .row .xDetailPat .xDetailPatRig span button{
+	background: none;
+	color: #4AB033;
+	font-size: 14px;
+}
+.content .block-item .xItemBox{
+	width: 508px;
+	border-bottom: #FFAD39 1px solid;
+    height: 34px;
+}
+.content .block-item .xItemBox .bi-item:nth-of-type(1), .sub-title .row .xDetailPat label, .sub-title .row label{ 
+	display: inline-block;
+	height: 34px;
+	background: #FFAD39;
+	line-height: 34px;
+	color: #fff;
+	padding:0 15px; 
+	position: relative;
+	float: left;
+}
+.content .block-item .xItemBox .bi-item:nth-of-type(2){
+	line-height: 34px;
+	margin-left: 30px;
+	display: inline-block;
+	height: 34px;
+	color: #FFAD39;
+}
+.content .block-item .xTriangle{
+	width:0; 
+    height:0; 
+    border-left:0px solid transparent;
+    border-right:20px solid #FFAD39;
+    border-bottom:34px solid transparent;
+    transform:rotate(180deg);
+    /*background: #FFAD39;*/
+    position: absolute;
+    right: -20px;
+    top: 0;
+}
+.sub-title .row .xDetailPat .xTriangle{
+	width:0; 
+    height:0; 
+    border-left:0px solid transparent;
+    border-right:20px solid #FFAD39;
+    border-bottom:34px solid transparent;
+    transform:rotate(180deg);
+    /*background: #FFAD39;*/
+    position: absolute;
+    left: 94px;
+    top: 0;
+}
+.content .block-item .xItemBox .bi-item:nth-of-type(1) .bi-label{
+	float: left;
+	display: inline-block;
+}
+.content .block-item .xItemBox .bi-item:nth-of-type(1)  .bi-value{
+	float: left;
+}
+.content .block-item .xListBox{
+
+}
+.content .block-item .xListBox .bi-item{
+	
+}
+.content .block-item .xPhoto{
+	display: inline-block;
+	float: left;
+    padding: 5px 0;
+}
+.content .block-item  .xPhoto img{
+	width: 40px;
+	height: 40px;
+	padding: 0 15px;
+
+}
+.content .block-item .xImgBox{
+    height: 50px;
+    padding: 10px 0;
+    border: #FFAD39 1px solid;
+    position: relative;
+}
+.content .block-item .xImgBox .bi-item div{
+	float: left;
+}
+.content .block-item .xImgBox .bi-item{
+	float: left;
+	height: 25px;
+	line-height: 25px;
+}
+.content .block-item .xImgBox .bi-item:nth-of-type(2n){
+	width: 164px;
+}
+.content .block-item .xImgBox .bi-item:nth-of-type(2n-1){
+	width: 272px;
+}
+.content .block-item .xImgBox .bi-item .bi-label, .xDetailPatBoxData .xDetailPatBoxDataTop div span, .xDetailPatBoxData .xDetailPatBoxDataBot div span, .xDetailInf span, .content label{
+	color: #858585;
+	font-size: 13px;
+	margin-right:10px; 
+}
+.content .block-item .xImgBox .bi-item .bi-value, .xDetailPatBoxData .xDetailPatBoxDataTop div, .xDetailPatBoxData .xDetailPatBoxDataBot div, .xDetailInf{
+	color: #333333;
+	font-size: 13px;
+}
+.bi-btn-wraper{
+	position: absolute;
+	right: 5px;
+/*	bottom: 10px;*/
+	display: none;
+}
+.content .block-item .xImgBox:hover .bi-btn-wraper, .block-item:hover .bi-btn-wraper{
+	display: block;
+}
+.text-center {
+    text-align: center;
+    overflow: hidden;
+    
+}
+.floatRight{
+	float: right;
+}
+.pager {
+    margin: 5px 0px;
+}
+.pager {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.pager>li {
+    display: inline;
+    margin-left: 2px;
+}
+.pager>li a{
+	padding: 5px 10px;
+	background: #4AB033;
+	color: #ffffff;
+	border-radius:3px;
+}
+.xPagerBox{
+	
+}
+.content-summery{
+	font-size: 13px;
+	border-top: #ccc 1px solid;
+}
+
+
+
+.row .form-group ul.xDetail li{
+	float: left;
+	display: inline-block;
+	padding-right: 5px;
+}
+.row .form-group ul.xDetail li a{
+}
+.row .form-group ul.xDetail li span{
+	cursor: pointer;
+}
+.row .form-group ul.xDetail{
+	width: 100%;
+	border-bottom: #4AB033 1px solid;
+	height: 60px;
+	line-height: 60px;
+}
+.sub-title .row .xDetailPat{
+	position: relative;
+	width: 100%;
+	margin-top: 20px;
+	border-bottom: #FFAD39 1px solid;
+	height: 34px;
+}
+.sub-title .row .xDetailPat .xDetailPatRig{
+	position: absolute;
+	right: 0;
+}
+.sub-title .row .xDetailPat .xDetailPatRig span button{
+	line-height: 34px;
+}
+.xDetailPatBox{
+	width: 1036px;
+	height: 70px;
+	border: #FFAD39 1px solid;
+}
+.xDetailPatBoxImg{
+	float: left;
+	padding: 15px;
+	width: 40px;
+	height: 40px;
+}
+.xDetailPatBox .xDetailPatBoxImg img{
+	width: 40px;
+	height: 40px;
+}
+.xDetailPatBoxData{
+	height: 50px;
+    line-height: 25px;
+    padding: 10px 0;
+}
+.xDetailPatBoxData .xDetailPatBoxDataTop, .xDetailPatBoxData .xDetailPatBoxDataBot{
+	word-break:break-all; /*支持IE，chrome，FF不支持*/
+	word-wrap:break-word;/*支持IE，chrome，FF*/
+	overflow: hidden;
+}
+.xDetailPatBoxData .xDetailPatBoxDataTop div{
+	width: 149px;
+	float: left;
+	overflow: hidden;
+}
+.xDetailPatBoxData .xDetailPatBoxDataBot div{
+	width: 298px;
+	float: left;
+}
+.xDetailInf{
+	border: #FFAD39 1px solid;
+	line-height: 28px;
+	padding: 10px;
+}
+.xDetailInfOne, .xDetailInfT, .xDetailInfF{
+	line-height: 28px;
+	height: 28px;
+}
+.xDetailInfS{
+	line-height: 28px;
+}
+.xDetailInf .xDetailInfOne div{
+	float: left;
+	width: 25%;
+    height: 28px;
+    overflow: hidden;
+}
+.xDetailInf .xDetailInfT div, .xDetailInfF div{
+	width: 25%;
+	float: left;
+}
+.xDetailInf .xDetailInfS, .xDetailInfF{
+	width: 100%;
+}
+.xDetailInfS a{
+	color: #4AB033;
+}
+.xDetailCon{
+    width: 300px;
+    margin: 0 auto;
+}
+.xDetailCon button{
+	padding: 0 20px;
+	width: 92px;
+	height: 35px;
+	line-height: 35px;
+	border-radius: 5px;
+}
+.xDetailCon span{
+	margin: 0 15px;
+}
+#rejectmodal{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+    top:0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+    display: none;
+}
+#rejectmodal .modal-dialog{
+
+}
+#rejectmodal .modal-dialog .modal-content, #submitmodal .modal-dialog{
+	width: 530px;
+	min-height: 260px;
+	margin: auto;
+   	opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=100);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    overflow: hidden;
+    background-color: #fff;
+    /*position: relative;*/
+}
+.modal-header{
+	width: 100%;
+	height: 40px;
+	background: #4882e4;
+}
+button.close{
+    float: right;
+    background: none;
+    font-size: 40px;
+    padding: 0;
+    margin-right: 10px;
+}
+.xMask{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+    background: #000;
+    top:0;
+    left: 0;
+    opacity: .2;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+    filter: alpha(opacity=20);
+    -moz-opacity: .2;
+    -khtml-opacity: .2;
+    overflow: hidden;
+    z-index: -1;
+}
+.modal-header h4,#selectRPDoctor .modal-dialog .modal-header h4#resizedModalTitle, .clear .modal-header{
+	font-weight: 400;
+	padding: 0 15px;
+	line-height: 40px;
+	color: #fff;
+}
+.clear .modal-header{
+	background: #4882e4;
+}
+.clear .modal{
+	width: 30%;
+	margin: auto;
+	height: 200px;
+	background: #fff;
+}
+.modal-body p{
+	padding: 20px;
+}
+.modal-body table{
+	margin: 20px auto;
+}
+#rejectmodal .modal-dialog .modal-content .modal-body table td textarea{
+	width: 491px;
+	height: 120px;
+	border: #ccc 1px solid;
+	resize: none;
+}
+#rejectmodal .modal-footer, .modal-footer{
+	width: 185px;
+	margin: 0 auto;
+}
+#rejectmodal .modal-footer button, .modal-footer button{
+	width: 80px;
+	height: 30px;
+	text-align: center;
+	border-radius: 5px;
+}
+#rejectmodal .modal-footer button:nth-of-type(2), #selectRPDoctor .modal-footer button:nth-of-type(2){
+	margin-left: 20px;
+}
+#selectRPDoctor, .clear, #submitmodal, #msg{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+    top:0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+    display: none;
+} 
+#selectRPDoctor .modal-dialog{
+	width: 740px;
+	min-height: 220px;
+	margin: 0 auto;
+	background: #fff;
+}
+#selectRPDoctor .modal-dialog .modal-content .modal-body{
+	overflow: hidden;
+	padding: 0 20px;
+}
+#selectRPDoctor .modal-dialog .modal-content .modal-body form .container .content .block-item{
+	width: 206px;
+	height: 74px;
+	padding: 7px;
+	border: #ccc 1px solid;
+	position: relative;
+}
+#selectRPDoctor .modal-dialog .modal-content .modal-body form .container .content .block-item .bi-avatar,.bi-info .bi-item div{
+	float: left;
+}
+#selectRPDoctor .modal-dialog .modal-content .modal-body form .container .content .block-item .bi-info{
+	overflow: hidden;
+	line-height: 22px;
+	width: 120px;
+	padding: 0 8px;
+    float: left;
+}
+#selectRPDoctor .modal-dialog .modal-content .modal-body form .container .content .block-item .bi-info .bi-item{
+	overflow: hidden;
+}
+#selectRPDoctor .modal-dialog img{
+	width: 70px;
+	height: 70px;	
+}
+.xBoder{
+    border: #FFAD39 1px solid;
+    padding: 10px;
+}
+.content label{
+	float: left;
+}
+.content .row textarea{
+	width: 920px;
+    height: 55px;
+    resize: none;
+}
+.red_star{
+	color: red;
+}
+#msg .modal-dialog{
+	width: 380px;
+	height: 155px;
+	background: #fff;
+	color: #333;
+	position: relative;
+    margin: 0 auto;
+}
+#msg .modal-dialog .modal-footer{
+	width: 80px;
+	bottom: 10px;
+	text-align: center;
+	margin: 0 auto;
+}

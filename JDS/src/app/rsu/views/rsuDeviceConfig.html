@@ -1,0 +1,192 @@
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .xDetailPos button
+  {
+    background: #4AB033;
+    color: white;
+    line-height: 5px;
+  }
+
+  .div-left{
+    width: 39%;
+    float: left;
+    position: absolute;
+    top: 100px;
+  }
+
+  .div-right{
+    width: 60%;
+    float: right;
+    top: 100px;
+  }
+
+  .heading{
+    line-height: 30px;
+    background-color: #4AB033;
+    padding: 0 15px;
+    font-size: 16px;
+  }
+
+  .zTree3 {
+    overflow-y: auto; 
+    margin-top: 40px; 
+    padding: 0px;
+  }
+
+</style>
+
+<link href="libs/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+
+<div class="container pos" data-ng-init="initialData()" style="width: 98%">
+  <div class="row nomargin pos">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>设备设置</li>
+            </ul>
+            
+            <div class="form-group flright xHandle" style="top: 8px; right: 0px;">
+              <span class="ml10 ">
+                <button class="bton green"  ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button> 
+                <button class="bton green"  ng-click="sendMessage()"><i class="icon icon-check"></i> 发送</button> 
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group">
+          <span class="i-form-label ml10">项目名称：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="projectList.selected" theme="select2" ng-change="searchDevice()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (projectList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">设备状态：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="statusList.selected" theme="select2" ng-change="searchDevice()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (statusList | filter: $select.search) track by item.code">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">生产厂家：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="vendorList.selected" theme="select2" ng-change="searchDevice()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (vendorList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">消息类别：</span>
+          <input type="radio" name="messageType" style="margin-top: 8px; margin-left:20px" ng-click="chooseMsgType('update')" checked> 更新系统
+          <input type="radio" name="messageType" style="margin-left:20px" ng-click="chooseMsgType('reboot')"> 重启设备
+        </div>
+      </div>
+      <!-- 下拉列表 -->
+
+      <div class="div-left pos" style="">
+        <div class="heading" style="color: black">RSU 设备</div>
+        <div id ="sel_device_tree" >
+          <ul id="device_tree" class="ztree2 zTree3 pos"></ul>
+        </div>         
+      </div>
+
+      <div class="div-right" ng-show="msgType=='update'">
+        <div class="heading">更新设备软件</div>
+        <div style="padding: 15px; font-size: 14px;">
+          <span>消息参数：</span>
+          <div style="padding: 10px;">
+            <span >版本文件名：  {{softwareFileName}}
+              <div class="xDetailPos" style="margin-top: -25px;">           
+                <button class="fileUpload bton green" style="cursor: pointer">上传文件
+                  <input type="file" class="upload" id="local_upload" nv-file-select uploader="uploader" multiple accept="*">
+                </button>
+              </div>
+            </span>
+            
+            <div style="margin-top: 20px">
+              <span >更新模式：</span>
+              <input type="radio" name="updateMode" value="0" style="margin-left: 10px;" ng-click="chooseUpdateMode(0)">  重启时更新
+              <input type="radio" name="updateMode" value="1" style="margin-left: 10px;" ng-click="chooseUpdateMode(1)" checked>  立刻更新并重启
+            </div>
+          </div>
+        </div>
+         
+        <div class="xTop30"></div>
+      </div>
+
+      <div class="div-right" ng-show="msgType=='reboot'">
+        <div class="heading">重启设备</div>
+        <div style="padding: 15px; font-size: 14px;">
+          <span>消息参数：</span>
+          <div style="padding: 10px;">   
+            <span >重启模式：</span>
+            <input type="radio" name="rebootMode" style="margin-left: 10px;" ng-click="chooseRebootMode(0)">  重启应用
+            <input type="radio" name="rebootMode" style="margin-left: 10px;" ng-click="chooseRebootMode(1)" checked>  重启系统
+          </div>
+          <div  style="padding: 10px;">
+            <span >延时时间：</span>
+            <input type="number" min='0' required class="form-control xEdit" ng-model="rebootDelayTime" style="width: 100px;padding-left: 2px;" > 秒
+          </div>
+        </div>
+         
+        <div class="xTop30"></div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 0,
+    minView: 0,
+    forceParse: 0,
+    format: 'hh:ii',
+  });
+</script>

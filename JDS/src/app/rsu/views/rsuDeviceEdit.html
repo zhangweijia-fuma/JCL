@@ -1,0 +1,236 @@
+<!-- RSU设备信息编辑 -->
+
+<style>
+  .break{
+      word-break: break-all;  
+      word-wrap: break-word; 
+  }
+
+  .rowHeight {
+    height: 40px;
+  }
+
+  .xDetailPatBoxData .xDetailPatBoxDataTop div{
+    width:25%;
+  }
+
+  .xDetailPatBoxDataTop div{
+    width: 25%;
+  }
+
+  .xDetailPat a{
+    background: #4AB033;
+      border: none;
+      color: #fff;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 13px;
+  }
+
+  .selectStyle {
+    width: 77%;
+    height: 25px;
+  }
+
+ .editStyle
+  {
+    width: 76%; 
+    height: 20px; 
+    text-indent: 2px;
+  }
+
+</style>
+
+
+<link rel="stylesheet" type="text/css" href="libs/area-picker/css/city-picker.css">
+<link rel="stylesheet" type="text/css" href="libs/area-picker/css/main.css">
+
+<script type="text/javascript" src="libs/common/angular/svcCommon.js"></script>
+<script type="text/javascript" src="libs/area-picker/js/area-picker.data.js"></script>
+<script type="text/javascript" src="libs/area-picker/js/area-picker.js"></script>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request" id="html5Form" validate>
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail">
+              <li ng-class="{true: 'active'}[tab==0]" ng-click="changeTab(0)"><a href="#/RSUDeviceManage">RSU设备管理</a></li>
+              <li><span>></span></li>
+              <li><a href="" style="color: #4AB033;">{{editMode}} RSU 设备信息</a></li>
+              <span  class="ml10" style="float:right;margin-left: 10px;"> 
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button>
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="confirmToSaveInfo()"><i class="icon icon-check"></i> 确定</button>
+              </span>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat">
+            <label class="clabel"> RSU 设备信息 </label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      
+      <div class="JCLBox">
+
+        <div class="JCLBoxData" style="width: 100%; margin: 10px ">
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>供&thinsp;   应&thinsp;   商：</span>
+              <select class="selectStyle form-control" ng-model="deviceInfo.vendor_id" ng-options="option.id as option.name for option in vendorList2" id=vendor_id>
+              <option value="" selected="selected">供应商名称</option>
+              </select>
+            </div>
+
+            <div>
+              <span>项目名称：</span>
+              <select id="project_id" class="selectStyle form-control" ng-model="deviceInfo.project_id" ng-options="option.id as option.name for option in projectList2">
+                <option value="" selected="selected">项目名称</option>
+              </select>
+            </div>
+
+            <div>
+              <span>设备名称：</span>
+              <input id="device_name" type="text" ng-model="deviceInfo.device_name" class="editStyle" required/>
+            </div>
+
+            <div>
+              <span style="">英文名称：</span>
+              <input id="device_name_en" type="text" ng-model="deviceInfo.device_name_en" class="editStyle" required/>
+            </div>
+          </div>
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>设备编号：</span>
+              <input id="device_code" type="text" ng-model="deviceInfo.device_code" class="editStyle" style="" placeholder="设备编号" required/>
+            </div>
+
+            <div>
+              <span>设备类型：</span>
+              <select id="device_type" class="form-control selectStyle" ng-model="deviceInfo.device_type_id" ng-options="option.id as option.name for option in deviceTypeList" required>
+                <option value="" selected="selected">设备类型</option>
+              </select>
+            </div>
+
+            <div>
+              <span>IP 地址 1：</span>
+              <input id="ip_address1" type="text" ng-model="deviceInfo.ip_address1" class="editStyle" required/>
+            </div>
+
+            <div>
+              <span style="">IP 地址 2：</span>
+              <input id="ip_address2" type="text" ng-model="deviceInfo.ip_address2" class="editStyle" required/>
+            </div>
+
+          </div>
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span style="">序&thinsp;   列&thinsp;   号：</span>
+              <input id="device_sn" type="text" ng-model="deviceInfo.device_sn" class="editStyle" required/>
+            </div>
+
+            <div>
+              <span style="">二&thinsp;   维&thinsp;   码：</span>
+              <input id="device_qr_code" type="text" ng-model="deviceInfo.qr_code" class="editStyle" required/>
+            </div>
+
+            <div>
+              <span>生产日期：</span>
+              <input type="text" class="form-date form-control choosetime editStyle" ng-model="deviceInfo.produce_date" data-date-format="yyyy-mm-dd" placeholder="生产日期" id="produce_date" >
+            </div>
+
+            <div>
+              <span>生产批次：</span>
+              <input id="produce_batch" type="text" ng-model="deviceInfo.produce_batch" class="editStyle" required/>
+            </div>
+          </div>
+
+          <div class="rowHeight">
+            <div style="display: inline-flex; font-size: 14px; width: 100%; ">
+              <div style="width: 25%; display: inline-flex; ">
+                <span>生产地点：</span>
+                <div style="position: relative; margin-top: 3px; width: 77%">
+                  <input readonly type="text" data-toggle="city-picker" data-type="produce_addr" ng-model="deviceInfo.produce_location" data-country='0' placeholder="生产地点" id='produce_location' style="width: 100%" >
+                </div>
+              </div>
+
+              <div style="width: 25%">
+                <span>启用日期：</span>
+                <input type="text" class="form-date form-control choosetime editStyle" ng-model="deviceInfo.start_used_date" data-date-format="yyyy-mm-dd" placeholder="启用日期" id="start_used_date">
+              </div>
+
+              <div style="width: 25%; ">
+                <span>停用日期：</span>
+                <input type="text" class="form-date form-control choosetime editStyle" ng-model="deviceInfo.end_used_date" data-date-format="yyyy-mm-dd" placeholder="停用日期" id="end_used_date" >
+              </div>
+<!-- 
+              <div style="width: 25%">
+                <span>设备状态：</span>
+                <select id="device_status" class="form-control selectStyle" ng-model="deviceInfo.device_status" ng-options = "option.code as option.name for option in statusList2"  required>
+                  <option value="" selected="selected">设备状态</option>
+                </select>
+              </div> -->
+
+            </div>
+          </div>
+
+          <div class="rowHeight" style="">
+            <div style="display: inline-flex; font-size: 14px; width: 100%; ">
+              <div style="width: 25%; display: inline-flex; ">
+                <span>安装路段：</span>
+                <div style="position: relative; margin-top: 3px; width: 77%">
+                  <input readonly type="text" data-toggle="city-picker" data-type="install_addr" ng-model="deviceInfo.install_location" data-country='0' placeholder="安装路段"  id='location' style="width: 100%">
+                </div>
+              </div>
+              <div style="width: 25%">
+                <span>详细地址：</span>
+                <input class="editStyle" id="detail_location" type="text" ng-model="deviceInfo.detail_location" required/>
+              </div>
+
+              <div style="width: 25%">
+                <span style="">安装日期：</span>
+                <input type="text" class="form-date form-control choosetime editStyle" ng-model="deviceInfo.install_date" data-date-format="yyyy-mm-dd" placeholder="安装日期" id="install_date">
+              </div>
+
+            </div> 
+          </div>
+        </div>
+
+        <div class="xDetailDesc" style="height: 180px;">
+          <span>设备描述：</span>
+          <textarea ng-model="deviceInfo.device_desc" id="device_desc" style="resize: none; height:150px; text-indent: 2px; width: 100%"></textarea>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd'
+  });
+</script>

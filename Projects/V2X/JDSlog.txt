@@ -1,0 +1,32 @@
+2020-10-27 15:39:31 临时设置RSU经纬度
+2020-10-27 15:39:31 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:39:37 临时设置RSU经纬度
+2020-10-27 15:39:37 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:39:43 临时设置RSU经纬度
+2020-10-27 15:39:43 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:39:49 临时设置RSU经纬度
+2020-10-27 15:39:49 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:39:55 临时设置RSU经纬度
+2020-10-27 15:39:55 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:40:01 临时设置RSU经纬度
+2020-10-27 15:40:01 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:40:07 临时设置RSU经纬度
+2020-10-27 15:40:07 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:40:13 临时设置RSU经纬度
+2020-10-27 15:40:13 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:40:19 临时设置RSU经纬度
+2020-10-27 15:40:19 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:40:25 临时设置RSU经纬度
+2020-10-27 15:40:25 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:40:31 临时设置RSU经纬度
+2020-10-27 15:40:31 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:40:37 临时设置RSU经纬度
+2020-10-27 15:40:37 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:40:43 临时设置RSU经纬度
+2020-10-27 15:40:43 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:40:49 临时设置RSU经纬度
+2020-10-27 15:40:49 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:40:55 临时设置RSU经纬度
+2020-10-27 15:40:55 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)
+2020-10-27 15:41:01 临时设置RSU经纬度
+2020-10-27 15:41:01 Send RSU InitialRequestMsg to RSU Manager(192.168.1.12:11615)

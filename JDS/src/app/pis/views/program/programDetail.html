@@ -1,0 +1,320 @@
+
+<style type="text/css">
+  .row{
+    overflow: initial;
+  }
+
+  .break{
+    word-break: break-all;  
+    word-wrap: break-word; 
+}
+.xDetailPatBoxData .xDetailPatBoxDataTop div{
+  width:25%;
+}
+.xDetailPat a{
+  background: #4AB033;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+
+  .xDetailPos button
+  {
+    background: #4AB033;
+    color: white;
+    line-height: 5px;
+    width: 100px;
+  }
+
+</style>
+
+
+<link href="libs/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+
+
+<div class="container pos" data-ng-init="initialData()">
+  <div class="row nomargin pos">
+    <div class="mytab" style="height: 40px;border-bottom: 1px solid black;">
+      <ul class="nav nav-tabs" style="line-height: 35px;" >
+        <div class="content clear_after">
+          <ul class="nav nav-tabs" >
+            <li>节目单详情</li>
+          </ul>
+          <div style="float:right; margin-right: 20px;">
+            <span class="ml10 ">
+              <button class="bton green"  ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button> 
+            </span>
+            <span class="ml10 " ng-show="editType=='edit'">
+              <button class="bton green"  ng-click="submitToCheck()"><i class="icon icon-check"></i> 提交申请</button> 
+            </span>
+            <span class="ml10 " ng-show="editType=='check'&&showCheck">
+              <button class="bton green"  ng-click="showCheckDlg()"><i class="icon icon-ok"></i> 审核</button>
+            </span>
+            <span class="ml10 " ng-show="editType=='send'&&showSend">
+              <button class="bton green"  ng-click="sendList()"><i class="icon icon-check"></i> 发送</button>
+            </span>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div>
+      <div style="min-height: 540px;">
+
+        <div class="xTop20"></div>
+        <div class="content clear_after">
+          <div class="col-md-3 zPanelBox" style="width: 26%">
+            <div class="panel zPanel zPanelzzz1 pos" style="width:260px;border-right: 1px solid #ccc;top:60px;" >
+              <div class="panel-heading " style="width: 230px;color: black">节目栏列表</div>
+              <div class="panel-body pos">
+                <div class="zPanelPadding15" style="padding: 0px">
+                  <div class=" xDetailPatBoxmenus clear_after">
+                    <div class="panel-body" id ="sel_program_tree" >
+                      <ul id="program_tree" class="ztree1 pos" style="overflow-y:auto; width: 92%; top: 50px;" ></ul>
+                    </div>   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-9 zWid75" >
+            <div class="panel pos " style="border:0px; width: 73%;top:60px; overflow-y: auto; overflow-x: hidden; ">
+              <div class="zPanel1 " style="min-height:160px;width: 99%" >
+                <div class="panel-heading ">节目单信息</div>   
+                <div class="panel-body"  >
+                  <div class="zPanelPadding15">
+                    <table class="table table-bordered" style="width: 100%;" border="0" cellpadding="0" cellspacing="0">
+                      <tr hover="white">
+                        <td style="width: 33%; padding: 2px;"><span>清单名称：</span>{{listInfo.name}}</td> 
+                        <td style="width: 33%; padding: 2px;"><span>清单编号：</span>{{listInfo.code}}</td>
+                        <td style="width: 33%; padding: 2px;"><span>生效时间：</span>{{listInfo.valid_date}}</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 33%; padding: 2px;"><span>申&thinsp;   请&thinsp;   人：</span>{{listInfo.apply_name}}</td>
+                        <td style="width: 33%; padding: 2px;"><span>申请时间：</span>{{listInfo.apply_date}}</td>
+                        <td style="width: 33%; padding: 2px;"><span>申请状态：</span>{{listInfo.apply_status_name}}</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 33%; padding: 2px;"><span>下&thinsp;   发&thinsp;   者：</span>{{listInfo.sender_name}}</td>
+                        <td style="width: 33%; padding: 2px;"><span>发送时间：</span>{{listInfo.send_date}} {{listInfo.send_time}}</td>                       
+                        <td style="width: 33%; padding: 2px;"><span>发送状态：</span>{{listInfo.send_status_name}}</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 33%; padding: 2px;" ng-show="editType=='edit'">
+                          <span class="i-form-label ml10">节目类型：</span>
+                          <input type="radio" name="showType" value="0" ng-model="listInfo.video_type" style="" ng-click="chooseVideoType(0)" checked> 录播
+                          <input type="radio" name="showType" value="1" ng-model="listInfo.video_type" style="" ng-click="chooseVideoType(1)" > 直播
+                        </td>
+                        <td style="width: 33%; padding: 2px;" ng-show="editType!='edit'"><span>节目类型：</span>{{listInfo.videoTypeName}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div> 
+              <div class="xTop30"></div>
+
+              <!-- 节目单审批记录 -->
+              <div class="zPanel1 " style="min-height:120px; border: 0px;">
+                <div class="panel-heading " style="background: white; color: black; border-bottom: 1px solid #ccc; padding-left: 0px;">节目单审批记录</div>
+
+                <div class="">
+                  <table class="table table-bordered tbRow" style="margin-top: 10px;" >
+                    <thead>
+                      <tr>
+                        <th style="width: 30px">序号</th>
+                        <th style="width: 100px">审批人</th>
+                        <th style="width: 160px">审批时间</th>
+                        <th style="width: 100px">审批结果</th>
+                        <th style="width: 400px">审批意见</th>
+                      </tr>
+                    </thead>
+                    <tr><td class="ctdLine" colspan="10" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+                    <tbody>
+                      <tr ng-repeat="item in checkHistoryList" class="hovershow trHover">
+                        <td class="" style="text-align: center;">{{item.no}}</td>
+                        <td class="" style="text-align: center;">{{item.checker_name}}</td>
+                        <td class="" style="text-align: center;">{{item.check_date}}</td>
+                        <td class="" style="text-align: center;">{{item.check_result_name}}</td>
+                        <td class="" style="text-align: center;">{{item.check_opinion}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- 节目栏信息 -->
+              <div class="zPanel1 " style="min-height:120px; border: 0px;" ng-show="showUnit&&listInfo.video_type=='0'">
+                <div class="panel-heading " style="background: white; color: black; border-bottom: 1px solid #ccc; padding-left: 0px;">节目栏信息</div>
+                <div class="panel-body"  style="min-height: 220px;">
+                  <div class="zPanelPadding15">
+                    <table class="table table-bordered " style="width: 100%;" >
+                      <tr>
+                        <td style="width: 33%"><span>开始时间：</span>{{currentUnit.start_time}}</td>
+                        <td style="width: 33%"><span>结束时间：</span>{{currentUnit.end_time}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 节目信息 -->
+              <div class="zPanel1 " style="min-height:200px; border: 0px;" ng-show="showUnit&&listInfo.video_type=='0'">
+                <div class="panel-heading " style="background: white; color: black; border-bottom: 1px solid #ccc; padding-left: 0px;">节目信息
+                  <div class="form-group flright xDetailPos" style="float:right; margin-top: -25px;">
+                    <span class="ml10 " ng-show="editType=='edit'">
+                      <button class="fileUpload bton green" style="cursor: pointer; width: 120px;" ><i class="icon icon-upload"></i> 上传节目单
+                        <input type="file" class="upload" id="local_upload" nv-file-select uploader="uploader" multiple accept=".xlsx, .xls" >
+                      </button>
+                      <button class="bton green" title="将该节目栏同步到全天其他节目栏" ng-click="syncUnit()" style="width: 120px"><i class="icon icon-trash"></i> 同步节目栏</button> 
+                      <button class="bton green"  ng-click="showDeleteAllProgramDlg()"><i class="icon icon-trash"></i> 全部删除</button> 
+                    </span>
+                  </div>
+                </div>
+                <div class="">
+                  <table class="table table-bordered tbRow" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th style="width: 10%">序号</th>
+                        <th style="width: 50%">节目名称</th>
+                        <th style="width: 40%">节目时长</th>
+                        <!-- <th style="width: 380px">文件名称</th> -->
+                      </tr>
+                    </thead>
+                    <tr><td class="ctdLine" colspan="10" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+                    <tbody>
+                      <tr ng-repeat="item in programInfoList" class="hovershow trHover" ng-dblclick="updateProgramFileInfo(item)">
+                        <td class="" style="text-align: center;">{{item.sort}}</td>
+                        <td class="" style="text-align: center;">{{item.name}}</td>
+                        <td class="" style="text-align: center;">{{item.duration}}</td>
+                        <!-- <td class="" style="text-align: center;">{{item.file_name}}</td> -->
+                        <td class="showdelete" ng-show="editType=='edit'">
+                          <i class="icon icon-arrow-up" style="margin-left: -80px; " title="上升" ng-click="changeProgramSort(item, -1)"></i>
+                        </td>
+                        <td class="showdelete" ng-show="editType=='edit'">
+                          <i class="icon icon-arrow-down" style="margin-left: -60px; " title="下降" ng-click="changeProgramSort(item, 1)"></i>
+                        </td>
+                        <td class="showdelete" ng-show="editType=='edit'">
+                          <i class="icon icon-trash" style="margin-left: -40px; " title="删除" ng-click="showDeleteProgramFileDlg(item)"></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- 发送记录 -->
+              <div class="zPanel1 " style="min-height:200px; border: 0px; margin-top: 20px;" ng-show="showSendHistory" >
+                <div class="panel-heading " style="background: white; color: black; border-bottom: 1px solid #ccc;">节目单发送记录</div>
+                <div class="">
+                  <table class="tbRow" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th style="width: 30px">No.</th>
+                        <th style="width: 240px">控制器名称</th>
+                        <th style="width: 120px">接收日期</th>
+                        <th style="width: 100px">接收时间</th>
+                        <th style="width: 100px">消息类型</th>
+                        <!-- <th style="width: 60px">序号</th> -->
+                        <th style="width: 120px">接收状态</th>
+                      </tr>
+                    </thead>
+                    <tr><td class="ctdLine" colspan="10" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+                    <tbody>
+                      <tr  ng-repeat="item in sendHistoryList" class="hovershow trHover">
+                        <td class="" style="text-align: center;">{{item.no}}</td>
+                        <td class="" style="text-align: center;">{{item.receiver_name}}</td>
+                        <td class="" style="text-align: center;">{{item.receive_date}}</td>
+                        <td class="" style="text-align: center;">{{item.receive_time}}</td>
+                        <td class="" style="text-align: center;">{{item.message_type_name}}</td>
+                        <!-- <td class="" style="text-align: center;">{{item.message_sn}}</td> -->
+                        <td class="" style="text-align: center;">{{item.send_status_name}}</td>
+                        <td class="showdelete" ng-show="item.send_status!='1'">
+                          <i class="icon icon-share" style="margin-left: -20px;" title="重发" ng-click="reSendList(item)"></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="row text-center floatRight" style="margin-right: 10px;">
+                  <ul class="pager" id="pager">
+                    <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+                    <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+                    <li ><a href="" id="beforeSL">...</a></li>
+                    <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+                    <li ><a href="" id="afterSL">...</a></li>
+                    <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+                    <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+                    <li class="xColor" ng-show="totalPage">|</li>
+                    <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+                  </ul>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 审核节目单 -->
+<div class="modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog" style="width: 360px;" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon icon-check"></i> 节目单审批</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="padding: 20px;">
+
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px; width: ">
+              <div style="height: 40px;"><span>审批结果</span>
+                <input type="radio" id="result" value="3" ng-model="checkResult" required checked >通过
+                <input type="radio" id="result" value="4" ng-model="checkResult" style="margin-left: 10px">驳回
+              </div>
+              <div style="height: 40px;"><span>审批意见：</span>
+                 <input id="opinion" type="text" class="form-control xEdit" max="10" style="text-indent: 2px;width: 160px; height: 20px;" ng-model="checkOpinion" placeholder="审批意见">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grn" ng-click="confirmCheckList()"><i class="icon icon-check-circle"></i> 确定</button>
+        <button type="button" class="btn btn-grn" data-dismiss="modal"><i class="icon icon-remove-sign"></i> 取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 1,
+    minView: 0,
+    forceParse: 0,
+    format: 'hh:ii'
+  });
+</script>

@@ -1,0 +1,250 @@
+<!-- 组件管理页面 -->
+
+<style>
+  .GridHeading{
+    background: #4ab033;
+    /*height: 20px;*/
+    padding: 8px 15px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: white;
+  }
+
+  .GridHeading2{
+    background: white; 
+    color: black; 
+    border-bottom: 1px solid #ccc;
+    padding: 8px 15px;
+  }
+
+  .Unit50{
+    overflow: hidden;
+    float: left;
+    width: 48%;
+  }
+</style>
+
+<div class="container" data-ng-init="initialData()" style="height: 100%">
+  <div class="row nomargin" style="height: 100%">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request" style="height: 100% ">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>组件管理</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="content clear_after">
+        <div class="col-md-3 zPanelBox">
+          <div class="panel zPanel zPanelzzz1 pos" style="width: 48%; top:70px;">
+            <div class="panel-heading">组件列表
+              <div style="float:right; margin-top: -5px;" >
+                <span class="ml10 " > 
+                  <button class="bton green"  ng-click="showCreateComponentDlg()"><i class="icon icon-plus"></i> 新增组件</button>
+                </span>
+              </div>
+            </div>
+            <div class="panel-body pos" style="top: 40px; overflow-y: scroll;" >
+              <div class="cItemBoxMine">
+                <table class="table table-bordered tbRow" style="margin-top: 10px;" >
+                  <thead>
+                    <tr>
+                      <th style="text-align: center;width: 5%">SN</th>
+                      <th style="text-align: center;width: 20%">中文名称</th>
+                      <th style="text-align: center;width: 20%">英文名称</th>
+                      <th style="text-align: center;width: 20%">组件编号</th>
+                      <th style="text-align: center;width: 15%">组件说明</th>
+                      <th style="text-align: center;width: 10%">操作</th>
+                    </tr>
+                  </thead>
+                  <!-- <tr><td class="ctdLine" colspan="19" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr> -->
+
+                  <tbody>
+                    <tr ng-repeat="item in componentList" class="hovershow trHover" ng-click="selectComponent(item)">
+                      <td class="" style="text-align: center;">{{item.no}}</td>
+                      <td class="" style="text-align: center;">{{item.name}}</td>
+                      <td class="" style="text-align: center;">{{item.name_en}}</td>
+                      <td class="" style="text-align: center;">{{item.code}}</td>
+                      <td class="" style="text-align: center;">{{item.description}}</td>
+                      <td class="showdelete">
+                        <i class="icon icon-edit"  title="详情" ng-click="showEditComponentDlg(item)"></i>
+                        <i class="icon icon-trash" title="删除" ng-click="showDeleteComponentDlg(item)"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="row text-center floatRight" style="margin-right: 20px;">
+                <ul class="pager" id="pager_component">
+                  <li class="previous" ><a href="" id="first" ng-click="page1($event)">首页</a></li>
+                  <li class="previous" ><a href="" id="prev"  ng-click="page1($event)">上一页</a></li>
+                  <li ><a href="" id="beforeSL">...</a></li>
+                  <li ng-repeat="pageNumber1 in pager1.pageNumbers"><a href=""class=""id="{{pageNumber1}" ng-click="page1($event)">{{pageNumber1}}</a></li>
+                  <li ><a href="" id="afterSL">...</a></li>
+                  <li class="next"><a href="" id="next" ng-click="page1($event)">下一页</a></li>
+                  <li class="next"><a href="" id="last" ng-click="page1($event)">尾页</a></li>
+                  <li class="xColor" ng-show="totalPage1">|</li>
+                  <li class="xColor" ng-show="totalPage1">共 {{totalPage1}} 页</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9 zWid75" style="width: 48%; font-size: 14px; margin-top: 20px;" >
+          <div class="panel" style="border:0px; width: 100%;">
+            <div class="zPanel1 " style="width: 99%; border: 0px;" >
+              <div class="panel-heading ">组件属性列表信息
+                <div style="float:right; margin-top: -5px;" ng-show="componentInfo.id">
+                  <span class="ml10 " > 
+                    <button class="bton green"  ng-click="createProperty()"><i class="icon icon-plus"></i> 新增属性</button>
+                  </span>
+                </div>
+              </div>
+            </div> 
+            <div class="panel-body"  >
+              <div class="zPanelPadding15">
+                <table class="table table-bordered tbRow" style="margin-top: 10px;" >
+                  <thead>
+                    <tr>
+                      <th style="text-align: center;width: 5%">SN</th>
+                      <th style="text-align: center;width: 20%">中文名称</th>
+                      <th style="text-align: center;width: 20%">英文名称</th>
+                      <th style="text-align: center;width: 15%">属性类别</th>
+                      <th style="text-align: center;width: 25%">属性值</th>
+                      <th style="text-align: center;width: 15%">组件说明</th>
+                      <th style="text-align: center;width: 10%">操作</th>
+                    </tr>
+                  </thead>
+                  <tr><td class="ctdLine" colspan="19" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+                  <tbody>
+                    <tr ng-repeat="item in propertyList" class="hovershow trHover" title="双击编辑属性" ng-click="selectProperty(item)" ng-dblclick="editPropertyInfo(item)" ng-click="selectProperty(item)">
+                      <td class="" style="text-align: center;">{{item.no}}</td>
+                      <td class="" style="text-align: center;">{{item.name}}</td>
+                      <td class="" style="text-align: center;">{{item.name_en}}</td>
+                      <td class="" style="text-align: center;">{{item.value_type_name}}</td>
+                      <td class="" style="text-align: center;">{{item.value}}</td>
+                      <td class="" style="text-align: center;">{{item.description}}</td>
+                      <td class="showdelete">
+                        <i class="icon icon-edit" style="" title="编辑" ng-click="editPropertyInfo(item)"></i>
+                        <i class="icon icon-trash" title="删除" ng-click="showDeletePropertyDlg(item)"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row text-center floatRight" style="margin-right: 20px;">
+                  <ul class="pager" id="pager_property">
+                    <li class="previous" ><a href="" id="first" ng-click="page2($event)">首页</a></li>
+                    <li class="previous" ><a href="" id="prev"  ng-click="page2($event)">上一页</a></li>
+                    <li ><a href="" id="beforeSL">...</a></li>
+                    <li ng-repeat="pageNumber in pager2.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page2($event)">{{pageNumber}}</a></li>
+                    <li ><a href="" id="afterSL">...</a></li>
+                    <li class="next"><a href="" id="next" ng-click="page2($event)">下一页</a></li>
+                    <li class="next"><a href="" id="last" ng-click="page2($event)">尾页</a></li>
+                    <li class="xColor" ng-show="totalPage2">|</li>
+                    <li class="xColor" ng-show="totalPage2">共 {{totalPage2}} 页</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="xTop30"></div>
+
+            <!-- 组件属性详情 -->
+            <div class="zPanel1 " style="width: 99%; min-height: 200px; border: 0px;" ng-if="showPropertyInfo">
+              <div class="panel-heading " style="">组件属性详细信息
+                <div style="float:right; margin-top: -5px;" ng-show="propertyMode=='编辑'">
+                  <span class="ml10" > 
+                    <button class="bton green"  ng-click="confirmToSave('property')"><i class="icon icon-check"></i> 确定</button>
+                  </span>
+                </div>
+              </div>
+              <div class="" style="line-height: 30px;">
+                <div style="padding: 10px">
+                  <div class="Unit50" style="">
+                    <span>中文名称：</span>
+                    <span ng-show="propertyMode!='编辑'"> {{propertyInfo.name}}</span>
+                    <input id="name" type="text" ng-show="propertyMode=='编辑'" ng-model="propertyInfo.name" style="width: 200px; height: 20px; text-indent: 2px;" required/>
+                  </div>
+                  <div class="Unit50" style="">
+                    <span>英文名称：</span>
+                    <span ng-show="propertyMode!='编辑'"> {{propertyInfo.name_en}}</span>
+                    <input id="name_en" type="text"  ng-show="propertyMode=='编辑'" ng-model="propertyInfo.name_en" style="width: 200px; height: 20px; text-indent: 2px;" required/>
+                  </div>
+                </div>
+                <div style="padding: 10px">
+                  <div class="Unit50" style="">
+                    <span>属性类型：</span>
+                    <span ng-show="propertyMode!='编辑'"> {{propertyInfo.value_type_name}}</span>
+                    <select class="form-control" ng-model="propertyInfo.value_type" ng-options = "option.code as option.name for option in valueTypeList" id='valueType' style="width: 202px;" ng-show="propertyMode=='编辑'">
+                    <option value="" selected="selected">属性类型</option>
+                    </select>
+                  </div>
+                  <div class="Unit50" style="">
+                    <span>属&thinsp;  性&thinsp;  值：</span>
+                    <span ng-show="propertyMode!='编辑'"> {{propertyInfo.value}}</span>
+                    <input id="value" type="text" ng-show="propertyMode=='编辑'" ng-model="propertyInfo.value" style="width: 200px; height: 20px; text-indent: 2px;" required/>
+                  </div>
+                </div>
+                <div style="padding: 10px">
+                  <div class="Unit50" style="">
+                    <span>属性描述：</span>
+                    <span ng-show="propertyMode!='编辑'"> {{propertyInfo.description}}</span>
+                    <input id="description" type="text" ng-show="propertyMode=='编辑'" ng-model="propertyInfo.description" style="width: 200px; height: 20px; text-indent: 2px;" required/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- 新增、修改组件 -->
+<div class="modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog" style="width: 480px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon-list-alt"></i> {{editMode}}组件</h4>
+      </div>
+
+      <!-- 组件 -->
+      <div class="modal-body" style="">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="padding: 10px;">
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+              <div style="height: 40px;"><span>中文名称：</span>
+                <input id="name" type="text" ng-model="itemInfo.name" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 40px;"><span>英文名称：</span>
+                <input id="name_en" type="text" ng-model="itemInfo.name_en" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 40px;"><span>组件描述：</span>
+                <input id="description" type="text" ng-model="itemInfo.description" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grn" ng-click="confirmToSave('component')"> <i class="icon icon-check"></i>确定</button>
+        <button type="button" class="btn btn-grn" data-dismiss="modal" style="margin-left: 40px;">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+

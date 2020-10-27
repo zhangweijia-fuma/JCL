@@ -1,0 +1,555 @@
+
+
+
+2020-02-29 20:40:40 Initial YIMS-TMS CCU System...
+2020-02-29 20:40:40 Bind local address: 192.168.1.190:11630
+2020-02-29 20:40:40 Bind local address: :11632
+2020-02-29 20:40:40 YIMS-TMS CCU system starting...
+
+
+
+2020-02-29 20:42:26 Initial JamesSoft-TMS CCU System...
+2020-02-29 20:42:26 Bind local address: 192.168.1.190:11630
+2020-02-29 20:42:26 Bind local address: :11632
+2020-02-29 20:42:26 JamesSoft-TMS CCU system starting...
+2020-02-29 20:42:36 CCU system loop times: 1.
+
+
+
+2020-03-02 07:39:06 Initial JamesSoft-TMS CCU System...
+2020-03-02 07:39:06 Bind local address: 192.168.30.190:11630
+2020-03-02 07:39:06 Bind local address: :11632
+2020-03-02 07:39:06 JamesSoft-TMS CCU system starting...
+2020-03-02 07:39:15 CCU system loop times: 1.
+2020-03-02 07:39:27 CCU system loop times: 2.
+2020-03-02 07:39:38 CCU system loop times: 3.
+2020-03-02 07:39:39 Error: Decode UINT error, Pos: 62, MsgLen: 62
+2020-03-02 07:39:39 Decode message InitialRequestMsg error.
+2020-03-02 07:39:44 Error: Decode UINT error, Pos: 62, MsgLen: 62
+2020-03-02 07:39:44 Decode message InitialRequestMsg error.
+2020-03-02 07:39:48 CCU system loop times: 4.
+2020-03-02 07:39:49 Error: Decode UINT error, Pos: 62, MsgLen: 62
+2020-03-02 07:39:49 Decode message InitialRequestMsg error.
+2020-03-02 07:39:54 Error: Decode UINT error, Pos: 62, MsgLen: 62
+2020-03-02 07:39:54 Decode message InitialRequestMsg error.
+2020-03-02 07:39:57 CCU system loop times: 5.
+2020-03-02 07:40:07 CCU system loop times: 6.
+2020-03-02 07:40:17 CCU system loop times: 7.
+2020-03-02 07:40:27 CCU system loop times: 8.
+2020-03-02 07:40:36 CCU system loop times: 9.
+2020-03-02 07:40:46 CCU system loop times: 10.
+2020-03-02 07:40:56 CCU system loop times: 11.
+2020-03-02 07:41:06 CCU system loop times: 12.
+2020-03-02 07:41:15 CCU system loop times: 13.
+2020-03-02 07:41:25 CCU system loop times: 14.
+2020-03-02 07:41:35 CCU system loop times: 15.
+2020-03-02 07:41:45 CCU system loop times: 16.
+2020-03-02 07:41:54 CCU system loop times: 17.
+2020-03-02 07:42:04 CCU system loop times: 18.
+2020-03-02 07:42:14 CCU system loop times: 19.
+2020-03-02 07:42:24 CCU system loop times: 20.
+2020-03-02 07:42:33 CCU system loop times: 21.
+2020-03-02 07:42:43 CCU system loop times: 22.
+2020-03-02 07:42:53 CCU system loop times: 23.
+2020-03-02 07:43:03 CCU system loop times: 24.
+2020-03-02 07:43:13 CCU system loop times: 25.
+2020-03-02 07:43:23 CCU system loop times: 26.
+2020-03-02 07:43:32 CCU system loop times: 27.
+2020-03-02 07:43:42 CCU system loop times: 28.
+2020-03-02 07:43:52 CCU system loop times: 29.
+2020-03-02 07:44:02 CCU system loop times: 30.
+2020-03-02 07:44:12 CCU system loop times: 31.
+2020-03-02 07:44:21 CCU system loop times: 32.
+2020-03-02 07:44:31 CCU system loop times: 33.
+2020-03-02 07:44:41 CCU system loop times: 34.
+2020-03-02 07:44:51 CCU system loop times: 35.
+2020-03-02 07:45:01 CCU system loop times: 36.
+2020-03-02 07:45:11 CCU system loop times: 37.
+2020-03-02 07:45:20 CCU system loop times: 38.
+2020-03-02 07:45:30 CCU system loop times: 39.
+2020-03-02 07:45:40 CCU system loop times: 40.
+2020-03-02 07:45:50 CCU system loop times: 41.
+2020-03-02 07:45:59 CCU system loop times: 42.
+2020-03-02 07:46:09 CCU system loop times: 43.
+
+
+
+2020-03-02 07:46:38 Initial JamesSoft-TMS CCU System...
+2020-03-02 07:46:38 Bind local address: 192.168.30.190:11630
+2020-03-02 07:46:38 Bind local address: :11632
+2020-03-02 07:46:38 JamesSoft-TMS CCU system starting...
+2020-03-02 07:46:49 CCU system loop times: 1.
+2020-03-02 07:47:00 CCU system loop times: 2.
+2020-03-02 07:47:12 CCU system loop times: 3.
+2020-03-02 07:47:17 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 1A   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 00 00 00 2D 70 00 00   00 00 00 00 00 00 00 00 
+0048: 00 09 00 00 00 00 00 00   00 08 DE DE DE DE 
+2020-03-02 07:47:17 Error: Decode UINT error, Pos: 62, MsgLen: 62
+2020-03-02 07:47:17 Decode message InitialRequestMsg error.
+2020-03-02 07:47:22 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 1A   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 00 00 00 2D 70 00 00   00 00 00 00 00 00 00 00 
+0048: 00 09 00 00 00 00 00 00   00 08 DE DE DE DE 
+2020-03-02 07:47:22 Error: Decode UINT error, Pos: 62, MsgLen: 62
+2020-03-02 07:47:22 Decode message InitialRequestMsg error.
+2020-03-02 07:47:23 CCU system loop times: 4.
+2020-03-02 07:47:33 CCU system loop times: 5.
+2020-03-02 07:47:43 CCU system loop times: 6.
+2020-03-02 07:47:52 CCU system loop times: 7.
+2020-03-02 07:48:02 CCU system loop times: 8.
+2020-03-02 07:48:12 CCU system loop times: 9.
+2020-03-02 07:48:22 CCU system loop times: 10.
+2020-03-02 07:48:31 CCU system loop times: 11.
+2020-03-02 07:48:41 CCU system loop times: 12.
+
+
+
+2020-03-02 07:50:53 Initial JamesSoft-TMS CCU System...
+2020-03-02 07:50:53 Bind local address: 192.168.30.190:11630
+2020-03-02 07:50:53 Bind local address: :11632
+2020-03-02 07:50:53 JamesSoft-TMS CCU system starting...
+2020-03-02 07:51:00 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 1A   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 00 00 00 2D 70 00 00   00 00 00 00 00 00 00 00 
+0048: 00 09 00 00 00 00 00 00   00 08 00 00 00 00 DE DE 
+0064: DE DE 
+2020-03-02 07:51:00 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 07:51:00 Receive Initial Request Message from 192.168.30.194:11631
+2020-03-02 07:51:00 Module TMS DDU(192.168.30.194:11631) online.
+2020-03-02 07:51:00 Send InitialRequestAckMsg to TMS DDU(192.168.30.194:11631)
+2020-03-02 07:51:04 CCU system loop times: 1.
+2020-03-02 07:51:04 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 1A   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 00 00 00 2D 70 00 00   00 00 00 00 00 00 00 00 
+0048: 00 09 00 00 00 00 00 00   00 08 00 00 00 00 DE DE 
+0064: DE DE 
+2020-03-02 07:51:04 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 07:51:04 Receive Initial Request Message from 192.168.30.194:11631
+2020-03-02 07:51:04 Error: Receive Initial Request message from TMS DDU(192.168.30.194:11631) in online status.
+2020-03-02 07:51:09 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 1A   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 00 00 00 2D 70 00 00   00 00 00 00 00 00 00 00 
+0048: 00 09 00 00 00 00 00 00   00 08 00 00 00 00 DE DE 
+0064: DE DE 
+2020-03-02 07:51:10 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 07:51:10 Receive Initial Request Message from 192.168.30.194:11631
+2020-03-02 07:51:10 Error: Receive Initial Request message from TMS DDU(192.168.30.194:11631) in online status.
+2020-03-02 07:51:13 CCU system loop times: 2.
+2020-03-02 07:51:14 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 1A   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 00 00 00 2D 70 00 00   00 00 00 00 00 00 00 00 
+0048: 00 09 00 00 00 00 00 00   00 08 00 00 00 00 DE DE 
+0064: DE DE 
+2020-03-02 07:51:15 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 07:51:15 Receive Initial Request Message from 192.168.30.194:11631
+2020-03-02 07:51:15 Error: Receive Initial Request message from TMS DDU(192.168.30.194:11631) in online status.
+2020-03-02 07:51:19 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 1A   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 00 00 00 2D 70 00 00   00 00 00 00 00 00 00 00 
+0048: 00 09 00 00 00 00 00 00   00 08 00 00 00 00 DE DE 
+0064: DE DE 
+2020-03-02 07:51:19 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 07:51:20 Receive Initial Request Message from 192.168.30.194:11631
+2020-03-02 07:51:20 Error: Receive Initial Request message from TMS DDU(192.168.30.194:11631) in online status.
+2020-03-02 07:51:23 Error: Module TMS DDU(192.168.30.194) lost connection.
+2020-03-02 07:51:23 CCU system loop times: 3.
+2020-03-02 07:51:33 CCU system loop times: 4.
+2020-03-02 07:51:43 CCU system loop times: 5.
+2020-03-02 07:51:53 CCU system loop times: 6.
+2020-03-02 07:52:02 CCU system loop times: 7.
+2020-03-02 07:52:12 CCU system loop times: 8.
+2020-03-02 07:52:22 CCU system loop times: 9.
+2020-03-02 07:52:32 CCU system loop times: 10.
+2020-03-02 07:52:42 CCU system loop times: 11.
+
+
+
+2020-03-02 07:54:28 Initial JamesSoft-TMS CCU System...
+2020-03-02 07:54:28 Bind local address: 192.168.30.190:11630
+2020-03-02 07:54:28 Bind local address: :11632
+2020-03-02 07:54:28 JamesSoft-TMS CCU system starting...
+2020-03-02 07:54:34 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 1A   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 00 00 00 2D 70 00 00   00 00 00 00 00 00 00 00 
+0048: 00 09 00 00 00 00 00 00   00 08 00 00 00 00 DE DE 
+0064: DE DE 
+2020-03-02 07:54:34 Error: Decode UINT error, Pos: 66, MsgLen: 66
+2020-03-02 07:54:34 Decode message InitialRequestMsg error.
+2020-03-02 07:54:38 CCU system loop times: 1.
+2020-03-02 07:54:39 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 1A   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 00 00 00 2D 70 00 00   00 00 00 00 00 00 00 00 
+0048: 00 09 00 00 00 00 00 00   00 08 00 00 00 00 DE DE 
+0064: DE DE 
+2020-03-02 07:54:39 Error: Decode UINT error, Pos: 66, MsgLen: 66
+2020-03-02 07:54:39 Decode message InitialRequestMsg error.
+
+
+
+2020-03-02 07:55:38 Initial JamesSoft-TMS CCU System...
+2020-03-02 07:55:38 Bind local address: 192.168.30.190:11630
+2020-03-02 07:55:38 Bind local address: :11632
+2020-03-02 07:55:38 JamesSoft-TMS CCU system starting...
+2020-03-02 07:55:43 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 1A   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 00 00 00 2D 70 00 00   00 00 00 00 00 00 00 00 
+0048: 00 09 00 00 00 00 00 00   00 08 00 00 00 00 DE DE 
+0064: DE DE 
+2020-03-02 07:55:43 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 07:55:43 Receive Initial Request Message from 192.168.30.194:11631
+2020-03-02 07:55:43 Module TMS DDU(192.168.30.194:11631) online.
+2020-03-02 07:55:43 Send InitialRequestAckMsg to TMS DDU(192.168.30.194:11631)
+2020-03-02 07:55:43 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 00   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 0E 31 39 32 2E 31 36   38 2E 33 30 2E 31 39 30 
+0048: 00 00 2D 6E 00 00 00 00   00 00 00 00 00 00 00 09 
+0064: 00 00 00 00 00 00 00 08   00 00 00 00 DE DE DE DE 
+0080: 
+2020-03-02 07:55:48 CCU system loop times: 1.
+2020-03-02 07:55:49 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 00   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 0E 31 39 32 2E 31 36   38 2E 33 30 2E 31 39 30 
+0048: 00 00 2D 6E 00 00 00 00   00 00 00 00 00 00 00 09 
+0064: 00 00 00 00 00 00 00 08   00 00 00 00 DE DE DE DE 
+0080: 
+2020-03-02 07:55:55 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 00   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 0E 31 39 32 2E 31 36   38 2E 33 30 2E 31 39 30 
+0048: 00 00 2D 6E 00 00 00 00   00 00 00 00 00 00 00 09 
+0064: 00 00 00 00 00 00 00 08   00 00 00 00 DE DE DE DE 
+0080: 
+2020-03-02 07:55:58 CCU system loop times: 2.
+2020-03-02 07:56:01 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 00   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 0E 31 39 32 2E 31 36   38 2E 33 30 2E 31 39 30 
+0048: 00 00 2D 6E 00 00 00 00   00 00 00 00 00 00 00 09 
+0064: 00 00 00 00 00 00 00 08   00 00 00 00 DE DE DE DE 
+0080: 
+2020-03-02 07:56:07 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 00   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 0E 31 39 32 2E 31 36   38 2E 33 30 2E 31 39 30 
+0048: 00 00 2D 6E 00 00 00 00   00 00 00 00 00 00 00 09 
+0064: 00 00 00 00 00 00 00 08   00 00 00 00 DE DE DE DE 
+0080: 
+2020-03-02 07:56:08 CCU system loop times: 3.
+2020-03-02 07:56:13 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 00   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 0E 31 39 32 2E 31 36   38 2E 33 30 2E 31 39 30 
+0048: 00 00 2D 6E 00 00 00 00   00 00 00 00 00 00 00 09 
+0064: 00 00 00 00 00 00 00 08   00 00 00 00 DE DE DE DE 
+0080: 
+2020-03-02 07:56:17 CCU system loop times: 4.
+2020-03-02 07:56:19 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 00   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 0E 31 39 32 2E 31 36   38 2E 33 30 2E 31 39 30 
+0048: 00 00 2D 6E 00 00 00 00   00 00 00 00 00 00 00 09 
+0064: 00 00 00 00 00 00 00 08   00 00 00 00 DE DE DE DE 
+0080: 
+2020-03-02 07:56:25 Receive msg from 192.168.30.194:11631, 
+
+0000: A5 A5 A5 A5 00 00 00 00   00 00 00 0E 31 39 32 2E 
+0016: 31 36 38 2E 33 30 2E 31   39 34 00 00 2D 6F 00 00 
+0032: 00 0E 31 39 32 2E 31 36   38 2E 33 30 2E 31 39 30 
+0048: 00 00 2D 6E 00 00 00 00   00 00 00 00 00 00 00 09 
+0064: 00 00 00 00 00 00 00 08   00 00 00 00 DE DE DE DE 
+0080: 
+2020-03-02 07:56:27 CCU system loop times: 5.
+
+
+
+2020-03-02 07:57:22 Initial JamesSoft-TMS CCU System...
+2020-03-02 07:57:22 Bind local address: 192.168.30.190:11630
+2020-03-02 07:57:22 Bind local address: :11632
+2020-03-02 07:57:22 JamesSoft-TMS CCU system starting...
+2020-03-02 07:57:30 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 07:57:30 Receive Initial Request Message from 192.168.30.194:11631
+2020-03-02 07:57:30 Module TMS DDU(192.168.30.194:11631) online.
+2020-03-02 07:57:30 Send InitialRequestAckMsg to TMS DDU(192.168.30.194:11631)
+2020-03-02 07:57:32 CCU system loop times: 1.
+2020-03-02 07:57:42 CCU system loop times: 2.
+2020-03-02 07:57:51 CCU system loop times: 3.
+2020-03-02 07:58:01 CCU system loop times: 4.
+2020-03-02 07:58:10 Error: Module TMS DDU(192.168.30.194) lost connection.
+2020-03-02 07:58:11 CCU system loop times: 5.
+
+
+
+2020-03-02 07:58:23 Initial JamesSoft-TMS CCU System...
+2020-03-02 07:58:23 Bind local address: 192.168.30.190:11630
+2020-03-02 07:58:23 Bind local address: :11632
+2020-03-02 07:58:23 JamesSoft-TMS CCU system starting...
+2020-03-02 07:58:26 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 07:58:26 Receive Initial Request Message from 192.168.30.194:11631
+2020-03-02 07:58:26 Module TMS DDU(192.168.30.194:11631) online.
+2020-03-02 07:58:26 Send InitialRequestAckMsg to TMS DDU(192.168.30.194:11631)
+2020-03-02 08:00:23 Error: Module TMS DDU(192.168.30.194) lost connection.
+
+
+
+2020-03-02 08:16:18 Initial JamesSoft-TMS CCU System...
+2020-03-02 08:16:18 Bind local address: 192.168.30.190:11630
+2020-03-02 08:16:18 Bind local address: :11632
+2020-03-02 08:16:18 JamesSoft-TMS CCU system starting...
+2020-03-02 08:16:21 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 08:16:21 Receive Initial Request Message from 192.168.30.194:11631
+2020-03-02 08:16:21 Module TMS DDU(192.168.30.194:11631) online.
+2020-03-02 08:16:21 Send InitialRequestAckMsg to TMS DDU(192.168.30.194:11631)
+
+
+
+2020-03-02 08:17:12 Initial JamesSoft-TMS CCU System...
+2020-03-02 08:17:12 JamesSoft-TMS CCU system starting...
+2020-03-02 08:17:15 Error: Receive Heartbeat msg from offline module: 192.168.30.194:11631
+2020-03-02 08:17:26 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 08:17:26 Receive Initial Request Message from 192.168.30.194:11631
+2020-03-02 08:17:26 Module TMS DDU(192.168.30.194:11631) online.
+2020-03-02 08:17:26 Send InitialRequestAckMsg to TMS DDU(192.168.30.194:11631)
+
+
+
+2020-03-02 08:17:57 Initial JamesSoft-TMS CCU System...
+2020-03-02 08:17:57 JamesSoft-TMS CCU system starting...
+2020-03-02 08:18:00 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 08:18:00 Receive Initial Request Message from 192.168.30.194:11631
+2020-03-02 08:18:00 Module TMS DDU(192.168.30.194:11631) online.
+2020-03-02 08:18:00 Send InitialRequestAckMsg to TMS DDU(192.168.30.194:11631)
+
+
+
+2020-03-02 08:19:25 Initial JamesSoft-TMS CCU System...
+2020-03-02 08:19:25 JamesSoft-TMS CCU system starting...
+2020-03-02 08:19:28 Receive InitialRequestMsg from 192.168.30.194:11631
+2020-03-02 08:19:28 Module TMS DDU(192.168.30.194:11631) online.
+2020-03-02 08:19:28 Send InitialRequestAckMsg to TMS DDU(192.168.30.194:11631)
+
+
+
+2020-03-02 08:19:33 Initial JamesSoft-TMS CCU System...
+2020-03-02 08:19:33 JamesSoft-TMS CCU system starting...
+2020-03-02 08:19:34 Error: Receive Heartbeat msg from offline module: 192.168.30.194:11631
+2020-03-02 08:19:40 Error: Receive Heartbeat msg from offline module: 192.168.30.194:11631
+2020-03-02 08:19:46 Error: Receive Heartbeat msg from offline module: 192.168.30.194:11631
+
+
+
+2020-03-02 19:59:30 Initial JamesSoft-TMS CCU System...
+2020-03-02 19:59:30 JamesSoft-TMS CCU system starting...
+
+
+
+2020-03-02 19:59:46 Initial JamesSoft-TMS CCU System...
+2020-03-02 19:59:46 JamesSoft-TMS CCU system starting...
+2020-03-02 19:59:46 CCU system loop times: 1.
+2020-03-02 19:59:46 CCU system loop times: 2.
+2020-03-02 19:59:46 CCU system loop times: 3.
+2020-03-02 19:59:46 CCU system loop times: 4.
+2020-03-02 19:59:46 CCU system loop times: 5.
+2020-03-02 19:59:46 CCU system loop times: 6.
+2020-03-02 19:59:46 CCU system loop times: 7.
+2020-03-02 19:59:46 CCU system loop times: 8.
+2020-03-02 19:59:46 CCU system loop times: 9.
+2020-03-02 19:59:47 CCU system loop times: 10.
+2020-03-02 19:59:47 CCU system loop times: 11.
+2020-03-02 19:59:47 CCU system loop times: 12.
+2020-03-02 19:59:47 CCU system loop times: 13.
+2020-03-02 19:59:47 CCU system loop times: 14.
+2020-03-02 19:59:47 CCU system loop times: 15.
+2020-03-02 19:59:47 CCU system loop times: 16.
+2020-03-02 19:59:47 CCU system loop times: 17.
+2020-03-02 19:59:47 CCU system loop times: 18.
+2020-03-02 19:59:47 CCU system loop times: 19.
+2020-03-02 19:59:48 CCU system loop times: 20.
+
+
+
+2020-03-02 19:59:56 Initial JamesSoft-TMS CCU System...
+2020-03-02 19:59:56 JamesSoft-TMS CCU system starting...
+2020-03-02 19:59:56 CCU system loop times: 1.
+2020-03-02 19:59:56 CCU system loop times: 2.
+2020-03-02 19:59:56 CCU system loop times: 3.
+2020-03-02 19:59:56 CCU system loop times: 4.
+2020-03-02 19:59:56 CCU system loop times: 5.
+2020-03-02 19:59:56 CCU system loop times: 6.
+2020-03-02 19:59:56 CCU system loop times: 7.
+2020-03-02 19:59:56 CCU system loop times: 8.
+2020-03-02 19:59:57 CCU system loop times: 9.
+2020-03-02 19:59:57 CCU system loop times: 10.
+2020-03-02 19:59:57 CCU system loop times: 11.
+2020-03-02 19:59:57 CCU system loop times: 12.
+2020-03-02 19:59:57 CCU system loop times: 13.
+
+
+
+2020-03-02 20:00:10 Initial JamesSoft-TMS CCU System...
+2020-03-02 20:00:10 JamesSoft-TMS CCU system starting...
+2020-03-02 20:00:11 CCU system loop times: 1.
+2020-03-02 20:00:11 CCU system loop times: 2.
+2020-03-02 20:00:11 CCU system loop times: 3.
+2020-03-02 20:00:11 CCU system loop times: 4.
+2020-03-02 20:00:11 CCU system loop times: 5.
+2020-03-02 20:00:11 CCU system loop times: 6.
+2020-03-02 20:00:11 CCU system loop times: 7.
+2020-03-02 20:00:11 CCU system loop times: 8.
+2020-03-02 20:00:11 CCU system loop times: 9.
+2020-03-02 20:00:11 CCU system loop times: 10.
+2020-03-02 20:00:12 CCU system loop times: 11.
+2020-03-02 20:00:12 CCU system loop times: 12.
+2020-03-02 20:00:12 CCU system loop times: 13.
+2020-03-02 20:00:12 CCU system loop times: 14.
+2020-03-02 20:00:12 CCU system loop times: 15.
+2020-03-02 20:00:12 CCU system loop times: 16.
+
+
+
+2020-03-02 20:06:27 Initial JamesSoft-TMS CCU System...
+2020-03-02 20:06:27 JamesSoft-TMS CCU system starting...
+2020-03-02 20:06:27 CCU system loop times: 1.
+2020-03-02 20:06:28 CCU system loop times: 2.
+2020-03-02 20:06:28 CCU system loop times: 3.
+2020-03-02 20:06:28 CCU system loop times: 4.
+2020-03-02 20:06:28 CCU system loop times: 5.
+2020-03-02 20:06:28 CCU system loop times: 6.
+2020-03-02 20:06:28 CCU system loop times: 7.
+2020-03-02 20:06:28 CCU system loop times: 8.
+2020-03-02 20:06:28 CCU system loop times: 9.
+2020-03-02 20:06:28 CCU system loop times: 10.
+2020-03-02 20:06:28 CCU system loop times: 11.
+2020-03-02 20:06:29 CCU system loop times: 12.
+2020-03-02 20:06:29 CCU system loop times: 13.
+2020-03-02 20:06:29 CCU system loop times: 14.
+2020-03-02 20:06:29 CCU system loop times: 15.
+2020-03-02 20:06:29 CCU system loop times: 16.
+2020-03-02 20:06:29 CCU system loop times: 17.
+2020-03-02 20:06:29 CCU system loop times: 18.
+2020-03-02 20:06:29 CCU system loop times: 19.
+2020-03-02 20:06:29 CCU system loop times: 20.
+2020-03-02 20:06:29 CCU system loop times: 21.
+2020-03-02 20:06:30 CCU system loop times: 22.
+2020-03-02 20:06:30 CCU system loop times: 23.
+2020-03-02 20:06:30 CCU system loop times: 24.
+2020-03-02 20:06:30 CCU system loop times: 25.
+2020-03-02 20:06:30 CCU system loop times: 26.
+2020-03-02 20:06:30 CCU system loop times: 27.
+
+
+
+2020-03-02 20:06:50 Initial JamesSoft-TMS CCU System...
+2020-03-02 20:06:50 JamesSoft-TMS CCU system starting...
+2020-03-02 20:06:50 CCU system loop times: 1.
+2020-03-02 20:06:50 CCU system loop times: 2.
+2020-03-02 20:06:50 CCU system loop times: 3.
+2020-03-02 20:06:50 CCU system loop times: 4.
+2020-03-02 20:06:50 CCU system loop times: 5.
+2020-03-02 20:06:50 CCU system loop times: 6.
+2020-03-02 20:06:51 CCU system loop times: 7.
+2020-03-02 20:06:51 CCU system loop times: 8.
+2020-03-02 20:06:51 CCU system loop times: 9.
+2020-03-02 20:06:51 CCU system loop times: 10.
+2020-03-02 20:06:51 CCU system loop times: 11.
+2020-03-02 20:06:51 CCU system loop times: 12.
+2020-03-02 20:06:51 CCU system loop times: 13.
+
+
+
+2020-03-02 20:07:04 Initial JamesSoft-TMS CCU System...
+2020-03-02 20:07:04 JamesSoft-TMS CCU system starting...
+2020-03-02 20:07:04 CCU system loop times: 1.
+2020-03-02 20:07:05 CCU system loop times: 2.
+2020-03-02 20:07:05 CCU system loop times: 3.
+2020-03-02 20:07:05 CCU system loop times: 4.
+2020-03-02 20:07:05 CCU system loop times: 5.
+2020-03-02 20:07:05 CCU system loop times: 6.
+2020-03-02 20:07:05 CCU system loop times: 7.
+2020-03-02 20:07:05 CCU system loop times: 8.
+2020-03-02 20:07:05 CCU system loop times: 9.
+2020-03-02 20:07:05 CCU system loop times: 10.
+2020-03-02 20:07:05 CCU system loop times: 11.
+2020-03-02 20:07:06 CCU system loop times: 12.
+2020-03-02 20:07:06 CCU system loop times: 13.
+2020-03-02 20:07:06 CCU system loop times: 14.
+
+
+
+2020-03-02 20:08:02 Initial JamesSoft-TMS CCU System...
+2020-03-02 20:08:02 JamesSoft-TMS CCU system starting...
+2020-03-02 20:08:02 CCU system loop times: 1.
+2020-03-02 20:08:02 CCU system loop times: 2.
+2020-03-02 20:08:02 CCU system loop times: 3.
+2020-03-02 20:08:02 CCU system loop times: 4.
+2020-03-02 20:08:02 CCU system loop times: 5.
+2020-03-02 20:08:02 CCU system loop times: 6.
+2020-03-02 20:08:02 CCU system loop times: 7.
+2020-03-02 20:08:02 CCU system loop times: 8.
+2020-03-02 20:08:03 CCU system loop times: 9.
+2020-03-02 20:08:03 CCU system loop times: 10.
+2020-03-02 20:08:03 CCU system loop times: 11.
+2020-03-02 20:08:03 CCU system loop times: 12.
+2020-03-02 20:08:03 CCU system loop times: 13.
+2020-03-02 20:08:03 CCU system loop times: 14.
+2020-03-02 20:08:03 CCU system loop times: 15.
+2020-03-02 20:08:03 CCU system loop times: 16.
+2020-03-02 20:08:03 CCU system loop times: 17.
+2020-03-02 20:08:03 CCU system loop times: 18.
+2020-03-02 20:08:04 CCU system loop times: 19.
+2020-03-02 20:08:04 CCU system loop times: 20.
+2020-03-02 20:08:04 CCU system loop times: 21.
+2020-03-02 20:08:04 CCU system loop times: 22.
+2020-03-02 20:08:04 CCU system loop times: 23.
+2020-03-02 20:08:04 CCU system loop times: 24.
+2020-03-02 20:08:04 CCU system loop times: 25.
+2020-03-02 20:08:04 CCU system loop times: 26.
+2020-03-02 20:08:04 CCU system loop times: 27.
+2020-03-02 20:08:04 CCU system loop times: 28.
+
+
+
+2020-03-02 20:11:17 Initial JamesSoft-TMS CCU System...
+2020-03-02 20:11:17 JamesSoft-TMS CCU system starting...
+
+
+
+2020-03-03 07:55:47 Initial JamesSoft-TMS CCU System...
+2020-03-03 07:55:47 Error: Get configuration default parameters CCU1 failed.
+2020-03-03 07:55:47 Error: Initial TMS CCU system fail.
+
+
+
+2020-03-03 07:56:32 Initial JamesSoft-TMS CCU System...
+2020-03-03 07:56:32 Config file: /JamesSoft/JDS/config/TMS.conf
+2020-03-03 07:56:32 Error: Get configuration default parameters CCU1 failed.
+2020-03-03 07:56:32 Error: Initial TMS CCU system fail.

@@ -1,0 +1,118 @@
+
+<style>
+.break{
+    word-break: break-all;  
+    word-wrap: break-word; 
+}
+.xDetailPatBoxData .xDetailPatBoxDataTop div{
+  width:25%;
+}
+.xDetailPat a{
+  background: #4AB033;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request" id="html5Form" validate>
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail">
+              <li ng-class="{true: 'active'}[tab==0]" ng-click="changeTab(0)"><a href="#/lineManage">运营线路管理</a></li>
+              <li><span>></span></li>
+              <li><a href="" style="color: #4AB033;">{{editType}}控制器</a></li>
+              <span  class="ml10" style="float:right;margin-left: 10px;"> 
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button>
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="save()"><i class="icon icon-check"></i> 确定</button>
+              </span>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sub-title form-condensed inline-form">
+        <div class="row">
+          <div class="form-group xDetailPat">
+            <label class="i-form-label ml10 inline-title">基本信息</label>
+            <div class="xTriangle"></div>
+            <span  class="ml10" style="float:right;margin-left: 10px;"> 
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content xDetailPatBox clear_after">
+        <div class="xDetailPatBoxData" style="margin-left: 20px; width: 100%;">
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div style="width: 33%;">
+              <span>设备编号：</span>
+              <input type="text" id="code" required class="form-control xEdit" ng-model="controllerInfo.code" style="width: 150px;padding-left: 2px;" >
+            </div>
+            <div style="width: 33%;">
+              <span>设备地址：</span>
+              <input type="text" id="ip_address" class="form-control xEdit" style="text-align: center; width: 150px;" ng-model="controllerInfo.ip_address">
+            </div>
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div style="width: 33%;">
+              <span>安装{{install_location}}：</span>
+              <input type="text" id="install_name" class="form-control xEdit" style="width: 150px;" ng-model="controllerInfo.install_name" readonly>
+            </div>
+            
+            <div style="width: 66%;">
+              <span style="float: left;">安装地点：</span>
+              <div style="width: 55%" ng-if="installType=='0'">
+                <input type="radio" name="type" value="0" ng-model="controllerInfo.install_type" required checked >车头控制器
+                <input type="radio" name="type" value="1" ng-model="controllerInfo.install_type" required >车尾控制器
+              </div>
+              <div style="width: 55%" ng-if="installType!='0'">
+                <input type="radio" name="type" value="2" ng-model="controllerInfo.install_type" style="margin-left: 10px">上行控制器
+                <input type="radio" name="type" value="3" ng-model="controllerInfo.install_type" style="margin-left: 10px">下行控制器
+                <input type="radio" name="type" value="4" ng-model="controllerInfo.install_type" style="margin-left: 10px">站厅控制器
+              </div>
+            </div>
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div style="width: 33%;">
+              <span>唤醒时间：</span>
+              <input type="text" id="dstime" class="form-date form-control choosetime" style="text-indent: 2px;width: 150px;" ng-model="controllerInfo.open_time" data-date-format="HH:mm:ss" placeholder="开机时间">
+            </div>
+            <div style="width: 33%;">
+              <span>休眠时间：</span>
+              <input type="text" id = "detime" class="form-date form-control choosetime" style="text-indent: 2px;width: 150px;" ng-model="controllerInfo.close_time" data-date-format="HH:mm:ss" placeholder="休眠时间">
+            </div>
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 0,
+    minView: 0,
+    forceParse: 0,
+    format: 'hh:ii',
+  });
+</script>

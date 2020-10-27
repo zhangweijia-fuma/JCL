@@ -1,0 +1,89 @@
+<!-- 查看公告牌 -->
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData('')">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+<!--       <object data="{{BulletinBoardInfo.file_path}}" type="application/pdf" width="100%" height="1200px">
+          <embed src="{{BulletinBoardInfo.file_path}}" type="application/pdf">
+              <p>This browser does not support PDFs. Please download the PDF to view it: <a href="{{BulletinBoardInfo.file_path}}">Download PDF</a>.</p>
+          </embed>
+      </object> -->
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group" >
+            <img src="{{AppSystemUserInfo.logo_horizontal}}" style="width: 100px; height: 40px;">
+          </div>
+          <div class="form-group flright xHandle" style="top: 8px; right: 0px;">
+              <span class="ml10">
+                <button class="bton green"  ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button>
+              </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group" align="center">
+            <ul class="xDetail" style="height: 40px;line-height: 40px; color: red; font-size: 40px; border-bottom: red solid 0px; ">
+              {{AppSystemUserInfo.user_name}}
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px; border-bottom: red solid 2px;">
+            <label style="color: red; background: white;">文号：{{BulletinBoardInfo.code}}</label>
+            <div class="form-group flright xHandle" style="top: 1px; right: 1px;">           
+              <span class="ml10" style="color: red"></i> 发布日期：{{BulletinBoardInfo.publish_date}}</span>
+            </div>
+          </div>  
+        </div>
+
+        <div align="center" style="margin-top: 40px;">
+          <span style="color: red; font-size: 32px;">{{BulletinBoardInfo.title}}</span>
+        </div>
+
+        <div style="width: 80%; margin-top:40px; margin-left: 10%">
+          <textarea ng-model="BulletinBoardInfo.content" style="width:100%;height:750px;resize: vertical; border: 0px; line-height: 40px;font-size: 20px;" readonly="true"></textarea>
+          </div>
+        </div>
+
+    </form>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd',
+  });
+</script>
+
+

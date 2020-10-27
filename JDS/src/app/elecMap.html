@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html ng-app="firstApp" xmlns:wb="http://open.weibo.com/wb" style="height: 100%">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>成都地铁二号线电子地图</title>
+    <link rel="stylesheet" type="text/css" href="/resource/styles/xcss.css">
+    <link rel="stylesheet" type="text/css" href="/resource/styles/xindex.css">
+    <link rel="stylesheet" type="text/css" href="/resource/styles/zui.me.contract.css">
+    <link rel="stylesheet" type="text/css" href="/libs/zui/css/mainManage.css">
+    <link href="/libs/datetimepicker/datetimepicker.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resource/iconfonts/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/resource/styles/zindex.css">
+    <link rel="stylesheet" type="text/css" href="/resource/styles/yims.css">
+    <link rel="stylesheet" type="text/css" href="/libs/select2/select.css">
+    <link rel="stylesheet" type="text/css" href="/libs/select2/select2.css">
+
+  </head>
+  <style>
+    .row{
+      overflow: inherit;
+  }
+
+    .blockStyleLeft{
+      margin-top: 5px;
+      margin-left: 0.1%;
+      float: left; 
+      display: inline; 
+      width: 36%; 
+      height: 600px;
+    }
+    .blockStyleRight{
+      float: left; 
+      display: inline; 
+      width: 63.7%; 
+      height: 600px;
+      margin-left: 0.1%;
+      margin-top: 5px;
+      margin-right: 0.1%;
+    }
+
+    .showStatus{
+        width: 45px;
+        float: left;
+        display: inline;
+        margin-top: 20px;
+    }
+    .showStatus img{
+      width: 25px; 
+      height: 4px;
+      z-index: -1;
+      float: left; 
+      margin-left: 20px; 
+      margin-top: -12px;
+    }
+
+    .showStatus span{
+      display: block;
+      padding-top: 18px;
+      width: 20px;  
+      line-height: 14px;  
+      font-size: 14px;
+    }
+    #a{
+        width: 20px;
+        /*padding-top: 5px;*/
+    }
+    #b{
+        text-align: left;
+        width: 120px;
+        margin-top: 10px;
+        margin-left: 2px;
+    }
+
+    .name {
+      width: 14px;  
+      height: 70px;
+      margin-left: 2px;
+      line-height: 14px;  
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+
+  <body style="height: 100%">
+    <div ng-controller="elecMapCtrl">
+      <div class="blockStyleLeft">
+        <video id="videoAD" src="{{videoUrl}}" style="width: 100%; height: 100%; object-fit: fill" autoplay="autoplay" muted></video>
+      </div>
+
+      <div class="blockStyleRight">
+        <div style="text-align: center; font-size: 36px; margin-top: 20px; margin-bottom: 60px;">
+          成都地铁二号线
+        </div>
+        <div style="display: table; margin: auto; ">
+          <div class="" ng-repeat="station in stationList track by $index" style="display: inline; ">
+            <div class="showStatus">
+              <div class="name">
+                <span style="padding-top: 0px; margin-left: -2px;">{{station.exangeName}}</span>
+                <img src="/resource/images/line4.png" ng-show="station.isExange==1" style="width: 4px; height: 20px; margin-left: 6px; margin-top: 5px;">
+              </div>
+              <div id = "a">
+                  <img src="{{station.image}}" style="width: 20px; height: 20px;margin-left: 0px;margin-top: 0px;">
+                  <img src="/resource/images/line3.png" ng-show="station.isLast==0">
+              </div>
+              <div id="b">
+                <span>{{station.name}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="libs/cryptojslib/rollups/md5.js"></script>
+    <script src="libs/cryptojslib/rollups/aes.js"></script>
+    <script type="text/javascript" src="libs/zui/lib/jquery/jquery.js"></script>
+    <script type="text/javascript" src="libs/zui/lib/jquery/jquery-html5Validate-min.js"></script>
+    <script type="text/javascript" src="libs/zui/js/zui.min.js"></script>
+
+    <script type="text/javascript" src="libs/angular/angular/angular.js"></script>
+    <script type="text/javascript" src="libs/angular/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="libs/angular/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="libs/angular/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="libs/angular/angular-tree/angular-tree-control.js"></script>
+    <script type="text/javascript" src="libs/angular/angular-file-upload/angular-file-upload.js"></script>
+    <script type="text/javascript" src="libs/select2/select.js"></script>
+    <script type="text/javascript" src="libs/datetimepicker/datetimepicker.js" charset="utf-8"></script>
+
+    <script type="text/javascript" src="libs/common/function.js"></script>
+    <script type="text/javascript" src="libs/common/ctrlBase.js"></script>
+    <script type="text/javascript" src="libs/common/pager.js"></script>
+    <script type="text/javascript" src="libs/common/dialog.js"></script>
+    <script type="text/javascript" src="libs/common/angular/svcCommon.js"></script>
+    <script type="text/javascript" src="libs/common/angular/drtCommon.js"></script>
+    <script type="text/javascript" src="libs/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="libs/highcharts/highcharts-3d.js"></script>
+    <script type="text/javascript" src="libs/highcharts/theme.js"></script>
+    <script type="text/javascript" src="libs/highcharts/highcharts-ng.js"></script>
+
+    <!-- 包含JS文件 -->
+    <script src="/config.js"></script>
+    <script src="/app.js"></script>
+
+    <!-- system -->
+    <script type="text/javascript" src="system/scripts/accountManage.js"></script>
+    <script type="text/javascript" src="system/scripts/dataDictionaryManage.js"></script>
+    <script type="text/javascript" src="system/scripts/menuManage.js"></script>
+    <script type="text/javascript" src="system/scripts/operationLog.js"></script>
+    <script type="text/javascript" src="system/scripts/groupManage.js"></script>
+
+    <!--public-->
+    <script type="text/javascript" src="public/scripts/ctrIndex.js"></script>
+    
+    <!-- 百度地图 -->
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=sEKdIjahGM3zyXoXx2FSvVbT7NhcSrrT&s=1"></script>
+
+    <!-- PIS 部分 -->
+    <script type="text/javascript" src="pis/scripts/lineManage.js"></script>
+    <script type="text/javascript" src="pis/scripts/controllerManage.js"></script>
+    <script type="text/javascript" src="pis/scripts/ctrlLogManage.js"></script>
+    <script type="text/javascript" src="pis/scripts/programManage.js"></script>
+    <script type="text/javascript" src="pis/scripts/messageManage.js"></script>
+    <script type="text/javascript" src="pis/scripts/lineStatus.js"></script>
+    <script type="text/javascript" src="pis/scripts/videoSurv.js"></script>
+
+    <!-- IOT部分 -->
+    <script type="text/javascript" src="iot/scripts/gpsModuleManage.js"></script>
+
+    <!-- 电子地图 -->
+    <script type="text/javascript" src="pisAudio/scripts/elecMap.js"></script>
+
+    <script src="js.js"></script>
+  </body>
+</html>
+
+<script type="text/javascript">
+
+  <!--回顶部-->
+  $(document).ready(function () {
+  $("#returntop").click(function () {
+    if (scroll == "off") return;
+    $("html,body").animate({scrollTop: 0}, 600);
+  });
+  });
+  var exitsystem = function () {
+  sessionStorage.removeItem("strUser");
+  sessionStorage.removeItem("authToken");
+  window.location.href = "/login.html"
+  };
+  var gotoLogin=function(status) {
+    if (status==401) {
+    window.location.href = "/login.html"
+    }
+  }
+</script>

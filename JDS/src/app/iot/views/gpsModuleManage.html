@@ -1,0 +1,253 @@
+<!-- 定位模块管理 -->
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .xDetailPos button
+  {
+    background: #4AB033;
+    color: white;
+    line-height: 5px;
+    /*width: 120px;*/
+  }
+
+  .editStyle
+  {
+    width: 140px; 
+    height: 20px; 
+    text-indent: 2px;
+  }
+
+  .selectStyle
+  {
+    text-align: center; 
+    width: 144px;
+    height: 24px; 
+    margin-left: 5px;
+  }
+
+</style>
+
+<div class="container" style="width: 102%" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>定位模块管理</li>
+            </ul>
+            <div class="form-group flright xDetailPos" style="top: 15px; margin-right: 20px">           
+              <span class="ml10 "><button class="bton green"  ng-click="createGPSModule()"><i class="icon icon-list-alt"></i> 创建</button> </span>
+              <span class="ml10 ">
+                <button class="fileUpload bton green" style="cursor: pointer"><i class="icon icon-upload"></i> 批量导入
+                  <input type="file" class="upload" id="local_upload" nv-file-select uploader="uploader" multiple accept=".xls;*.xlsx">
+                </button>
+              </span>
+              <span class="ml10 "><button class="bton green"  ng-click="exportToFile()"><i class="icon icon-download-alt"></i> 导出</button> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group">
+          <span class="i-form-label ml10">安装批次：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="batchList.selected" theme="select2" ng-change="searchModule()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.batch"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (batchList | filter: $select.search) track by item.batch">
+                  <span ng-bind="item.batch"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">安装类型：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="installTypeList.selected" theme="select2" ng-change="searchModule()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (installTypeList | filter: $select.search) track by item.code">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">模块编号：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="codeList.selected" theme="select2" ng-change="searchModule()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.code"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (codeList | filter: $select.search) track by item.code">
+                  <span ng-bind="item.code"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+      </div>      
+      <!-- 下拉列表 -->
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel">定位模块清单</label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="cItemBoxMine">
+        <table class="table table-bordered tbRow" style="margin-top: 10px;" >
+          <thead>
+            <tr>
+              <th style="width: 3%">序号</th>
+              <th style="width: 10%">模块编号</th>
+              <th style="width: 10%">设备类型</th>
+              <th style="width: 10%">MAC地址</th>
+              <th style="width: 10%">安装日期</th>
+              <th style="width: 10%">安装批次</th>
+              <th style="width: 10%">安装类型</th>
+              <th style="width: 22%">最新位置</th>
+              <th style="width: 10%">当前状态</th>
+              <th style="width: 5%">操作</th>
+            </tr>
+          </thead>
+          <tr><td class="ctdLine" colspan="19" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in moduleList" class="hovershow trHover" title="双击查看详情" ng-dblclick="updateGPSModule(item)">
+              <td class="" style="text-align: center;">{{item.no}}</td>
+              <td class="" style="text-align: center;">{{item.code}}</td>
+              <td class="" style="text-align: center;">{{item.device_type_name}}</td>
+              <td class="" style="text-align: center;">{{item.mac_addr}}</td>
+              <td class="" style="text-align: center;">{{item.install_date}}</td>
+              <td class="" style="text-align: center;">{{item.install_batch}}</td>
+              <td class="" style="text-align: center;">{{item.install_type_name}}</td>
+              <td class="" style="text-align: center;">{{item.addr}}</td>
+              <td class="" style="text-align: center;">{{item.status_name}}</td>
+              <td class="showdelete" >
+                <i class="icon icon-edit" title="详情" ng-click="updateGPSModule(item)"></i>
+                <i class="icon icon-trash" title="删除" ng-click="showDeleteModuleDlg(item)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+
+    <div class="footer">
+      <ul class="pager" id="pager">
+        <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+        <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+        <li ><a href="" id="beforeSL">...</a></li>
+        <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+        <li ><a href="" id="afterSL">...</a></li>
+        <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+        <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+        <li class="xColor" ng-show="totalPage">|</li>
+        <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 新增、更新定位模块 -->
+<div class="modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog" style="width: 580px;" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon icon-info"></i> {{editMode}}定位模块信息</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="margin-left: 20px; font-size: 14px;">
+
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px; width: ">
+              <div style="height: 40px;">
+                <span>编&#12288;&#12288;号：</span>
+                <input id="code" type="text" ng-model="showModuleInfo.code" class="editStyle" style="margin-left:5px" required/>
+                <span style="margin-left: 10px;">名&#12288;&#12288;称：</span>
+                <input id="name" type="text" ng-model="showModuleInfo.name" class="editStyle" style="margin-left:5px" required/>
+              </div>
+
+              <div style="height: 40px;">
+                <span>序&thinsp;   列&thinsp;   号：</span>
+                <input id="serial_no" type="text" ng-model="showModuleInfo.serial_no" class="editStyle" style="margin-left:5px" required/>
+                <span style="margin-left: 10px;">设备类型：</span>
+                <select id="device_type" class="form-control selectStyle" ng-model="showModuleInfo.device_type" ng-options = "option.code as option.name for option in deviceTypeList" required>
+                  <option value="" selected="selected">设备类型</option>
+                </select>
+              </div>
+
+              <div style="height: 40px;">
+                <span>生产厂家：</span>
+                <input id="vendor" type="text" ng-model="showModuleInfo.vendor" class="editStyle" style="margin-left:5px" required/>
+                <span style="margin-left: 10px;">MAC地址：</span>
+                <input id="mac_addr" type="text" ng-model="showModuleInfo.mac_addr" class="editStyle" required/>
+              </div>
+
+              <div style="height: 40px;">
+                <span>安装日期：</span>
+                <input type="text" class="form-date form-control choosetime selectStyle" style="width: 140px;" ng-model="showModuleInfo.install_date" data-date-format="yyyy-mm-dd" placeholder="安装日期">
+                <span style="margin-left: -22px; cursor: pointer; font-size: 20px;" ng-click="resetTime()">&times;</span>
+                <span style="margin-left: 10px;">安装批次：</span>
+                <input id="batch" type="text" ng-model="showModuleInfo.install_batch" class="editStyle" style="margin-left:5px" required/>
+              </div>
+
+              <div style="height: 40px;">
+                <span>安装类型：</span>
+                <select id="install_type" class="form-control selectStyle" ng-model="showModuleInfo.install_type" ng-options = "option.code as option.name for option in selectInstallTypeList" required>
+                  <option value="" selected="selected">安装类型</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grn" ng-click="confirmToSaveModuleInfo()">确定</button>
+        <button type="button" class="btn btn-grn" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd',
+  });
+</script>
+
+

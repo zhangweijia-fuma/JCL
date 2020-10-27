@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+<title>下载仓库 · smallwei/avue-cli - 码云 Gitee.com</title>
+<link href="https://assets.gitee.com/assets/favicon-9007bd527d8a7851c8330e783151df58.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+<meta content='gitee.com/smallweigit/avue-cli git https://gitee.com/smallweigit/avue-cli.git' name='go-import'>
+<meta charset='utf-8'>
+<meta content='always' name='referrer'>
+<meta content='码云' property='og:site_name'>
+<meta content='Object' property='og:type'>
+<meta content='http://gitee.com/smallweigit/avue-cli/repository/archive/master' property='og:url'>
+<meta content='https://gitee.com/static/images/logo_themecolor.png' itemprop='image' property='og:image'>
+<meta content='下载仓库 · smallwei/avue-cli - 码云 Gitee.com' itemprop='name' property='og:title'>
+<meta content='avue-cli是一款基于avue和element-ui完全开源、免费的企业后端产品前端集成解决方案，采用最新的前端技术栈,多终端适配，已经准备好了大部分的项目准备工作，你可以快速进行二次开发' property='og:description'>
+<meta content='码云,代码托管,git,Git@OSC,gitee.com,开源,内源,项目管理,版本控制,开源代码,代码分享,项目协作,开源项目托管,免费代码托管,Git代码托管,Git托管服务' name='Keywords'>
+<meta content='avue-cli是一款基于avue和element-ui完全开源、免费的企业后端产品前端集成解决方案，采用最新的前端技术栈,多终端适配，已经准备好了大部分的项目准备工作，你可以快速进行二次开发' itemprop='description' name='Description'>
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+<meta content="authenticity_token" name="csrf-param" />
+<meta content="tP4p+Z21eT8bvCQW3GwBPPCmTMF4jWiRxCcPaZUuvpg=" name="csrf-token" />
+
+<link href="https://assets.gitee.com/assets/application-560a8ca730352af726761dd2e3574779.css" media="screen" rel="stylesheet" />
+<script>
+//<![CDATA[
+window.gon = {};gon.locale="zh-CN";gon.sentry_dsn=null;gon.baidu_register_hm_push=null;gon.info={"controller_path":"repositories","action_name":"archive","current_user":{"id":7558354,"username":"James1990","official":false}};gon.tour_env={"current_user":"James1990","action_name":"archive","original_url":"http://gitee.com/smallweigit/avue-cli/repository/archive/master","controller_path":"repositories"};gon.http_clone="https://gitee.com/smallweigit/avue-cli.git";gon.user_project="smallweigit/avue-cli";gon.manage_branch="管理分支";gon.manage_tag="管理标签";gon.enterprise_id=0;gon.create_reaction_path="/smallweigit/avue-cli/reactions";gon.yunpian_key=false;gon.package_loading="后台正在为您打包，请耐心稍等。(提示: 打包时长与仓库大小有关)";

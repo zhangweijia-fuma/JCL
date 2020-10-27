@@ -1,0 +1,118 @@
+<!-- 公告牌管理 -->
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData('')" style="height: 100%">
+  <div class="row nomargin" style="height: 90%">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form">
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>{{AppSystemUserInfo.abbr_name}}公告牌</li>
+              <span  class="ml10" style="float:right;margin-left: 10px;" ng-if="!isAdmin"> 
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="adminBulletin()"><i class="icon icon-circle-arrow-left"></i> 公司公告管理</button>
+              </span>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group">
+          <span class="i-form-label ml10">开始日期：</span>
+          <div class="i-form-field search">
+            <input type="text" class="form-date choosetime JCLInputStyle" style="width: 200px; height: 24px" ng-model="startDate" data-date-format="yyyy-mm-dd" placeholder="开始日期" ng-change="searchBulletin()"  >
+            <span class="cancel" ng-click="resetTime(0)">&times;</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <span class="i-form-label ml10">结束日期：</span>
+          <div class="i-form-field search">
+            <input type="text" class="form-date form-control choosetime JCLInputStyle" style="text-indent: 2px;width: 200px; height: 24px;" ng-model="endDate" data-date-format="yyyy-mm-dd" placeholder="结束日期" ng-change="searchBulletin()">
+            <span class="cancel" ng-click="resetTime(1)">&times;</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">搜索：</span>
+          <input type="text" required class="form-control xEdit" ng-model="bulletinContent" style="height: 24px; width: 480px">
+        </div>
+
+      </div>      
+      <!-- 下拉列表 -->
+
+      <div class="cItemBoxMine">
+        <table class="table table-bordered tbRow" style="margin-top: 10px;" >
+          <thead>
+            <tr>
+              <th style="width: 5%">序号</th>
+              <th style="width: 50%">公告名称</th>
+              <th style="width: 15%">公告编号</th>
+              <th style="width: 15%">发布日期</th>
+              <th style="width: 15%">发布人</th>
+              <th style="width: 5%">操作</th>
+            </tr>
+          </thead>
+          <tr><td class="ctdLine" colspan="6" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in bulletinList" class="hovershow trHover" title="双击查看详情" ng-dblclick="showBulletin(item)">
+              <td class="" style="text-align: center;">{{item.no}}</td>
+              <td class="" style="text-align: center;">{{item.title}}</td>
+              <td class="" style="text-align: center;">{{item.code}}</td>
+              <td class="" style="text-align: center;">{{item.publish_date}}</td>
+              <td class="" style="text-align: center;">{{item.publisher_name}}</td>
+              <td class="showdelete" >
+                <i class="icon icon-edit" title="审核" ng-click="CheckApplication(item)" ng-show="item.status == '2' && isAdmin"></i>
+                <i class="icon icon-trash" title="删除" ng-click="showDeleteDlg(item)" ng-show="item.status!='2' && item.status != '5' "></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
+  <div class="row text-center floatRight" style="height: 30px">
+    <ul class="pager" id="pager">
+      <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+      <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+      <li ><a href="" id="beforeSL">...</a></li>
+      <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+      <li ><a href="" id="afterSL">...</a></li>
+      <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+      <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+      <li class="xColor" ng-show="totalPage">|</li>
+      <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+    </ul>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd',
+  });
+</script>
+
+

@@ -1,0 +1,235 @@
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .tds{
+    margin:15px;
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData()" >
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>消息查询</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+
+        <div class="form-group">
+          <span class="i-form-label ml10">发送方：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="senderList.selected" theme="select2" ng-change="searchMessage()" style="width: 140px">
+              <ui-select-match placeholder="选择全部">
+                <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+                <ui-select-choices repeat="item in (senderList | filter: $select.search) track by item.name">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">发送日期：</span>
+          <div class="i-form-field search">
+            <input type="text" class="form-date form-control choosetime" style="text-indent: 2px;width: 120px;" ng-model="send_date" placeholder="发送日期" ng-change="searchMessage()"  >
+            <span class="cancel" ng-click="resetTime(1)">&times;</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">消息类别：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="msgTypeList.selected" theme="select2" ng-change="searchMessage()" style="width: 160px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (msgTypeList | filter: $select.search) track by item.name">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+      </div>
+      <!-- 下拉列表 -->
+
+      <div ng-show = "dataSource=='internal'">
+        <div class="sub-title form-condensed inline-form" >
+          <div class="row">
+            <div class="form-group cDetailPat" style="margin-top: 60px;">
+              <label class="clabel">消息发送清单</label>
+              <div class="cTriangle"></div>
+              <div class="form-group flright xHandle" style="top: 3px; right: 0px;">
+                <span class="ml10 "><button class="bton green"  ng-click="exporToFile()"><i class="icon icon-download-alt"></i> 导出</button> </span>
+              </div>
+            </div>  
+          </div>
+        </div>
+
+        <div class="cItemBoxMine">
+          <table class="tbRow" border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+            <thead>
+              <tr>
+                <th style="width: 6%">No.</th>
+                <th style="width: 12%">发送方</th>
+                <th style="width: 14%">发送时间</th>
+                <th style="width: 12%">消息类型</th>
+                <th style="width: 50%">消息正文</th>
+                <th style="width: 6%">发送状态</th>
+              </tr>
+            </thead>
+            <tr><td class="ctdLine" colspan="15" rowspan="1" headers=""></td></tr>
+
+            <tbody>
+              <tr ng-repeat="item in messageList" name="item{{item.id}}" class="hovershow trHover" title="点击查看详单" ng-click="getMessageList(item)">
+                <td class=" tds" style="text-align: center; margin: 5px;">{{item.no}}</td>
+                <td class=" tds" style="text-align: center;">{{item.sender_name}}</td>
+                <td class=" tds" style="text-align: center;">{{item.sendTime}}</td>
+                <td class=" tds" style="text-align: center;">{{item.message_type_name}}</td>
+                <td class=" tds" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.content}}</td>
+                <td class=" tds" style="text-align: center;">{{item.send_status_name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row text-center floatRight">
+          <ul class="pager" id="pager" style="margin-right: 10px;">
+            <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+            <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+            <li ><a href="" id="beforeSL">...</a></li>
+            <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+            <li ><a href="" id="afterSL">...</a></li>
+            <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+            <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+            <li class="xColor" ng-show="totalPage">|</li>
+            <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="sub-title form-condensed inline-form" >
+          <div class="row">
+            <div class="form-group cDetailPat" style="margin-top: 60px;">
+              <label class="clabel">消息发送详单</label>
+              <div class="cTriangle"></div>
+            </div>  
+          </div>
+        </div>
+
+        <div class="content xDetailPatBox clear_after">
+          <div class="xDetailPatBoxData" style="margin-left: 20px; width: 100%;">
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+              <div style="width: 33%;">
+                <span>接收控制器总数：{{msgAll}}</span>
+              </div>
+              <div style="width: 33%;">
+                <span>接收成功控制器总数：{{msgSuccess}}</span>
+              </div>
+              <div style="width: 33%;">
+                <span>接收失败控制器总数：{{msgFailed}}</span>
+              </div>
+            </div>
+
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+              <div class="form-group" style="width: 100%">
+                <span class="i-form-label ml10">发送状态查询：</span>
+                <input type="radio" name="msgSendResultType" value="all" style="margin-left:2px; width: 20px;" ng-click="searchMessageBySendStatus('all')" checked> 全部
+                <input type="radio" name="msgSendResultType" value="success" style="margin-left:20px; width: 20px;" ng-click="searchMessageBySendStatus('success')"> 成功
+                <input type="radio" name="msgSendResultType" value="failed" style="margin-left:20px; width: 20px;" ng-click="searchMessageBySendStatus('failed')"> 失败
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="cItemBoxMine">
+          <table class="tbRow" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+              <tr>
+                <th style="width: 5%">No.</th>
+                <th style="width: 20%">接收方</th>
+                <th style="width: 10%">接收日期</th>
+                <th style="width: 10%">接收时间</th>
+                <th style="width: 10%">消息类型</th>
+                <!-- <th style="width: 40px">序号</th> -->
+                <th style="width: 40%">消息正文</th>
+                <th style="width: 5%">发送状态</th>
+              </tr>
+            </thead>
+            <tr><td class="ctdLine" colspan="15" rowspan="1" headers=""></td></tr>
+
+            <tbody>
+              <tr ng-repeat="item in messageLogList" class="hovershow trHover">
+                <td class="tds" style="text-align: center;">{{item.no}}</td>
+                <td class="tds" style="text-align: center;">{{item.receiver_name}}</td>
+                <td class="tds" style="text-align: center;">{{item.receive_date}}</td>
+                <td class="tds" style="text-align: center;">{{item.receive_time}}</td>
+                <td class="tds" style="text-align: center;">{{item.message_type_name}}</td>
+                <!-- <td class="tds" style="text-align: center;">{{item.message_sn}}</td> -->
+                <td class="tds" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.text_content}}</td>
+                <td class="tds" style="text-align: center;">{{item.send_status_name}}</td>
+                <td class="showdelete" ng-show="item.send_status!='1'">
+                  <i class="icon icon-share" title="重发" ng-click="reSendMessage(item)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row text-center floatRight">
+          <ul class="pager" id="pager2" style="margin-right: 10px;">
+            <li class="previous" ><a href="" id="first" ng-click="page2($event)">首页</a></li>
+            <li class="previous" ><a href="" id="prev" ng-click="page2($event)">上一页</a></li>
+            <li ><a href="" id="beforeSL">...</a></li>
+            <li ng-repeat="pageNumber in pager2.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page2($event)">{{pageNumber}}</a></li>
+            <li ><a href="" id="afterSL">...</a></li>
+            <li class="next"><a href="" id="next" ng-click="page2($event)">下一页</a></li>
+            <li class="next"><a href="" id="last" ng-click="page2($event)">尾页</a></li>
+            <li class="xColor" ng-show="totalPage2">|</li>
+            <li class="xColor" ng-show="totalPage2">共{{totalPage2}}页</li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd',
+  });
+</script>
+
+

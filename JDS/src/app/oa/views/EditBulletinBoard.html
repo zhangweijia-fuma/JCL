@@ -1,0 +1,187 @@
+<!-- 发布、编辑公告牌 -->
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+</style>
+
+
+<div class="container pos" data-ng-init="initialData()" style="width: 98%">
+  <div class="row nomargin pos">
+    <form class="form-horizontal form-condensed default-form pos" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>{{EditMode}}公告</li>
+            </ul>
+            <div class="form-group flright xHandle" style="top: 8px; right: 0px;">
+              <span class="ml10">
+                <button class="bton green"  ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button>
+              </span>
+              <span class="ml10 " ng-if="BulletinBoardInfo.status=='1'||BulletinBoardInfo.status=='3'">
+                <button class="bton green"  ng-click="previewBulletin()"><i class="icon icon-list-alt"></i> 预览公告</button> 
+              </span>            
+              <span class="ml10 " ng-if="BulletinBoardInfo.status=='1'||BulletinBoardInfo.status=='3'">
+                <button class="bton green"  ng-click="saveBulletin(true)"><i class="icon icon-list-alt"></i> 保存公告</button> 
+              </span>
+              <span class="ml10 " ng-if="BulletinBoardInfo.status =='2'">
+                <button class="bton green"  ng-click="CheckApplication()"><i class="icon icon-list-alt"></i> 审核申请</button> 
+              </span>
+              <span class="ml10 " ng-if="BulletinBoardInfo.status=='1'||BulletinBoardInfo.status=='3'">
+                <button class="bton green"  ng-click="submitBulletin()"><i class="icon icon-list-alt"></i> 提交审核</button> 
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat">
+            <label class="clabel"> 公告信息 </label>
+            <div class="cTriangle"></div>
+            <span class="m110 flright xDetailPos form-group "> 
+              <button class="fileUpload bton green" style="cursor: pointer; width: 120px"><i class="icon icon-upload"></i> 上传文件
+                <input type="file" class="upload" id="local_upload" nv-file-select uploader="bulletinFileLoader" multiple accept=".*">
+              </button>
+            </span>            
+          </div>  
+        </div>
+      </div>
+
+      <div class="JCLBox">
+
+        <div class="JCLBoxData">
+
+          <div class="JCLBoxDataRow">
+            <div style="width: 100%">
+              <span style="width: 5%">公告标题：</span>
+              <input type="text" required class="JCLInputStyle" ng-model="BulletinBoardInfo.title" id="title" style="width: 94%" >
+            </div>
+          </div>
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>发布人员：{{BulletinBoardInfo.publisher_name}}</span>
+            </div>
+
+            <div>
+              <span>发布部门：{{BulletinBoardInfo.publisher_dept}}</span>
+            </div>
+            <div>
+              <span>公告编号：{{BulletinBoardInfo.code}}</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="xDetailDesc">
+          <span>公告内容：</span>
+          <textarea ng-model="BulletinBoardInfo.content" id="content" style="width:100%;height:300px;resize: vertical;"></textarea>
+        </div>
+      </div>
+
+
+<!--       <div class="sub-title form-condensed inline-form" ng-if="BulletinBoardInfo.status == '3' || BulletinBoardInfo.status == '5' ">
+        <div class="row">
+          <div class="form-group xDetailPat">
+            <label class="i-form-label ml10 inline-title">审批信息</label>
+            <div class="xTriangle"></div>
+            <span  class="ml10" style="float:right;margin-left: 10px;"> 
+            </span>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="sub-title form-condensed inline-form" ng-if="BulletinBoardInfo.status == '3' || BulletinBoardInfo.status == '5' ">
+        <div class="row">
+          <div class="form-group cDetailPat">
+            <label class="clabel"> 审批信息 </label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="content xDetailPatBox clear_after" ng-if="BulletinBoardInfo.status == '3' || BulletinBoardInfo.status == '5' ">
+        <div class="xDetailPatBoxData" style="width:100%; margin-left: 15px; ">
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px; ">
+            <div>
+              <span> 审批意见： {{BulletinBoardInfo.check_opinion}}</span>
+            </div>
+          </div>
+        
+          <div class="xDetailPatBoxDataTop" style="width:100%;">
+            <div style="width: 50%">
+              <span> 审&thinsp;   批&thinsp;   人： {{BulletinBoardInfo.checker_name}}</span>
+            </div>
+            <div style="width: 50%">
+              <span> 审批日期： {{BulletinBoardInfo.check_date}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- 审核公告 -->
+<div class="modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog" style="width: 360px;" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon icon-check"></i> 公告审批</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="padding: 20px;">
+
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px; width: ">
+              <div style="height: 40px;"><span>审批结果</span>
+                <input type="radio" id="result" value="5" ng-model="checkResult" required checked >通过
+                <input type="radio" id="result" value="3" ng-model="checkResult" style="margin-left: 10px">驳回
+              </div>
+              <div style="height: 40px;"><span>审批意见：</span>
+                 <input id="opinion" type="text" class="form-control xEdit" max="10" style="text-indent: 2px;width: 160px; height: 20px;" ng-model="checkOpinion" placeholder="审批意见">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grn" ng-click="confirmApplication()"><i class="icon icon-check-circle"></i> 确定</button>
+        <button type="button" class="btn btn-grn" data-dismiss="modal"><i class="icon icon-remove-sign"></i> 取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd',
+  });
+</script>
+
+

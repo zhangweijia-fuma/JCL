@@ -1,0 +1,163 @@
+<style>
+  .row {
+    overflow: initial;
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail">
+              <li><a href="" style="color: #4AB033;">个人信息</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group flright xHandle">
+          <span class="ml10 "> 
+            <button class="bton green"  ng-click="changepass()"><i class="icon icon-node"></i> 修改密码</button> 
+          </span>
+          <span class="ml10 "> 
+            <button class="bton green"  ng-click="updateAccountInfo()"><i class="icon icon-edit"></i>  编辑</button> 
+          </span>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat">
+            <label class="clabel">基本信息</label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="JCLBox">
+
+        <div class="JCLBoxData">
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>用户名：</span>{{userInfo.user_name}}
+            </div>
+            <div>
+              <span>姓&#12288;名：</span>{{userInfo.name}}
+            </div>
+            <div>
+              <span>用户组：</span>{{userInfo.group_name_list}}
+            </div>
+          </div>
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>公&#12288;司：</span>{{userInfo.company}}
+            </div>
+            <div>
+              <span>部&#12288;门：</span>{{userInfo.dept_name}}
+            </div>
+            <div>
+              <span>电&#12288;话：</span>{{userInfo.mobile_phone1}}
+            </div>
+            <div>
+              <span>电&#12288;话：</span>{{userInfo.mobile_phone2}}
+            </div>
+          </div>
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>邮&#12288;件：</span>{{userInfo.mailbox}}
+            </div>
+            <div>
+              <span>性&#12288;别：</span>{{userInfo.sex_name}}
+            </div>
+            <div>
+              <span>身份证：</span>{{userInfo.id_no}}
+            </div>
+          </div>
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>地&#12288;址：</span>{{userInfo.address1}}
+            </div>
+            <div>
+              <span>地&#12288;址：</span>{{userInfo.address2}}
+            </div>
+          </div>
+
+          <div class="JCLBoxDataRow">
+          </div>
+        </div>
+
+
+        <div class="xDetailDesc">
+          <span>个人简介：</span>
+          <div style="height: 200px;">{{userInfo.description}}</div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="changepassport" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog">
+    <div class="modal-content" style="width: 430px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon icon-node"></i> 修改密码</h4>
+      </div>
+      <form class="form-horizontal" role="form" method='post' id="changepass" validate>
+        <div class="modal-body">
+          <div class="container" >
+            <table style="margin-bottom: 5px;">
+              <tr>
+                <td style="height: 30px;">
+                  <span style="width: 110px">原密码：</span>
+                  <input id="password"  type="password"  ng-model="password"  data-min="6" style="width: 200px; height: 30px;" required/>
+                </td>
+              </tr>
+              <tr>
+                <td style="height: 30px;">
+                  <span style="width: 110px">新密码：</span>
+                  <input id="password1" type="password"  ng-model="password1"  data-min="6" style="width: 200px;  height: 30px;" required/>
+                </td>
+              </tr>
+              <tr>
+                <td style="height: 30px;">
+                  <span style="width: 110px">确&#12288;认：</span>
+                  <input id="password2" type="password"  ng-model="password2" data-min="6" style="width: 200px; height: 30px;" required/>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer" style="margin-top:15px;">
+          <input class="xinput" type="submit" class="bton green"  ng-click="" />
+          <button type="button" class="btn btn-mini btn-default" style="margin-left: 20px;" data-dismiss="modal" >取消</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd'
+  });
+</script>

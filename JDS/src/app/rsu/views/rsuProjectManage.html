@@ -1,0 +1,273 @@
+<!-- RSU项目管理 -->
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .xDetailPos button
+  {
+    background: #4AB033;
+    color: white;
+    line-height: 5px;
+    /*width: 120px;*/
+  }
+
+  .editStyle
+  {
+    width: 140px; 
+    height: 20px; 
+    text-indent: 2px;
+    margin-left: 5px;
+  }
+
+  .selectStyle
+  {
+    text-align: center; 
+    width: 144px;
+    height: 24px; 
+    margin-left: 5px;
+  }
+
+  .rowUnit {
+    height: 40px;
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>RSU项目管理</li>
+            </ul>
+            <div class="form-group flright xDetailPos" style="top: 15px; margin-right: 20px;">           
+              <span class="ml10 "><button class="bton green"  ng-click="createProject()"><i class="icon icon-list-alt"></i> 创建</button> </span>
+              <span class="ml10 "><button class="bton green"  ng-click="exportToFile()"><i class="icon icon-download-alt"></i> 导出</button> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+
+        <div class="form-group">
+          <span class="i-form-label ml10">项目名称：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="projectNameList.selected" theme="select2" ng-change="searchProject()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (projectNameList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">甲方名称：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="partAList.selected" theme="select2" ng-change="searchProject()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (partAList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">乙方名称：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="partBList.selected" theme="select2" ng-change="searchProject()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (partBList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+      </div>      
+      <!-- 下拉列表 -->
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel"> RSU 项目清单 </label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="cItemBoxMine">
+        <table class="table table-bordered tbRow" style="margin-top: 10px;" >
+          <thead>
+            <tr>
+              <th style="width: 2%">序号</th>
+              <th style="width: 14%">合同名称</th>
+              <th style="width: 5%">合同金额</th>
+              <th style="width: 6%">签订日期</th>
+              <th style="width: 8%">签订地点</th>
+              <th style="width: 14%">甲方名称</th>
+              <th style="width: 8%">甲方合同号</th>
+              <th style="width: 5%">甲方签署人</th>
+              <th style="width: 5%">签署人职务</th>
+              <th style="width: 14%">乙方名称</th>
+              <th style="width: 8%">乙方合同号</th>
+              <th style="width: 5%">乙方签署人</th>
+              <th style="width: 5%">签署人职务</th>
+              <th style="width: 3%">操作</th>
+            </tr>
+          </thead>
+          <tr><td class="ctdLine" colspan="19" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in projectList" class="hovershow trHover" title="双击查看详情" ng-dblclick="updateInfo(item)">
+              <td class="" style="text-align: center;">{{item.no}}</td>
+              <td class="" style="text-align: center;">{{item.project_name}}</td>
+              <td class="" style="text-align: center;">{{item.project_amount}}</td>
+              <td class="" style="text-align: center;">{{item.sign_date}}</td>
+              <td class="" style="text-align: center;">{{item.sign_addr}}</td>
+              <td class="" style="text-align: center;">{{item.parta_name}}</td>
+              <td class="" style="text-align: center;">{{item.parta_code}}</td>
+              <td class="" style="text-align: center;">{{item.parta_man_name}}</td>
+              <td class="" style="text-align: center;">{{item.parta_title}}</td>
+              <td class="" style="text-align: center;">{{item.partb_name}}</td>
+              <td class="" style="text-align: center;">{{item.partb_code}}</td>
+              <td class="" style="text-align: center;">{{item.partb_man_name}}</td>
+              <td class="" style="text-align: center;">{{item.partb_title}}</td>
+              <td class="showdelete" >
+                <i class="icon icon-edit"  title="详情" ng-click="updateInfo(item)"></i>
+                <i class="icon icon-trash" title="删除" ng-click="showDeleteDlg(item)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+
+    <div class="footer">
+      <ul class="pager" id="pager">
+        <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+        <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+        <li ><a href="" id="beforeSL">...</a></li>
+        <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+        <li ><a href="" id="afterSL">...</a></li>
+        <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+        <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+        <li class="xColor" ng-show="totalPage">|</li>
+        <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 新增、更新RSU 合同 -->
+<div class="modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog" style="width: 580px; height: 400px;" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon icon-info"></i> {{editMode}}项目</h4>
+      </div>
+      <div class="modal-body" style="height: 280px;">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="margin-left: 20px; font-size: 14px;">
+
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px; width: ">
+              <div class="rowUnit">
+                <span>项目名称：</span>
+                <input id="name" type="text" style="width: 430px;" ng-model="showProjectInfo.project_name" class="editStyle" required/>
+              </div>
+
+              <div class="rowUnit">
+                <span>签署日期：</span>
+                <input id="sign_date" type="text" class="form-date form-control choosetime editStyle" style="width: 195px;" ng-model="showProjectInfo.sign_date" data-date-format="hh:ii" placeholder="签署日期">
+
+                <span style="margin-left: 10px;">签署地点：</span>
+                <input id="sign_addr" type="text" style="margin-left: 5px;" ng-model="showProjectInfo.sign_addr" class="editStyle" required/>
+              </div>
+
+              <div class="rowUnit">
+                <span>合同金额：</span>
+                <input id="amount" type="text" ng-model="showProjectInfo.project_amount" class="editStyle" style=" width: 195px;" required/>
+              </div>
+
+              <div class="rowUnit">
+                <span>合同甲方：</span>
+                <select id="parta_id" class="form-control selectStyle" ng-model="showProjectInfo.parta_id" ng-options = "option.id as option.name for option in organizationList" style="width: 200px;" required>
+                  <option value="" selected="selected">名称</option>
+                </select>
+                <span style="margin-left: 10px;">甲方编号：</span>
+                <input id="parta_code" type="text" ng-model="showProjectInfo.parta_code" class="editStyle" required/>
+              </div>
+
+              <div class="rowUnit">
+                <span>签&thinsp;   署&thinsp;   人：</span>
+                <input id="parta_man_name" type="text" ng-model="showProjectInfo.parta_man_name" class="editStyle" style="width: 195px;" required/>
+                <span style="margin-left: 10px;">职&#12288;&#12288;务：</span>
+                <input id="parta_title" type="text" style="margin-left: 5px;" ng-model="showProjectInfo.parta_title" class="editStyle" required/>
+              </div>
+
+              <div class="rowUnit">
+                <span>合同乙方：</span>
+                <select id="partb_id" class="form-control selectStyle" ng-model="showProjectInfo.partb_id" ng-options = "option.id as option.name for option in organizationList" style="width: 200px;" required>
+                  <option value="" selected="selected">名称</option>
+                </select>
+                <span style="margin-left: 10px;">乙方编号：</span>
+                <input id="partb_code" type="text" ng-model="showProjectInfo.partb_code" class="editStyle" required/>
+              </div>
+
+              <div class="rowUnit">
+                <span>签&thinsp;   署&thinsp;   人：</span>
+                <input id="partb_man_name" type="text" ng-model="showProjectInfo.partb_man_name" class="editStyle" style="width: 195px;" required/>
+                <span style="margin-left: 10px;">职&#12288;&#12288;务：</span>
+                <input id="partb_title" type="text" ng-model="showProjectInfo.partb_title" class="editStyle" required/>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grn" ng-click="confirmToSaveInfo()">确定</button>
+        <button type="button" class="btn btn-grn" data-dismiss="modal" style="margin-left: 40px">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd',
+  });
+</script>
+
+

@@ -1,0 +1,216 @@
+<!-- 设备类型管理 -->
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+          <div class="row ">
+              <div class="form-group">
+                  <ul class="xDetail" style="height: 40px;line-height: 40px">
+                      <li>设备类型管理</li>
+                  </ul>
+                  <div class="form-group flright xHandle" style="top: 15px;">           
+                    <span class="ml10 "><button class="bton green"  ng-click="showCreateDeviceTypeDlg()"><i class="icon icon-list-alt"></i> 创建</button> </span>
+                    <span class="ml10 "><button class="bton green"  ng-click="exportToFile()"><i class="icon icon-download-alt"></i> 导出</button> </span>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group">
+          <span class="i-form-label ml10">设备类型：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="typeList.selected" theme="select2" ng-change="search()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (typeList | filter: $select.search) track by item.name">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+      </div>      
+      <!-- 下拉列表 -->
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel">设备类型清单</label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="cItemBoxMine">
+        <table class="table table-bordered tbRow" style="margin-top: 10px;" >
+          <thead>
+            <tr>
+              <th style="width: 5%">SN</th>
+              <th style="width: 25%">中文名称</th>
+              <th style="width: 25%">英文名称</th>
+              <th style="width: 10%">名称简写</th>
+              <th style="width: 10%">类型编号</th>
+              <th style="width: 20%">设备类型说明</th>
+              <th style="width: 5%">操作</th>
+            </tr>
+          </thead>
+          <tr><td class="ctdLine" colspan="19" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in deviceTypeList" class="hovershow trHover" title="双击查看详情" ng-dblclick="showEditDeviceTypeDlg(item)">
+              <td class="" style="text-align: center;">{{item.no}}</td>
+              <td class="" style="text-align: center;">{{item.name}}</td>
+              <td class="" style="text-align: center;">{{item.name_en}}</td>
+              <td class="" style="text-align: center;">{{item.abbr_en}}</td>
+              <td class="" style="text-align: center;">{{item.code}}</td>
+              <td class="" style="text-align: center;">{{item.description}}</td>
+              <td class="showdelete">
+                <i class="icon icon-edit" title="详情" ng-click="showEditDeviceTypeDlg(item)"></i>
+                <i class="icon icon-trash" title="删除" ng-click="showDeleteDeviceTypeDlg(item)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+
+
+    <div class="footer">
+      <ul class="pager" id="pager">
+        <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+        <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+        <li ><a href="" id="beforeSL">...</a></li>
+        <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+        <li ><a href="" id="afterSL">...</a></li>
+        <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+        <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+        <li class="xColor" ng-show="totalPage">|</li>
+        <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- 新增、修改类型 -->
+<div class="modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog" style="width: 480px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon-list-alt"></i> {{dlgTitle}}</h4>
+      </div>
+
+      <!-- 设备类型 -->
+      <div class="modal-body" style="" ng-if="dlgType=='device'">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="padding: 10px;">
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+              <div style="height: 40px;"><span>中文名称：</span>
+                <input id="name" type="text" ng-model="itemInfo.name" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 40px;"><span>英文名称：</span>
+                <input id="name_en" type="text" ng-model="itemInfo.name_en" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 40px;"><span>英文编码：</span>
+                <input id="name_en" type="text" ng-model="itemInfo.abbr_en" style="width: 320px; height: 20px; text-indent: 2px;" required/ placeholder="类型编码长度为3个字符" maxlength="3">
+              </div>
+              <div style="height: 40px;"><span>设备描述：</span>
+                <input id="description" type="text" ng-model="itemInfo.description" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- 组件 -->
+      <div class="modal-body" style="" ng-if="dlgType=='component'">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="padding: 10px;">
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+              <div style="height: 40px;"><span>中文名称：</span>
+                <input id="name" type="text" ng-model="itemInfo.name" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 40px;"><span>英文名称：</span>
+                <input id="name_en" type="text" ng-model="itemInfo'.name_en" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 40px;"><span>组件描述：</span>
+                <input id="description" type="text" ng-model="itemInfo.description" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- 属性 -->
+      <div class="modal-body" style="" ng-if="dlgType=='property'">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="padding: 10px;">
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+              <div style="height: 30px;"><span>中文名称：</span>
+                <input id="name" type="text" ng-model="itemInfo.name" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 30px;"><span>英文名称：</span>
+                <input id="name_en" type="text" ng-model="itemInfo.name_en" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 30px;"><span>属性类别：</span>         
+                <select class="form-control" ng-model="itemInfo.value_type" ng-options = "option.code as option.name for option in valueTypeList" id='value_type' >
+                <option value="" selected="selected">属性类别</option>
+                </select>
+              </div>
+              <div style="height: 30px;"><span>属&thinsp;   性&thinsp;   值：</span>
+                <input id="value" type="text" ng-model="itemInfo.value" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+
+              <div style="height: 30px;"><span>属性描述：</span>
+                <input id="description" type="text" ng-model="itemInfo.description" style="width: 320px; height: 20px; text-indent: 2px;" required/>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grn" ng-click="confirmToSave()">确定</button>
+        <button type="button" class="btn btn-grn" data-dismiss="modal" style="margin-left: 40px;">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd',
+  });
+</script>
+
+

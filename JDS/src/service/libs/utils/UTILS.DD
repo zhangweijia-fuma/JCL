@@ -1,0 +1,37 @@
+# 400【PYTHON】 utils.py接口
+
+<br/>
+
+## 接口说明
+- 定义一些通用的函数接口，业务无关
+
+## 代码说明
+service\libs\utils\utils.py
+
+## 使用范例
+
+### 导入模块
+	from libs.utils.utils import * #导入utils.py下的所有函数
+	或from libs.utils.utils import xxx #导入utils.py下的xxx函数
+
+- randomStr(len): 获取随机字符串 a-zA-Z0-9
+> len ： 随机字符串长度
+
+- cachePath()： 获取缓存目录
+- tempFile()： 获取一个随机的临时文件
+- closeFile(fd): 关闭文件，并忽略异常
+- deleteFile(file)
+- deleteDir(dir)
+- D(msg): 打印调试信息
+- E(msg)：打印错误信息
+- readFile(file, codes="utf-8"): 读取文件内容
+> codes为文件编码，默认为"utf-8"，比如
+> content=readFile("data.json", codes="gbk")
+
+- exec(cmd, useTempFile=False):执行命令并等待返回，函数返回命令执行的输出 
+> useTempFile : 是否把输出定向到临时文件，可以传该参数，默认False
+
+- invoke(self, funcName):
+
+##注意事项
+无

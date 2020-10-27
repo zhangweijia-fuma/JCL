@@ -1,0 +1,58 @@
+# 200【WEB】function.js接口说明
+
+<br/>
+
+## 接口说明
+定义常用公共接口， <a style="color:red">比较独立的接口可以单独写个说明文档</a>
+
+## 代码说明
+JS代码路径 libs/common/function.js <br>
+
+- Url.xxx：获取url相关属性,例如
+> Url.getPort()获取当前访问网页的**端口号**
+> Url.getProtocol()获取当前访问网页的协议**http**或**https**
+
+- appCache.xxx： 缓存操作，不要直接使用sessionStorage等底层接口；已编译生成代码的可移植性
+> appCache.setItem()设置键值对
+> appCache.getItem()获取键值
+#
+	appCache.setItem("key1", "value");
+	var v = appCache.getItem("key1");
+	var data = {
+		a : "aaaa",
+		b : "bbbb"
+	};
+	appCache.setObject("key2", data);
+	va d = appCache.getObject("key2");
+
+- cookieOperate.xxx: cookie操作
+#
+
+- listToObject： list转object
+#
+
+- calcXxxxx年龄/性别等计算
+> calcAgeByBdate：根据出生日期计算年龄
+> calcSexById：根据身份证号计算性别
+> calcAgeById：根据身份证号计算年龄
+> calculateMonth：...
+> calculateAge： ...
+
+- isEmpty: 判断字符串是否为空
+> 示例
+#
+	if (isEmpty(a)) {
+		//a is a empty string
+	}
+
+- .....
+
+- .....
+
+
+## 使用范例
+
+> 见代码说明
+
+## 注意事项
+无

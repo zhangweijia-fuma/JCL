@@ -1,0 +1,90 @@
+
+<link rel="stylesheet" href="stock/css/pearMarket.css" type="text/css" />
+
+<link rel="stylesheet" href="libs/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+<script src="stock/scripts/stockBase.js"></script>
+<script type="text/javascript" src="libs/jqwidgets/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="libs/jqwidgets/jqwidgets/jqxsplitter.js"></script>
+<!-- <script type="text/javascript" src="libs/jqwidgets/jqwidgets/jqxtabs.js"></script> -->
+<script type="text/javascript">
+    $(document).ready(function () 
+    {
+        // 左右分割为2个窗口，左边为股票列表窗口
+        $('#splitContainer').jqxSplitter({ height: '98%', width: '100%', orientation: 'vertical', panels: [{ size: 220 }, { size: '100%' - 220 }],  splitBarSize: 0  });
+        // 将右边窗口分割为上下窗口，上边为K线窗口
+        $('#splitter').jqxSplitter({ width: '100%', orientation: 'horizontal', panels: [{ size: '100%' - 20 }, { size: 20} ], splitBarSize: 0, showSplitBar: false });
+        // 将下边窗口分割为上下窗口，中间窗口为交易量窗口，下边窗口为日期窗口
+        $('#splitter2').jqxSplitter({ width: '100%', orientation: 'horizontal', disabled: false, panels: [{ size: '100%' - 100 }, { size: 100}], splitBarSize: 0 });
+        // $("#tabswidget").jqxTabs({  height: '100%', width: '100%' });
+    });
+</script>
+
+<div class="container pos" data-ng-init="initialData()" style="height: 99.8%; width: 99.9%; background-color: black">
+  <div id="splitContainer" class="pos" style="border-color: red;">
+    <div id="stockList">
+      <div class="zPanel pos" style="background-color: black;">
+        <table class="table table-bordered " style="border-spacing: 0px 0px; color: #ffd280; background-color: black;" cellspacing="2">
+          <thead style="color: #ffd280; background-color: black;">
+            <tr>
+              <th style="width: 30px; color: #ffd280; background-color: black; text-align: center;">No.</th>
+              <th style="width: 70px; color: #ffd280; background-color: black; text-align: center;">编号</th>
+              <th style="width: 80px; color: #ffd280; background-color: black; text-align: center;">名称</th>
+            </tr>
+          </thead>
+
+          <tbody class="pos" style="overflow-y: auto; margin-top: 38px; cursor: default; ">
+            <tr ng-repeat="item in stockList" class="hovershow trHover" style="" ng-click="selectStock(item)">
+              <td style="width: 30px;color: #ffd280; background-color: black; text-align: center;">{{item.no}}</td>
+              <td style="width: 70px;color: #ffd280; background-color: black; text-align: center;">{{item.code}}</td>
+              <td style="width: 80px;color: #ffd280; background-color: black; text-align: center;">{{item.name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <div id="splitter">
+        <div>
+          <div id = "splitter2">
+            <div id="kLinePanel" style="background: black;">
+              <div id="KTitle" style="line-height: 35px;">
+                <span class="kTitle">{{stock_name}} {{stock_code}}</span>
+                <span class="kMa5">{{ma5}}</span>
+                <span class="kMa10">{{ma10}}</span>
+                <span class="kMa20">{{ma20}}</span>
+                <span class="kMa60">{{ma60}}</span>
+                <span class="ml10"><button class="bton green" style="width: 90px; color: {{dayBtnColor}};" ng-click="SelectDataType('day')"><i class="icon icon-list-alt"></i> 日线</button></span>
+                <span class="ml10"><button class="bton green" style="width: 90px; color: {{m1btnColor}};" ng-click="SelectDataType('m1')"><i class="icon icon-list-alt"></i> 1分钟线</button></span>
+                <span class="ml10"><button class="bton green" style="width: 90px; color: {{m5BtnColor}};" ng-click="SelectDataType('m5')"><i class="icon icon-list-alt"></i> 5分钟线</button></span>
+              </div>
+
+              <div id='kLineCanvas' style="border: 1px solid red;">
+                <canvas id="canvasK" >
+                  你的浏览器还不支持canvas
+                </canvas>  
+              </div>
+            </div>
+            <div id="volPanel" style="background: black; height: 120px;">
+              <div id="volCanvas" style="height: 120px;">
+                <canvas id="canvasVol" >
+                  你的浏览器还不支持canvas
+                </canvas>       
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id='datePanel' style="background: black;color: white; border: 1px solid red; height: 20px;">
+          <div>
+            <canvas id="canvasDate">
+              你的浏览器还不支持canvas
+            </canvas> 
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

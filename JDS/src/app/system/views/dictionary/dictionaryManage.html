@@ -1,0 +1,180 @@
+<!-- 数据字典管理页面 -->
+
+<style>
+  .GridHeading{
+    background: #4ab033;
+    /*height: 20px;*/
+    padding: 8px 15px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: white;
+  }
+
+  .GridHeading2{
+    background: white; 
+    color: black; 
+    border-bottom: 1px solid #ccc;
+    padding: 8px 15px;
+  }
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>数据字典</li>
+            </ul>
+            <div class="form-group flright xHandle" style="top: 15px;">           
+              <span class="ml10 "><button class="bton green"  ng-click="createDictType()"><i class="icon icon-plus"></i> 新增类型</button> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content clear_after">
+        <div class="col-md-3 zPanelBox">
+          <div class="panel zPanel zPanelzzz1 pos" style="width:250px; top:70px;">
+            <div class="panel-heading">数据字典列表</div>
+            <div class="panel-body pos" style="top: 40px; overflow-y: scroll;" >
+              <table class="table table-bordered table-hover" style="width: 100%;">
+                <tbody>
+                  <tr ng-repeat="dictType in dictTypeList" ng-click="getDictTypeValue(dictType)">
+                    <td>{{dictType.name}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-9 zWid75" style="width: 80%; font-size: 14px;" >
+          <div class="panel pos" style="border:0px; width: 770px; top:70px; margin-left: 60px; overflow-y: auto;">
+            <div>
+              <div class="GridHeading" >字典信息（类型）
+                <div style="float:right; margin-top: -5px;" >
+                  <span class="ml10"><button class="bton green"  ng-click="updateDictType()"><i class="icon icon-edit"></i> 更新</button></span>
+                  <span class="ml10"><button class="bton green"  ng-click="showDeleteDictTypeDlg()"><i class="icon icon-trash"></i> 删除</button></span>
+                </div>
+              </div>
+
+              <div style="line-height: 24px; padding: 15px; margin-bottom: 20px;">
+                <div>
+                  <table class="table table-bordered" style="width: 100%;">
+                    <tr>
+                      <td style="width: 50%"><span>字典名称：</span>{{currentDictType.name}}</td> 
+                      <td><span>字典编码：</span>{{currentDictType.code}}</td>
+                    </tr>
+                    <tr>
+                      <td><span>描&emsp;&emsp;述：</span>{{currentDictType.description}}</td>
+                      <td><span>状&emsp;&emsp;态：</span>{{currentDictType.status_name}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div class="GridHeading" >字典信息（值）
+                <div style="float:right; margin-top: -5px;" >
+                  <span class="ml10 " > 
+                    <button class="bton green"  ng-click="createDictTypeItem()"><i class="icon icon-list-alt"></i> 新增条目</button>
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <div style="overflow-y: auto;">
+                  <table class="table table-bordered tbRow" style="width: 100%;" cellspacing="5">
+                    <thead>
+                      <tr>
+                        <th style="width: 40px; text-align: center;">编码</th>
+                        <th style="width: 120px; text-align: center;">名字</th>
+                        <th style="width: 120px; text-align: center;">描述</th>
+                        <th style="width: 60px; text-align: center;">顺序</th>
+                        <th style="width: 60px; text-align: center;">状态</th>
+                        <th style="width: 80px; text-align: center;">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="dictItem in dictItemList" class="hovershow trHover" ng-dblclick="updateDictTypeItem(dictItem)">
+                        <td style="text-align: center;">{{dictItem.code}}</td>
+                        <td style="text-align: center;">{{dictItem.name}}</td>
+                        <td style="text-align: center;">{{dictItem.description}}</td>
+                        <td style="text-align: center;">{{dictItem.sort}}</td>
+                        <td style="text-align: center;">{{dictItem.status_name}}</td>
+                        <td class="showdelete" style="text-align: center; top: 0px;">
+                          <i class="icon icon-edit" style="margin-left: 5px" title="修改" ng-click="updateDictTypeItem(dictItem)"></i>
+                          <i class="icon icon-trash" style="margin-left: 5px" title="删除" ng-click="showDeleteDictValueDlg(dictItem)"></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 新增、修改数据字典类型 -->
+<div class="modal" id="addPage" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog" style="width: 360px; " >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle"><i class="icon-list-alt"></i> {{editMode}}{{editType}}</h4>
+      </div>
+      <div class="modal-body" style="">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="padding: 20px;">
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;" ng-show="editType=='字典类型'">
+              <div style="height: 40px;"><span>字典编码：</span>
+                <input id="dict_code" type="text" ng-model="editedDictType.code" style="width: 160px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 40px;"><span>字典名称：</span>
+                <input id="dict_name" type="text" ng-model="editedDictType.name" style="width: 160px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 40px;"><span>字典描述：</span>
+                <input id="dict_desc" type="text" ng-model="editedDictType.description" style="width: 160px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 35px;" ng-show="editMode=='更新'"><span>字典状态：</span>
+                <input type="radio" name='dict_type_status' value="1" ng-model="editedDictType.status" required>启用
+                <input type="radio" name='dict_type_status' value="0" ng-model="editedDictType.status" style="margin-left: 10px">停用  
+              </div>
+            </div>
+            <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;" ng-show="editType=='字典条目'">
+              <div style="height: 35px;"><span>条目代码：</span>
+                <input id="item_code" type="text" ng-model="editedDictItem.code" style="width: 160px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 35px;"><span>条目名称：</span>
+                <input id="item_name" type="text" ng-model="editedDictItem.name" style="width: 160px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 35px;"><span>条目描述：</span>
+                <input id="item_desc" type="text" ng-model="editedDictItem.description" style="width: 160px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 35px;"><span>条目顺序：</span>
+                <input id="item_sort" type="number" ng-model="editedDictItem.sort" style="width: 160px; height: 20px; text-indent: 2px;" required/>
+              </div>
+              <div style="height: 35px;" ng-show="editMode=='更新'"><span>条目状态：</span>
+                <input type="radio" name='dict_item_status' value="1" ng-model="editedDictItem.status" required>启用
+                <input type="radio" name='dict_item_status' value="0" ng-model="editedDictItem.status" style="margin-left: 10px">停用  
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grn" ng-click="confirmToSave()">确定</button>
+        <button type="button" class="btn btn-grn" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+

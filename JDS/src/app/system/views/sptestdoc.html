@@ -1,0 +1,33 @@
+
+<div class="container">
+<div class="row">
+	<div class="tab-content tab-bordered">
+	        <div style="float: left;">
+		<iframe id="report" name="report" src="/system/views/shearphotodoc.html" style="margin:0px auto;min-width:1000px; min-height:720px"></iframe>
+		</div>
+		<div style="float: left;">
+		<button class="button hui ml10" href="" onclick="goBack()"> 返回</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+	    function goBack(){
+		window.history.go(-1);
+		var docinfoback1=null;
+			if(sessionStorage.getItem("strUser")){
+		   
+			    docinfoback1=JSON.parse(sessionStorage.getItem("docinfoback"));
+			    if(docinfoback1&&docinfoback1.path){
+			   
+			    	console.log(user.avatar)
+							creatImg=document.getElementById("my_avatar");
+							creatImg.src=docinfoback1.path;
+					        console.log(creatImg.src)
+			    }
+			    
+			}else{
+			    window.location.href = "/login.html"
+			}
+	    }
+	</script>
+</div>
+</div>

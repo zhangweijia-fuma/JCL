@@ -1,0 +1,213 @@
+
+<style>
+.break{
+    word-break: break-all;  
+    word-wrap: break-word; 
+}
+
+</style>
+
+
+<link rel="stylesheet" type="text/css" href="libs/area-picker/css/city-picker.css">
+<link rel="stylesheet" type="text/css" href="libs/area-picker/css/main.css">
+
+<script type="text/javascript" src="libs/common/angular/svcCommon.js"></script>
+<script type="text/javascript" src="libs/area-picker/js/area-picker.data.js"></script>
+<script type="text/javascript" src="libs/area-picker/js/area-picker.js"></script>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request" id="html5Form" validate>
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail">
+              <li ng-class="{true: 'active'}[tab==0]" ng-click="changeTab(0)"><a href="#/accountManage">账户管理</a></li>
+              <li><span>></span></li>
+              <li><a href="" style="color: #4AB033;">更新账户</a></li>
+              <span  class="ml10" style="float:right;margin-left: 10px;"> 
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button>
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="ConfirmToSave()"><i class="icon icon-check"></i> 确定</button>                
+              </span>
+            </ul>            
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat">
+            <label class="clabel">基本信息</label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="JCLBox">
+
+        <div class="JCLBoxData">
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>用&thinsp;   户&thinsp;   名：</span>
+              <input type="text" required class="JCLInputStyle" ng-model="account.user_name" id="user_name" >
+            </div>
+
+            <div><span>用户姓名：</span>
+              <input type="text" required class="JCLInputStyle" ng-model="account.name" id="name" >
+            </div>
+            
+            <div>
+              <span>用&thinsp;  户&thinsp;  组：</span>
+              <input type="text" class="JCLInputStyle" ng-model="account.group_name_list" id="grouplist" readonly >
+              </div>
+            <div>
+              <button type="button" class="bton green" data-dismiss="modal" ng-click="selectUserGroup()" style="font-size: small;">选择用户组</button>
+            </div>
+          </div>
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>密&#12288;&#12288;码：</span>
+              <input id="password"  type="password"  name="secret" ng-model="account.password" class="JCLInputStyle" data-min="6" placeholder="密码长度不能小于6位" required>
+            </div>
+            <div>
+              <span>确认密码：</span>
+              <input id="password1" type="password"  ng-model="account.password1" type="text" class="JCLInputStyle" data-min="6" required>
+            </div>
+            <!-- <label for="secret">密码长度不能小于6位</label> -->
+          </div>
+        
+          <div class="JCLBoxDataRow">
+<!--             <div id="smallsize">
+              <span>所在公司：</span>
+              <input type="text" required class="JCLInputStyle" ng-model="account.company" id="company" >
+            </div> -->
+            <div>
+              <span>所在公司：</span>
+              <select class="JCLSelectStyle form-control" ng-model="account.company" ng-options = "option.name as option.name for option in allOrganizationList" id='organizationList'>
+              <option selected="selected">组织团体</option>
+              </select>
+            </div>
+
+            <div>
+              <span>所在部门：</span>
+              <input type="text" required class="JCLInputStyle" ng-model="account.dept_name" id="dept_name">
+            </div>
+
+            <div>
+              <span>电话号码：</span>
+              <input type="text" required class="JCLInputStyle" ng-model="account.mobile_phone1" id="phone1" >
+            </div>
+
+            <div>
+              <span>电话号码：</span>
+              <input type="text" required class="JCLInputStyle" ng-model="account.mobile_phone2" id="phone2" >
+            </div>
+          </div>
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>电子邮件：</span>
+              <input type="text" required class="JCLInputStyle" ng-model="account.mailbox">
+            </div>
+       
+            <div><span>性&#12288;&#12288;别：</span>
+              <input type="radio" name="sex" value="1" ng-model="account.sex" required checked >男
+              <input type="radio" name="sex" value="2" ng-model="account.sex" style="margin-left: 10px">女
+            </div>
+
+            <div>
+              <span>身&thinsp;   份&thinsp;   证：</span>
+              <input type="text" required class="JCLInputStyle" ng-model="account.id_no" id="id_no">
+            </div>
+          </div>
+
+          <div class="" style="">
+            <div style="display: inline-flex; font-size: 14px; width: 100%; ">
+              <div style="width: 25%; display: inline-flex; ">
+                <span>地&#12288;&#12288;址：</span>
+                <div style="position: relative; margin-top: 3px; width: 77%">
+                  <input readonly type="text" data-toggle="city-picker" data-type="addr1" ng-model="account.address1" data-country='0' placeholder="地址1"  id='addr1' style="width: 100%">
+                </div>
+              </div>
+              <div style="width: 25%">
+                <span>详细地址：</span>
+                <input type="text" class="JCLInputStyle" ng-model="account.addr1_detail" placeholder="街道门牌地址">
+              </div>
+
+              <div style="width: 25%; display: inline-flex; ">
+                <span>地&#12288;&#12288;址：</span>
+                <div style="position: relative; margin-top: 3px; width: 77%">
+                  <input readonly type="text" data-toggle="city-picker" data-type="addr2" ng-model="account.address2" data-country='0' placeholder="地址2"  id='addr2' style="width: 100%;">
+                </div>
+              </div>
+              <div style="width: 25%">
+                <span>详细地址：</span>
+                <input type="text" class="JCLInputStyle" ng-model="account.addr2_detail" placeholder="街道门牌地址">
+              </div>
+            </div>           
+          </div>
+
+        </div>
+      
+        <div class="xDetailDesc">
+          <span>个人简介：</span>
+          <textarea ng-model="account.description" style="width:100%; height:200px;resize: vertical;"></textarea>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+<div class="modal" id="selectUserGroup" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle">
+          <i class="icon icon-warning-sign"></i> 用户组<span id="warning" style="font-size:13px;">(至少选择一项)</span>
+        </h4>
+      </div>
+    
+      <div class="modal-body" style="min-height: 100px;">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="margin: 15px;">
+            <form>
+              <div  ng-repeat="group in groupList track by $index"  >
+                <div class="xMYSI" title="{{group.name}}">
+                   <input type="checkbox" name="group" value="{{group.name}} " id="{{group.id}} "/>
+                   <span>{{group.name}}</span>
+                 </div>
+               </div> 
+            </form>
+          </div>
+        </form>
+      </div>
+    
+      <div class="modal-footer" style="clear: both;">
+        <button type="button" class="bton green"  ng-click="saveUserGroup()">确定</button>
+        <button type="button" class="bton green" data-dismiss="modal" style="margin-left: 20px">取消</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+        {
+      language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            format: 'yyyy-mm-dd'
+        });
+</script>

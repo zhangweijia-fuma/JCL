@@ -1,0 +1,251 @@
+<!-- 节目单管理 -->
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .xDetailPos button
+  {
+    background: #4AB033;
+    color: white;
+    line-height: 5px;
+    /*width: 120px;*/
+  }
+
+  .filepreview 
+    {
+      width: 100%; 
+      height: 600px; 
+      position: relative;
+      z-index: 0
+    }
+  .filepreview img
+    {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 600px;
+    }
+  .filepreview span
+    {
+      position: absolute;
+    }
+
+  .filepreview marquee 
+  {
+    position: absolute;
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>版式管理</li>
+            </ul>
+            <div class="form-group flright xDetailPos" style="top: 15px; margin-right: 20px;">
+              <span class="ml10 ">
+                <button class="fileUpload bton green" style="cursor: pointer"><i class="icon icon-upload"></i> 上传文件
+                  <input type="file" class="upload" id="local_upload" nv-file-select uploader="uploader" multiple accept="*">
+                </button>
+                <button class="bton green" style="width: 100px;" ng-click="exportToFile()"><i class="icon icon-download-alt"></i> 导出清单</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group">
+          <span class="i-form-label ml10">文件名称：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="nameList.selected" theme="select2" ng-change="searchFile()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (nameList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">开始日期：</span>
+          <div class="i-form-field search">
+            <input type="text" class="form-date form-control choosetime" style="text-indent: 2px;width: 300px;" ng-model="start_time" data-date-format="yyyy-mm-dd" placeholder="开始时间" ng-change="searchByTime()">
+            <span class="cancel" ng-click="resetTime(1)">&times;</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">结束时间：</span>
+          <div class="i-form-field search">
+            <input type="text" class="form-date form-control choosetime" style="text-indent: 2px; width: 300px;" ng-model="end_time" data-date-format="yyyy-mm-dd" placeholder="结束时间" ng-change="searchByTime()" >
+            <span class="cancel" ng-click="resetTime(2)">&times;</span>
+          </div>
+        </div>
+
+      </div>
+      <!-- 下拉列表 -->
+
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel">版式文件清单</label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="cItemBoxMine">
+        <table class="tbRow" border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+          <thead>
+            <tr>
+              <th style="width: 5%">序号</th>
+              <th style="width: 35%">文件名称</th>
+              <th style="width: 35%">上传人</th>
+              <th style="width: 20%">上传日期</th>
+              <th style="width: 5%">操作</th>
+            </tr>
+          </thead>
+          <tr><td class="ctdLine" colspan="30" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in formatFileList" name="item{{item.id}}" class="hovershow trHover" ng-click="chooseAction(item)">
+              <td class="" style="text-align: center;">{{item.no}}</td>
+              <td class="" style="text-align: center;">{{item.name}}</td>
+              <td class="" style="text-align: center;">{{item.uploader_name}}</td>
+              <td class="" style="text-align: center;">{{item.upload_date}}</td>
+              <td class="showdelete">
+                <i class="icon icon-trash" title="删除" ng-click="showDeleteFormatFileDlg(item)"></i>
+              </td>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="row text-center floatRight">
+          <ul class="pager" id="pager">
+            <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+            <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+            <li ><a href="" id="beforeSL">...</a></li>
+            <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+            <li ><a href="" id="afterSL">...</a></li>
+            <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+            <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+            <li class="xColor" ng-show="totalPage">|</li>
+            <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div ng-show='showType&&showPreview'>
+        <div class="filepreview" style="margin-top: 80px;">
+          <img src="{{formatData.background}}">
+          <span style="color: {{formatData.date.color}}; font-size: {{formatData.date.fontsize}}px; left: {{formatData.date.x}}px; top: {{formatData.date.y}}px;">{{formatData.current_date}}</span>
+          <span style="color: {{formatData.week_cn.color}}; font-size: {{formatData.week_cn.fontsize}}px; left: {{formatData.week_cn.x}}px; top: {{formatData.week_cn.y}}px;">{{formatData.week_cn_name}}</span>
+
+          <span style="color: {{formatData.week_en.color}}; font-size: {{formatData.week_en.fontsize}}px; left: {{formatData.week_en.x}}px; top: {{formatData.week_en.y}}px;">{{formatData.week_en_name}}</span>
+          <span style="color: {{formatData.time.color}}; font-size: {{formatData.time.fontsize}}px; left: {{formatData.time.x}}px; top: {{formatData.time.y}}px;">{{formatData.current_time}}</span>
+
+          <marquee align="left" behavior="scroll" bgcolor="{{formatData.emergency.bgcolor}}" direction="left" height="22" width="23" top="22" loop="-1" scrollamount="5" scrolldelay="100" style="font-size: {{formatData.emergency.fontsize}}px; left: {{formatData.emergency.x}}px; top: {{formatData.emergency.y}}px; width: {{formatData.emergency.w}}px; height: {{formatData.emergency.h}}px;">
+            <a style="color: {{formatData.emergency.color}}; ">{{formatData.emergency_content}}</a>
+          </marquee >
+
+          <marquee align="left" behavior="scroll" bgcolor="{{formatData.message.bgcolor}}" direction="left" height="22" width="23" top="22" loop="-1" scrollamount="5" scrolldelay="100" style="font-size: {{formatData.message.fontsize}}px; left: {{formatData.message.x}}px; top: {{formatData.message.y}}px; width: {{formatData.message.w}}px; height: {{formatData.message.h}}px;">
+            <a style="color: {{formatData.message.color}}; ">{{formatData.message_content}}</a>
+          </marquee >
+        </div>
+      </div>
+
+      <div ng-show='!showType'>
+        <div class="sub-title form-condensed inline-form" >
+          <div class="row">
+            <div class="form-group cDetailPat" style="margin-top: 60px;">
+              <label class="clabel">版式文件发送历史</label>
+              <div class="cTriangle"></div>
+            </div>  
+          </div>
+        </div>
+
+        <div class="cItemBoxMine">
+          <table class="tbRow" border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+            <thead>
+              <tr>
+                <th style="width: 5%">No.</th>
+                <th style="width: 20%">发送日期</th>
+                <th style="width: 25%">文件名称</th>
+                <th style="width: 40%">接收方</th>
+                <th style="width: 10%">消息状态</th>
+              </tr>
+            </thead>
+            <tr><td class="ctdLine" colspan="15" rowspan="1" headers=""></td></tr>
+
+            <tbody>
+              <tr ng-repeat="item in messageLogList" class="hovershow trHover">
+                <td class="tds" style="text-align: center;">{{item.no}}</td>
+                <td class="tds" style="text-align: center;">{{item.sendTime}}</td>
+                <td class="tds" style="text-align: center;">{{item.name}}</td>
+                <td class="tds" style="text-align: center;">{{item.receiver_name}}</td>
+                <td class="tds" style="text-align: center;">{{item.send_status_name}}</td>
+                <td class="showdelete" ng-show="item.send_status!='1'">
+                  <i class="icon icon-share" title="重发" ng-click="reSendMessage(item)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row text-center floatRight">
+          <ul class="pager" id="pager2" style="margin-right: 10px;">
+            <li class="previous" ><a href="" id="first" ng-click="page2($event)">首页</a></li>
+            <li class="previous" ><a href="" id="prev" ng-click="page2($event)">上一页</a></li>
+            <li ><a href="" id="beforeSL">...</a></li>
+            <li ng-repeat="pageNumber in pager2.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page2($event)">{{pageNumber}}</a></li>
+            <li ><a href="" id="afterSL">...</a></li>
+            <li class="next"><a href="" id="next" ng-click="page2($event)">下一页</a></li>
+            <li class="next"><a href="" id="last" ng-click="page2($event)">尾页</a></li>
+            <li class="xColor" ng-show="totalPage2">|</li>
+            <li class="xColor" ng-show="totalPage2">共{{totalPage2}}页</li>
+          </ul>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd',
+  });
+</script>
+

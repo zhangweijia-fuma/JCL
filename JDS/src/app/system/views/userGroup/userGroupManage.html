@@ -1,0 +1,82 @@
+﻿
+<style type="text/css">
+  .row{
+    overflow: initial;
+  }
+</style>
+
+<div class="container xList">
+  <div class="row nomargin"  data-ng-init="initialData()">
+    <div class="mytab xList">
+      <ul class="htab nav nav-tabs">
+        <li >用户组管理</li>
+      </ul>
+    </div>
+
+    <div >
+      <div style="min-height: 540px;">
+        <div class="sub-title form-condensed inline-form">
+          <div class="row">
+            <div class="form-group flright xHandle">
+              <span class="ml10 "> <button class="bton green"  ng-click="showAddGroup()"><i class="icon icon-list-alt"></i> 创建用户组</button> </span>
+            </div>
+          </div>
+
+          <!-- 下拉列表 -->
+          <div class="row xAcount">
+            <div class="form-group">
+              <span class="i-form-label ml10">用户组名称：</span>
+              <div class="i-form-field">
+                <ui-select ng-model="groupNameList.selected" theme="select2" ng-change="searchByGroup()" style="width: 300px">
+                  <ui-select-match placeholder="选择全部">
+                    <span ng-bind="$select.selected.name"></span>
+                  </ui-select-match>
+                    <ui-select-choices repeat="item in (groupNameList | filter: $select.search) track by item.name">
+                      <span ng-bind="item.name"></span>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+          </div>
+          <!-- 下拉列表 -->
+        </div>
+
+        <div class="content clear_after">
+          <div class=" block-itemthree " ng-repeat="item in groupList" id="item{{item.id}}" ng-dblclick="updateGroupInfo(item)">
+            <div class="xImgBox">
+  
+              <div class="bi-item">
+                <div class="bi-value"><span>名称：</span>{{item.c_name}}</div>
+              </div>
+
+              <div class="bi-item" style="width:310px;">
+                <div class="bi-value" title="{{item.c_name}}"><span>描述：</span>{{item.description}}</div>
+              </div>
+      
+              <div class="bi-btn-wraper ">
+                <img class="bton green deleteIcon" title="删除" ng-show="item.group_type == '2'" ng-click = "showDeleteGroup(item)" src="/resource/images/delete.png">
+              </div>
+            </div>
+  
+          </div>           
+        </div>
+
+        <div class="footer">
+          <ul class="pager" id="pager">
+            <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+            <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+            <li ><a href="" id="beforeSL">...</a></li>
+            <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+            <li ><a href="" id="afterSL">...</a></li>
+            <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+            <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+            <li class="xColor">|</li>
+            <li class="xColor">共{{totalPage}}页</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

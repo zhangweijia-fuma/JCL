@@ -1,0 +1,189 @@
+
+<style>
+  .break{
+      word-break: break-all;  
+      word-wrap: break-word; 
+  }
+  .xDetailPatBoxData .xDetailPatBoxDataTop div{
+    width:25%;
+  }
+/*  .xDetailPat a{
+    background: #4AB033;
+      border: none;
+      color: #fff;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 13px;
+  }*/
+  
+  .Cancel
+  {
+    margin-left: -20px;
+    cursor: pointer;
+    color: gray;
+  }
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request" id="html5Form" validate>
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail">
+              <li ng-class="{true: 'active'}[tab==0]" ng-click="changeTab(0)"><a href="#/lineManage">运营线路管理</a></li>
+              <li><span>></span></li>
+              <li><a href="" style="color: #4AB033;">{{editType}}车站</a></li>
+              <span  class="ml10" style="float:right;margin-left: 10px;"> 
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button>
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="save()"><i class="icon icon-check"></i> 确定</button>
+              </span>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sub-title form-condensed inline-form">
+        <div class="row">
+          <div class="form-group xDetailPat">
+            <label class="i-form-label ml10 inline-title">基本信息</label>
+            <div class="xTriangle"></div>
+            <span  class="ml10" style="float:right;margin-left: 10px;"> 
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content xDetailPatBox clear_after">
+        <div class="xDetailPatBoxData" style="margin-left: 20px; width: 100%;">
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div style="width: 25%;">
+              <span>中文名称：</span>
+              <input type="text" id="name" required class="form-control xEdit" ng-model="stationInfo.name" style="width: 150px;padding-left: 2px;">
+            </div>
+
+            <div style="width: 25%;">
+              <span>英文名称：</span>
+              <input type="text" id="name_en" required class="form-control xEdit" ng-model="stationInfo.name_en" style="width: 150px;padding-left: 2px;">
+            </div>
+
+            <div style="width: 25%;">
+              <span>车站编号：</span>
+              <input type="text" id="code" required class="form-control xEdit" ng-model="stationInfo.code" style="width: 150px;padding-left: 2px;" >
+            </div>
+
+            <div style="width: 25%;">
+              <span>车站类型：</span>
+              <input type="radio" name="type" value="N" ng-model="stationInfo.type" required checked ng-click="chooseStationType('N')">运营
+              <input type="radio" name="type" value="S" ng-model="stationInfo.type" ng-click="chooseStationType('S')" style="margin-left: 10px">非运营
+            </div>
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;" ng-if="lineMode">
+            <div style="width: 50%;">
+              <span>运营线路：</span>
+              <select  class="form-control " style="text-align: center; width: 154px;" ng-model="currentLineID" ng-options = "option.line_id as option.name for option in selectedLineList" ng-change="chooseLine()" required>
+                  <!-- <option value="" selected="selected">运营线路</option> -->
+              </select>
+              <button type="button" class="bton green" data-dismiss="modal" ng-click="selectLine()" style="font-size: small; margin-left: 15px;">选择运营线路</button>
+            </div>        
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div style="width: 25%;">
+              <span>车站序号：</span>
+              <input type="number" id="sort" required class="form-control xEdit" ng-model="currentLine.sort" style="width: 150px;padding-left: 2px;">
+            </div>             
+            <div style="width: 25%;">
+              <span>IP&#12288;地址：</span>
+              <input type="text" id="ip_address" required class="form-control choosetime" style="text-align: center; width: 150px;" ng-model="stationInfo.ip_address">
+            </div>
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div style="width: 25%;">
+              <span>上行首班：</span>
+              <input id="up_start_time" type="text" class="form-date form-control choosetime" style="text-indent: 2px;width: 150px;" ng-model="currentLine.up_start_time" placeholder="上行首班">
+              <span class="Cancel" style="color: gray;" ng-click="resetTime(1)">&times;</span>
+            </div>
+
+            <div style="width: 25%;">
+              <span>上行末班：</span>
+              <input id="up_end_time" type="text" class="form-date form-control choosetime" style="text-indent: 2px;width: 150px;" ng-model="currentLine.up_end_time" placeholder="上行末班">
+              <span class="Cancel" style="color: gray;" ng-click="resetTime(2)">&times;</span>
+            </div>
+
+            <div style="width: 25%;">
+              <span>下行首班：</span>
+              <input id="down_start_time" type="text" class="form-date form-control choosetime" style="text-indent: 2px;width: 150px;" ng-model="currentLine.down_start_time" placeholder="下行首班">
+              <span class="Cancel" style="color: gray;" ng-click="resetTime(3)">&times;</span>
+            </div>
+
+            <div style="width: 25%;">
+              <span>下行末班：</span>
+              <input id="down_end_time" type="text" class="form-date form-control choosetime" style="text-indent: 2px;width: 140px;" ng-model="currentLine.down_end_time" placeholder="下行末班">
+              <span class="Cancel" style="color: gray;" ng-click="resetTime(4)">&times;</span>
+            </div>
+          </div>
+
+
+
+        </div>
+      
+        <!-- <div class="xDetailDesc">
+          <span>说明：</span>
+          <textarea ng-model="stationInfo.description" style="width:100%;height:150px;resize: vertical;"></textarea>
+        </div> -->
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="selectUserGroup" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog">
+    <div class="modal-content"  style="width: 750px">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle">
+          <i class="icon icon-warning-sign"></i> 运营线路<span id="warning" style="font-size:13px;">(至少选择一项)</span>
+        </h4>
+      </div>
+    
+      <div class="modal-body" style="min-height: 100px;">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="margin: 15px;">
+            <form>
+              <div  ng-repeat="line in allLineList track by $index"  >
+                <div class="xMYSI" title="{{line.name}}">
+                   <input type="checkbox" name="line" value="{{line.name}} " id="{{line.id}} "/>
+                   <span>{{line.name}}</span>
+                 </div>
+               </div> 
+            </form>
+          </div>
+        </form>
+      </div>
+    
+      <div class="modal-footer" style="">
+        <button type="button" class="bton green"  ng-click="saveOperationLine()">确定</button>
+        <button type="button" class="bton green" data-dismiss="modal" style="margin-left: 20px">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 0,
+    minView: 0,
+    forceParse: 0,
+    format: 'hh:ii',
+  });
+</script>

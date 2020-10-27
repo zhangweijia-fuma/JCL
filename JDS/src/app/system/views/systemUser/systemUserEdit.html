@@ -1,0 +1,328 @@
+<style>
+.break{
+    word-break: break-all;  
+    word-wrap: break-word; 
+}
+.xDetailPatBoxData .xDetailPatBoxDataTop div{
+  width:25%;
+}
+
+.inputStyle {
+  text-indent: 2px; 
+  height: 24px; 
+  width: 200px;
+}
+
+.xDesc{
+  margin: 0px 15px 15px;
+  padding-top: 10px;
+  color: #858585;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.xDetailPat a{
+  background: #4AB033;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+
+</style>
+
+
+<link href="libs/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="libs/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+
+<link rel="stylesheet" type="text/css" href="libs/area-picker/css/city-picker.css">
+<link rel="stylesheet" type="text/css" href="libs/area-picker/css/main.css">
+
+<script type="text/javascript" src="libs/common/angular/svcCommon.js"></script>
+<script type="text/javascript" src="libs/area-picker/js/area-picker.data.js"></script>
+<script type="text/javascript" src="libs/area-picker/js/area-picker.js"></script>
+
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request" data-ng-init="">
+      
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail">
+              <li ng-class="{true: 'active'}[tab==0]" ng-click="changeTab(0)"><a href="#/systemUserManage">系统用户管理</a></li>
+              <li><span>></span></li>
+              <li>{{editType}}系统用户</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group flright xHandle">
+          <span class="ml10 " > 
+              <span class="ml10 "> <button class="bton green" ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 取消</button> </span>
+              <span class="ml10 "> <button class="bton green" ng-click="saveData()" ><i class="icon icon-check"></i> 确定</button> </span>
+          </span>
+        </div>
+      </div>
+
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat">
+            <label class="clabel">系统用户基本信息</label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="JCLBox">
+
+        <div class="JCLBoxData">
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>公司名称：</span>
+              <input type="text" class="JCLInputStyle" ng-model="systemUserItem.user_name" id="name">
+            </div>
+
+            <div>
+              <span>英文名称：</span>
+              <input type="text" class="JCLInputStyle" ng-model="systemUserItem.user_name_en" id="user_name_en">
+            </div>
+          
+            <div>
+              <span>中文简写：</span>
+              <input type="text" class="JCLInputStyle" ng-model="systemUserItem.abbr_name" id="abbr_name">
+            </div>
+
+            <div>
+              <span>英文简写：</span>
+              <input type="text" class="JCLInputStyle" ng-model="systemUserItem.abbr_name_en" id="abbr_name_en">
+            </div>
+          </div>
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>应用名称：</span>
+              <input type="text" class="JCLInputStyle" ng-model="systemUserItem.app_name" id="app_name" placeholder="应用中文名称">
+            </div>
+
+            <div>
+              <span>英文名称：</span>
+              <input type="text" class="JCLInputStyle" ng-model="systemUserItem.app_name_en" id="app_name_en" placeholder="应用英文名称">
+            </div>
+
+            <div >
+              <span>业务类型：</span>
+              <select class="JCLSelectStyle" ng-model="systemUserItem.user_service" ng-options = "option.name as option.name for option in userServiceList">
+              <option value="" selected="selected">用户业务类型</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="JCLBoxDataRow" style="height: 150px; line-height: 40px;">
+            <div>
+              <spam>竖向Logo:</spam> 
+              <img src="{{systemUserItem.logo_vertical}}" style="margin-left: 75px; max-width: 70%; height: 100px;" ng-click="uploadFile()">
+            </div>
+
+            <div class="xDetailPos" style="position: inherit; margin-top: 10px ">
+              <span>
+                <button class="fileUpload bton green" style="cursor: pointer; color: white;background: #4AB033; line-height: 20px;">上传Logo文件
+                  <input type="file" class="upload" id="v_upload" nv-file-select uploader="logoVUploader" multiple accept="*">
+                </button>
+              </span>
+            </div>
+
+            <div>
+              <span>横向Logo:</span> 
+              <img src="{{systemUserItem.logo_horizontal}}" style="margin-left: 75px; max-width: 70%; height: 100px;" ng-click="uploadFile()">
+            </div>
+
+            <div class="xDetailPos" style="margin-top: 10px;">
+              <span>
+                <button class="fileUpload bton green" style="cursor: pointer; color: white;background: #4AB033; line-height: 20px;">上传Logo文件
+                  <input type="file" class="upload" id="h_upload" nv-file-select uploader="logoHUploader" multiple accept="*">
+                </button>
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="xDetailDesc">
+          <span>描述：</span>
+          <textarea ng-model="systemUserItem.user_desc" style="width:100%;height:150px;resize: vertical; text-indent: 2px;"></textarea>
+        </div>
+      </div>
+
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat">
+            <label class="clabel">系统管理员账户信息</label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <!-- 管理员个人信息只更新密码，其他信息由管理员自己更新 -->
+      <div class="JCLBox">
+
+        <div class="JCLBoxData">
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>用&thinsp;   户&thinsp;   名：</span>
+              <input type="text" class="JCLInputStyle" ng-model="serviceAdminAccount.user_name" id="user_name" ng-if="editType=='新建'">
+              <span ng-if="editType=='更新'">{{serviceAdminAccount.user_name}}</span>
+            </div>
+
+            <div>
+              <span>用户姓名：</span>
+              <input type="text" class="JCLInputStyle" ng-model="serviceAdminAccount.name" id="name" ng-if="editType=='新建'">
+              <span ng-if="editType=='更新'">{{serviceAdminAccount.name}}</span>
+            </div>
+
+            <div>
+              <span>中文组名：</span>
+              <input type="text" class="JCLInputStyle" ng-model="serviceAdminGroup.c_name" id="group_c_name" ng-if="editType=='新建'">
+              <span ng-if="editType=='更新'">{{serviceAdminGroup.c_name}}</span>
+            </div>
+
+            <div>
+              <span>英文组名：</span>
+              <input type="text" class="JCLInputStyle" ng-model="serviceAdminGroup.name" id="group_name" ng-if="editType=='新建'">
+              <span ng-if="editType=='更新'">{{serviceAdminGroup.name}}</span>
+            </div>  
+          </div>
+
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>密&#12288;&#12288;码：</span>
+              <input id="password"  type="password"  name="secret" ng-model="serviceAdminAccount.password" class="JCLInputStyle" data-min="6" >
+            </div>
+            
+            <div>
+              <span>确认密码：</span>
+              <input id="password1" type="password"  ng-model="serviceAdminAccount.password1" type="text" class="JCLInputStyle" data-min="6" >
+            </div>            
+          </div>
+
+
+          <div class="JCLBoxDataRow">
+            <div>
+              <span>所在公司：</span>
+              <input type="text" class="JCLInputStyle" ng-model="serviceAdminAccount.company" id="company" ng-if="editType=='新建'">
+              <span ng-if="editType=='更新'">{{serviceAdminAccount.company}}</span>
+            </div>
+            
+            <div>
+              <span>所在部门：</span>
+              <input type="text" class="JCLInputStyle" ng-model="serviceAdminAccount.dept_name" id="dept_name" ng-if="editType=='新建'">
+              <span ng-if="editType=='更新'">{{serviceAdminAccount.dept_name}}</span>
+            </div>
+
+            <div>
+              <span>电话号码：</span>
+              <input type="text" class="JCLInputStyle" ng-model="serviceAdminAccount.mobile_phone1" id="phone1" ng-if="editType=='新建'">
+              <span ng-if="editType=='更新'">{{serviceAdminAccount.mobile_phone1}}</span>
+            </div>
+
+            <div>
+              <span>电话号码：</span>
+              <input type="text" class="JCLInputStyle" ng-model="serviceAdminAccount.mobile_phone2" id="phone2" ng-if="editType=='新建'">
+              <span ng-if="editType=='更新'">{{serviceAdminAccount.mobile_phone2}}</span>
+            </div>
+          </div>
+
+
+          <div class="JCLBoxDataRow">
+            <div><span>电子邮件：</span>
+              <input type="text" class="JCLInputStyle" ng-model="serviceAdminAccount.mailbox" ng-if="editType=='新建'">
+              <span ng-if="editType=='更新'">{{serviceAdminAccount.mailbox}}</span>
+            </div>
+
+            <div>
+              <span>身&thinsp;   份&thinsp;   证：</span>
+              <input type="text" class="JCLInputStyle" ng-model="serviceAdminAccount.id_no" id="id_no" ng-if="editType=='新建'">
+              <span ng-if="editType=='更新'">{{serviceAdminAccount.id_no}}</span>
+            </div>
+
+            <div>
+              <span>性&#12288;&#12288;别：</span>
+              <span ng-if="editType=='更新'">{{serviceAdminAccount.sex_name}}</span>
+              <span ng-if="editType=='新建'"> <input type="radio" name="sex" value="1" ng-model="serviceAdminAccount.sex" required checked>男</span>
+              <span ng-if="editType=='新建'"> <input type="radio" name="sex" value="2" ng-model="serviceAdminAccount.sex" style="margin-left: 10px">女 </span>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: inline-flex; font-size: 14px; width: 100%; ">
+              <div style="width: 25%; display: inline-flex; ">
+                <span>地&thinsp;   址&thinsp;   1 ：</span>
+
+                <span ng-if="editType=='更新'">{{serviceAdminAccount.address1}}</span>
+
+                <div style="position: relative; margin-top: 3px; width: 77%" ng-if="editType=='新建'">
+                  <input readonly type="text" data-toggle="city-picker" data-type="addr1" ng-model="serviceAdminAccount.address1" data-country='0' placeholder="地址1"  id='address1' style="width: 100%">
+                </div>
+              </div>
+              <div style="width: 25%; " ng-if="editType=='新建'">
+                <span>详细地址：</span>
+                <input type="text" class="JCLInputStyle" ng-model="serviceAdminAccount.addr_detail1" placeholder="街道门牌地址">
+              </div>
+
+              <div style="width: 25%; display: inline-flex; ">
+                <span>地&thinsp;   址&thinsp;   2 ：</span>
+                <span ng-if="editType=='更新'">{{serviceAdminAccount.address2}}</span>
+                <div style="position: relative; margin-top: 3px; width: 77%" ng-if="editType=='新建'">
+                  <input readonly type="text" data-toggle="city-picker" data-type="addr2" ng-model="serviceAdminAccount.address2" data-country='0' placeholder="地址2"  id='address2' style="width: 100%;">
+                </div>
+              </div>
+              <div style="width: 25%" ng-if="editType=='新建'">
+                <span>详细地址：</span>
+                <input type="text" class="JCLInputStyle" ng-model="organizationInfo.addr_detail2" placeholder="街道门牌地址">
+              </div>
+            </div>           
+          </div>
+
+        </div>
+
+        <div class="xDetailDesc">
+          <span>个人简介：</span>
+          <textarea ng-model="serviceAdminAccount.description" style="width:100%; height:150px; resize: vertical; text-indent: 2px;" ng-if="editType=='新建'"></textarea>
+          <span style="height: 150px;">{{serviceAdminAccount.description}}</span>
+        </div>
+
+      </div>
+
+      <div class="sub-title form-condensed inline-form" data-ng-init="getAllMenu()" >
+        <div class="row">
+          <div class="form-group cDetailPat">
+            <label class="clabel">系统用户权限</label>
+            <div class="cTriangle"></div>
+            <div class="form-group flright xHandle" style="top: 2px; right: 2px;">
+              <span class="ml10 "><button class="bton green"  ng-click="selectAll()"><i class="icon icon-branch"></i> {{SelectAllButton}}</button> </span>
+            </div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="contentmenus xDetailPatBoxmenus clear_after" >
+        <div class="panel-body" id="sel_menu_tree"> 
+          <ul id="menu_tree" class="ztree2"></ul>
+        </div>   
+      </div>
+
+    </form>
+  </div>
+</div>

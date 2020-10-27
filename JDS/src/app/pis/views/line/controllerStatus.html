@@ -1,0 +1,247 @@
+<!-- 控制器状态显示 -->
+
+
+<style>
+  .break{
+      word-break: break-all;  
+      word-wrap: break-word; 
+  }
+  .xDetailPatBoxData .xDetailPatBoxDataTop div{
+    width:25%;
+  }
+
+/*  .xDetailPat a{
+    background: #4AB033;
+      border: none;
+      color: #fff;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 13px;
+  }*/
+  
+  .Cancel
+  {
+    margin-left: -20px;
+    cursor: pointer;
+    color: gray;
+  }
+
+   .screenPic{
+    width: 99.5%;
+    margin-top: 5px;
+  }
+   
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request" id="html5Form" validate>
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail">
+              <li><a href="#/lineManage">控制器状态显示</a></li>
+              
+              <span  class="ml10" style="float:right;margin-left: 10px;"> 
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button>
+              </span>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row">
+          <div class="form-group xDetailPat">
+            <label class="i-form-label ml10 inline-title">基本信息</label>
+            <div class="xTriangle"></div>
+            <span  class="ml10" style="float:right;margin-left: 10px;"> 
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content xDetailPatBox clear_after">
+        <div class="xDetailPatBoxData" style="margin-left: 20px; width: 100%;">
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div style="width: 25%;">
+              <span>设备编号：{{controllerInfo.code}}</span> 
+            </div>
+
+            <div style="width: 25%;">
+              <span>设备地址：{{controllerInfo.ip_address}}</span>
+            </div>
+
+            <div style="width: 25%;">
+              <span>安装地点：{{controllerInfo.install_name}}</span>
+            </div>
+
+            <div style="width: 25%;">
+              <span>安装类型：{{controllerInfo.install_type_name}}</span>
+            </div>
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div style="width: 25%;">
+              <span>唤醒时间：{{controllerInfo.open_time}}</span>
+            </div>
+            <div style="width: 25%;">
+              <span>休眠时间：{{controllerInfo.close_time}}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 控制器运行状态 -->
+      <div class="zPanel1 " style="height:450px; border: 0px; margin-top: 20px;">
+        <div class="panel-heading " style="background: white; color: black; border-bottom: 1px solid #ccc; padding-left: 0px;">控制器运行状态</div>   
+        <div class="panel-body">
+          <div class="zPanelPadding15">
+            <div ng-controller="controllerStatusCtrl">
+              <highchart config="serverChart"> </highchart>
+            </div>
+          </div>
+        </div>
+      </div>   
+
+      <!-- 控制器日志显示 -->
+      <div class="zPanel1 " style="border: 0px; margin-top: 30px;">
+        <div class="panel-heading " style="background: white; color: black; border-bottom: 1px solid #ccc; padding-left: 0px;">控制器日志</div>   
+        <div class=""  >
+          <div class="" style="overflow-y: auto;">
+            <table class="table table-bordered tbRow" style="width: 100%;" cellspacing="5">
+              <thead>
+                <tr>
+                  <th style="width: 30px">No.</th>
+                  <th style="width: 100px">控制器编号</th>
+                  <th style="width: 80px">日期</th>
+                  <th style="width: 80px">时间</th>
+                  <th style="width: 70px">日志级别</th>
+                  <th style="width: 70px">日志类别</th>
+                  <th style="width: 200px">日志标题</th>
+                  <th style="width: 270px">日志内容</th>
+                </tr>
+              </thead>
+
+              <tr><td class="ctdLine" colspan="9" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+              <tbody>
+                <tr ng-repeat="item in logList" class="hovershow trHover" style="color: {{item.color}}">
+                  <td class="" style="text-align: center;">{{item.no}}</td>
+                  <td class="" style="text-align: center;">{{item.controller_code}}</td>
+                  <td class="" style="text-align: center;">{{item.date}}</td>
+                  <td class="" style="text-align: center;">{{item.time}}</td>
+                  <td class="" style="text-align: center;">{{item.level_name}}</td>
+                  <td class="" style="text-align: center;">{{item.type_name}}</td>
+                  <td class="" style="text-align: center;">{{item.title}}</td>
+                  <td class="">{{item.content}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row text-center floatRight" style="margin-right: 10px;">
+            <ul class="pager" id="pager">
+              <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+              <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+              <li ><a href="" id="beforeSL">...</a></li>
+              <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+              <li ><a href="" id="afterSL">...</a></li>
+              <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+              <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+              <li class="xColor" ng-show="totalPage">|</li>
+              <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 控制器消息显示 -->
+      <div class="zPanel1 " style="border: 0px; margin-top: 100px;">
+        <div class="panel-heading " style="background: white; color: black; border-bottom: 1px solid #ccc; padding-left: 0px;">控制器消息</div>   
+        <div class="">
+          <div class="" style="overflow-y: auto; overflow-x: hidden;">
+            <table class="table table-bordered tbRow" style="width: 100%;" cellspacing="5">
+              <thead>
+                <tr>
+                  <th style="width: 30px">No.</th>
+                  <th style="width: 80px">接收日期</th>
+                  <th style="width: 80px">接收时间</th>
+                  <th style="width: 160px">消息类别</th>
+                  <!-- <th style="width: 40px">序号</th> -->
+                  <th style="width: 600px">消息内容</th>
+                  <th style="width: 100px">发送状态</th>
+                </tr>
+              </thead>
+
+              <tr><td class="ctdLine" colspan="17" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+              <tbody>
+                <tr ng-repeat="item in messageList" class="hovershow trHover" style="color: {{item.color}}">
+                  <td class="" style="text-align: center;">{{item.no}}</td>
+                  <td class="" style="text-align: center;">{{item.receive_date}}</td>
+                  <td class="" style="text-align: center;">{{item.receive_time}}</td>
+                  <td class="" style="text-align: center;">{{item.message_type_name}}</td>
+                  <!-- <td class="" style="text-align: center;">{{item.message_sn}}</td> -->
+                  <td class="" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.text_content}}</td>
+                  <td class="" style="text-align: center;">{{item.send_status_name}}</td>
+                  <td class="showdelete" ng-show="item.send_status!='1'">
+                    <i class="icon icon-share" title="重发" ng-click="reSendMessage(item)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row text-center floatRight" style="margin-right: 10px;">
+            <ul class="pager" id="pager2">
+              <li class="previous" ><a href="" id="first" ng-click="page2($event)">首页</a></li>
+              <li class="previous" ><a href="" id="prev" ng-click="page2($event)">上一页</a></li>
+              <li ><a href="" id="beforeSL">...</a></li>
+              <li ng-repeat="pageNumber in pager2.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page2($event)">{{pageNumber}}</a></li>
+              <li ><a href="" id="afterSL">...</a></li>
+              <li class="next"><a href="" id="next" ng-click="page2($event)">下一页</a></li>
+              <li class="next"><a href="" id="last" ng-click="page2($event)">尾页</a></li>
+              <li class="xColor" ng-show="totalPage2">|</li>
+              <li class="xColor" ng-show="totalPage2">共{{totalPage2}}页</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 控制器视频监播 -->
+      <div class="zPanel1 " style="border: 0px; margin-top: 60px;">
+        <div class="panel-heading " style="background: white; color: black; border-bottom: 1px solid #ccc; padding-left: 0px;">控制器视频监播</div>   
+          <div class="showScreen" style="margin-top: 20px;" >
+            <div style="width: 98%;height: 760px;" ng-show="showType">
+              <video src="{{controllerSurv.video_url}}" style="width: 100%" autoplay="autoplay" controls="controls" muted ng-show="controllerSurv.video_url!=''"></video>
+            </div>
+            <div class="screenPic" ng-show="!showType">
+              <img class="screenPic" src="{{controllerSurv.file_path}}" ng-show="controllerSurv.file_path!=''">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 0,
+    forceParse: 0,
+  });
+</script>

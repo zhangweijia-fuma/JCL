@@ -1,0 +1,211 @@
+<!-- RSU设备管理 -->
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .xDetailPos button
+  {
+    background: #4AB033;
+    color: white;
+    line-height: 5px;
+    /*width: 120px;*/
+  }
+
+  .editStyle
+  {
+    width: 180px; 
+    height: 20px; 
+    text-indent: 2px;
+    margin-left: 5px;
+  }
+
+  .selectStyle
+  {
+    text-align: center; 
+    width: 184px;
+    height: 24px; 
+    margin-left: 5px;
+  }
+
+  .rowUnit {
+    height: 40px;
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>RSU设备管理</li>
+            </ul>
+            <div class="form-group flright xDetailPos" style="top: 15px; margin-right: 20px;">           
+              <span class="ml10 "><button class="bton green"  ng-click="createDevice()"><i class="icon icon-list-alt"></i> 创建</button> </span>
+
+              <span class="ml10 " >
+                <button class="fileUpload bton green" style="cursor: pointer"><i class="icon icon-upload"></i> 批量导入
+                  <input type="file" class="upload" id="local_upload" nv-file-select uploader="uploader" multiple accept=".xls;*.xlsx">
+                </button>
+              </span>
+              <span class="ml10 "><button class="bton green"  ng-click="exportToFile()"><i class="icon icon-download-alt"></i> 导出</button> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group">
+          <span class="i-form-label ml10">项目名称：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="projectList.selected" theme="select2" ng-change="searchDevice()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (projectList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">设备状态：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="statusList.selected" theme="select2" ng-change="searchDevice()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (statusList | filter: $select.search) track by item.code">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">生产厂家：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="vendorList.selected" theme="select2" ng-change="searchDevice()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (vendorList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+      </div>      
+      <!-- 下拉列表 -->
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel"> RSU 清单 </label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="cItemBoxMine">
+        <table class="table table-bordered tbRow" >
+          <thead>
+            <tr>
+              <th style="width: 3%">序号</th>
+              <th style="width: 16%">项目名称</th>
+              <th style="width: 16%">设备编号</th>
+              <th style="width: 8%">IP地址1</th>
+              <th style="width: 8%">IP地址2</th>
+              <th style="width: 8%">安装日期</th>
+              <th style="width: 16%">安装地点</th>
+              <th style="width: 6%">当前状态</th>
+              <th style="width: 15%">生产厂家</th>
+              <th style="width: 3%">操作</th>
+            </tr>
+          </thead>
+          <tr><td class="ctdLine" colspan="19" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in deviceList" class="hovershow trHover" title="双击查看详情" ng-dblclick="updateInfo(item)" ng-click="getDeviceStatus(item)">
+              <td class="" style="text-align: center;">{{item.no}}</td>
+              <td class="" style="text-align: center;">{{item.project_name}}</td>
+              <td class="" style="text-align: center;">{{item.device_code}}</td>
+              <td class="" style="text-align: center;">{{item.ip_address1}}</td>
+              <td class="" style="text-align: center;">{{item.ip_address2}}</td>
+              <td class="" style="text-align: center;">{{item.install_date}}</td>
+              <td class="" style="text-align: center;">{{item.install_location}}</td>
+              <td class="" style="text-align: center;" bgcolor="{{item.color}}">{{item.status_name}}</td>
+              <td class="" style="text-align: center;">{{item.vendor_name}}</td>
+              <td class="showdelete" >
+                <i class="icon icon-edit" title="详情" ng-click="updateInfo(item)"></i>
+                <i class="icon icon-trash" title="删除" ng-click="showDeleteDlg(item)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="row text-center floatRight">
+          <ul class="pager" id="pager">
+            <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+            <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+            <li ><a href="" id="beforeSL">...</a></li>
+            <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+            <li ><a href="" id="afterSL">...</a></li>
+            <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+            <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+            <li class="xColor" ng-show="totalPage">|</li>
+            <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel"> RSU 设备状态趋势图 </label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+
+        <div class="cItemBoxMine" ng-show="showStatusInfo==true">
+          <div ng-controller="rsuDeviceManageCtrl">
+            <highchart config="deviceStatusChart"> </highchart>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd',
+  });
+</script>
+
+

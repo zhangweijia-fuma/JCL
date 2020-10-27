@@ -1,0 +1,185 @@
+<!-- 系统运行状态 -->
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+.showStatus{
+    width: 148px;
+    float: left;
+    display: inline;
+    margin-top: 20px;
+}
+
+#a{
+    width: 140px;
+    padding-top: 5px;
+}
+
+#b{
+    text-align: left;
+    width: 120px;
+    margin-top: 10px;
+}
+
+.showStatus span{
+  cursor: pointer;
+  display: block;
+  padding-top: 6px;
+  padding-left: 20px;
+}
+
+.showStatus img{
+  width: 100px; 
+  float: left; 
+  margin-left: 6px; 
+  margin-top: 5px;
+}
+
+.showStatus3{
+  width:148px;
+  float: left;
+}
+
+.showStatus3 span{
+  cursor: pointer;
+}
+
+.blockUnit{
+  font-size: 14px;
+}
+
+.chartShow{
+  top: 160px; 
+/*  overflow-y: auto; 
+  overflow-x: hidden;*/
+  width: 100%;
+  font-size: 14px;
+}
+
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>系统运行状态</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group" ng-if="lineMode">
+          <span class="i-form-label ml10">运营线路：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="lineList.selected" theme="select2" ng-change="chooseLine(lineList.selected)" style="width: 161px">
+              <ui-select-match placeholder="选择全部">
+                <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+                <ui-select-choices repeat="item in (lineList | filter: $select.search) track by item.name">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">选择类别：</span>
+          <input type="radio" name="showType" value="station" style="margin-top: 10px; margin-left:20px" ng-click="chooseShowType(1)" checked> 车站
+          <input type="radio" name="showType" value="train" style="margin-top: 10px; margin-left:20px" ng-click="chooseShowType(2)"> 列车
+        </div>
+ 
+        <!-- <div class="form-group" ng-if="showTrain">
+          <span class="i-form-label ml10">运营列车：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="trainList.selected" theme="select2" ng-change="searchByTrain()" style="width: 161px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (trainList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div> -->
+
+      </div>
+      <!-- 下拉列表 -->
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel">{{currentLine.name}}</label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div >
+
+      <div class="chartShow " ng-if="showStation"  >
+        <div class="">
+          <div class=""  ng-repeat="stationList in allStationList">
+            <div class="" ng-repeat="station in stationList track by $index" style="display: inline; ">
+              <div class="showStatus">
+                <div class="">
+                  <label>{{station.name}}&#12288;</label>
+                </div>
+                <div id = "a">
+                    <i class="icon icon-circle" style="color: {{station.color}}; float: left; "></i>
+                    <img  src="/resource/images/line2.png">
+                </div>
+                <div id="b">
+                  <span ng-if="station.controller[0].show" title="双击显示详情" style="color:{{station.controller[0].color}}; font-weight:{{station.controller[0].fontWeight}};" ng-dblclick = "showControllerDetial(station.controller[0])"><i class="icon icon-circle" style="color:{{station.controller[0].color}};"></i> 站厅控制器</span>
+                  <span ng-if="station.controller[1].show" title="双击显示详情" style="color:{{station.controller[1].color}}; font-weight:{{station.controller[1].fontWeight}};" ng-dblclick = "showControllerDetial(station.controller[1])"><i class="icon icon-circle" style="color:{{station.controller[1].color}};"></i> 上行控制器</span>
+                  <span ng-if="station.controller[2].show" title="双击显示详情" style="color:{{station.controller[2].color}}; font-weight:{{station.controller[2].fontWeight}};" ng-dblclick = "showControllerDetial(station.controller[2])"><i class="icon icon-circle" style="color:{{station.controller[2].color}};"></i> 下行控制器</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+
+      <div class="chartShow pos" ng-if="showTrain">
+        <div class="" style="margin-top: 20px;">
+          <div class="" ng-repeat="train in trainList track by $index" style="width: 180px; display: inline; line-height: 40px;" >
+            <div class="showStatus3">
+              <span><i class="icon icon-circle" title="双击显示详情" ng-dblclick = "showControllerDetial(train.controller[0])" style="color: {{train.controller[0].color}};"></i> </span>
+              <span style="width: 56px;">{{train.name}}</span>
+              <span><i class="icon icon-circle" title="双击显示详情" ng-dblclick = "showControllerDetial(train.controller[1])" style="color: {{train.controller[1].color}};"></i> </span>
+            </div>
+          </div>
+        </div>      
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 0,
+    forceParse: 0,
+    format: 'yyyy-mm-dd hh:ii',
+  });
+</script>
+
+

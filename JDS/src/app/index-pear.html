@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html ng-app="firstApp" xmlns:wb="http://open.weibo.com/wb" style="height: 100%">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>{{projConfig.projNameZh}}</title>
+    <link rel="stylesheet" type="text/css" href="/resource/styles/xcss.css">
+    <link rel="stylesheet" type="text/css" href="/resource/styles/xindex.css">
+    <link rel="stylesheet" type="text/css" href="/resource/styles/zui.me.contract.css">
+    <link rel="stylesheet" type="text/css" href="/libs/zui/css/mainManage.css">
+    <link href="/libs/datetimepicker/datetimepicker.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resource/iconfonts/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="/resource/styles/zindex.css">
+    <link rel="stylesheet" type="text/css" href="/resource/styles/JamesSoft.css">
+    <link rel="stylesheet" type="text/css" href="/libs/select2/select.css">
+    <link rel="stylesheet" type="text/css" href="/libs/select2/select2.css">
+  </head>
+
+  <body style="height: 100%">
+    <div style="display: none;" id="useObject"></div>
+    <div style="display: none;" id="useObjectR"></div>
+    <div class="container-fluid" ng-controller="hdrCtrl" style="height: 100%">
+      <div class="xBox" style="height: 100%">
+        <!-- body 样式设置了宽度 -->
+        <div class="row clear_after" style="height: 100%">
+          <div class="col-md-12" style="height: 100%">
+            <nav class="navbar navbar-default" role="navigation" >
+              <div class="navbar-header navLeft" style="width: {{projConfig.navLeftWidth}}">
+                <a href="#/account_detail">
+                  <img src="{{projConfig.ownerLogoURL}}" id="" style="width: {{projConfig.navPicWidth}}; height: 50px; margin-top: 0px; margin-left: 0px;">
+                  <span style="margin-left: 5px">{{projConfig.ownerName}}</span>
+                </a>
+              </div>
+
+              <div class="collapse navbar-collapse navRight" id="bs-example-navbar-collapse-1" style="width: {{projConfig.navRightWidth}}">
+                <ul class="nav navbar-nav">
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right xNavUl clear_after" id="navbar-right">
+                  <!--<li class="active">
+                    <a href="javascript:void(0);">PIS</a>
+                  </li>-->
+                  <li class="dropdown xNavUlLi" id="xNavUlLi">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="/resource/images/default.png" id="index_avatar" alt="头像"/>
+                    <span title="{{user.name}}" style="margin-left: 5px" class="myName">{{user.name}}</span><strong class="caret xArrow" ></strong>
+                    </a>
+                    <ul class="navRightUlTop">
+                      <li>
+                        <a href="#/toDo">个人信息</a>
+                      </li>
+                      <li class="divider">
+                      </li>
+                      <li>
+                        <a href="javascript:void(0);" onclick="$('#logout').modal('show');">退出系统</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            <div class="row main-wraper clear_after" style="height: 100%">
+              <div class="row main-view mainViewBg" style="overflow: hidden; display: flex; margin-top: 0px; height: 96%" >
+                <div class="left-nav clear_after" ng-controller="lmenuCtrl" style="width: 200px; flex: none;" ng-if="ProjectName!='stock'">
+                  <div id='left_menus_div'>
+                  </div>
+                </div>
+                <div class="content-view" id="winHeight" style="float: left; flex: 1; background-color: black; padding: 0px 0px;" ng-if="ProjectName=='stock'">
+                  <div ng-view>
+
+                  </div>
+                </div>
+                <div class="content-view" id="winHeight" style="float: left; flex: 1;" ng-if="ProjectName!='stock'">
+                  <div ng-view>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clear">
+
+              <div class="modal" id="logout" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true">
+                <div class="xMask"></div>
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="resizedModalTitle"><i class="icon-off"></i> 提示</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form class="form-horizontal" role="form" method='post'>
+                    <div class="container" style="text-align: center;">
+                      <p style="">您确定要退出当前系统吗</p>
+                    </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-mini green" data-dismiss="modal" ng-click="onLogout()">确认</button>
+                    <button type="button" class="btn btn-mini green btn-default" data-dismiss="modal">取消</button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="width:100%; text-align: center;">
+            <a href="javascript:void(0);" style="font-size: 12px;">JamesSoft提供技术支持</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <script src="libs/cryptojslib/rollups/md5.js"></script>
+    <script src="libs/cryptojslib/rollups/aes.js"></script>
+    <script type="text/javascript" src="libs/zui/lib/jquery/jquery.js"></script>
+    <script type="text/javascript" src="libs/zui/lib/jquery/jquery-html5Validate-min.js"></script>
+    <script type="text/javascript" src="libs/zui/js/zui.min.js"></script>
+
+    <script type="text/javascript" src="libs/angular/angular/angular.js"></script>
+    <script type="text/javascript" src="libs/angular/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="libs/angular/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="libs/angular/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="libs/angular/angular-tree/angular-tree-control.js"></script>
+    <script type="text/javascript" src="libs/angular/angular-file-upload/angular-file-upload.js"></script>
+    <script type="text/javascript" src="libs/select2/select.js"></script>
+    <script type="text/javascript" src="libs/datetimepicker/datetimepicker.js" charset="utf-8"></script>
+
+    <script type="text/javascript" src="libs/common/function.js"></script>
+    <script type="text/javascript" src="libs/common/fileUploader.js"></script>
+    
+    <script type="text/javascript" src="libs/common/ctrlBase.js"></script>
+    <script type="text/javascript" src="libs/common/pager.js"></script>
+    <script type="text/javascript" src="libs/common/dialog.js"></script>
+    <script type="text/javascript" src="libs/common/angular/svcCommon.js"></script>
+    <script type="text/javascript" src="libs/common/angular/drtCommon.js"></script>
+    <script type="text/javascript" src="libs/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="libs/highcharts/highcharts-3d.js"></script>
+    <script type="text/javascript" src="libs/highcharts/theme.js"></script>
+    <script type="text/javascript" src="libs/highcharts/highcharts-ng.js"></script>
+
+    <!-- 包含JS文件 -->
+    <script src="/config.js"></script>
+    <script src="/app.js"></script>
+
+    <!-- system -->
+    <script type="text/javascript" src="system/scripts/accountManage.js"></script>
+    <script type="text/javascript" src="system/scripts/dataDictionaryManage.js"></script>
+    <script type="text/javascript" src="system/scripts/menuManage.js"></script>
+
+    <script type="text/javascript" src="system/scripts/areaCodeManage.js"></script>
+    <script type="text/javascript" src="system/scripts/systemUserManage.js"></script>
+
+    <script type="text/javascript" src="system/scripts/operationLog.js"></script>
+    <script type="text/javascript" src="system/scripts/groupManage.js"></script>
+
+    <!--public-->
+    <script type="text/javascript" src="public/scripts/ctrIndex.js"></script>
+    
+    <!-- 百度地图 -->
+    <!-- <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=sEKdIjahGM3zyXoXx2FSvVbT7NhcSrrT&s=1"></script> -->
+
+    <!-- PIS 部分 -->
+    <script type="text/javascript" src="pis/scripts/lineManage.js"></script>
+    <script type="text/javascript" src="pis/scripts/controllerManage.js"></script>
+    <script type="text/javascript" src="pis/scripts/ctrlLogManage.js"></script>
+    <script type="text/javascript" src="pis/scripts/programManage.js"></script>
+    <script type="text/javascript" src="pis/scripts/messageManage.js"></script>
+    <script type="text/javascript" src="pis/scripts/lineStatus.js"></script>
+    <script type="text/javascript" src="pis/scripts/videoSurv.js"></script>
+
+    <!-- IOT部分 -->
+    <script type="text/javascript" src="iot/scripts/gpsModuleManage.js"></script>
+
+    <!-- 电子地图 -->
+    <script type="text/javascript" src="pisAudio/scripts/elecMap.js"></script>
+
+    <!-- 智能检修 -->
+    <script type="text/javascript" src="mro/scripts/vendorManage.js"></script>
+    <script type="text/javascript" src="mro/scripts/propertyManage.js"></script>
+    <script type="text/javascript" src="mro/scripts/deviceTypeManage.js"></script>
+
+    <!-- Stock -->
+    <!-- <script type="text/javascript" src="stock/scripts/stockBase.js"></script> -->
+    <script type="text/javascript" src="stock/scripts/stockManage.js"></script>
+
+    <!-- OA -->
+    <script type="text/javascript" src="oa/scripts/oaBulletinBoard.js"></script>
+
+    <script src="js.js"></script>
+  </body>
+</html>
+
+<script type="text/javascript">
+
+  <!--回顶部-->
+  $(document).ready(function () {
+  $("#returntop").click(function () {
+    if (scroll == "off") return;
+    $("html,body").animate({scrollTop: 0}, 600);
+  });
+  });
+  var exitsystem = function () {
+  sessionStorage.removeItem("strUser");
+  sessionStorage.removeItem("authToken");
+  window.location.href = "/login.html"
+  };
+  var gotoLogin=function(status) {
+    if (status==401) {
+    window.location.href = "/login.html"
+    }
+  }
+</script>

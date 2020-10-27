@@ -1,0 +1,185 @@
+<!-- 日志查询 -->
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+         
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>控制器日志查询</li>
+            </ul>
+            <div class="form-group flright xHandle" style="top: 15px;">           
+              <span class="ml10 "><button class="bton green"  ng-click="exporLogToFile()"><i class="icon icon-download-alt"></i> 导出日志</button> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group" ng-if="lineMode">
+          <span class="i-form-label ml10">所在线路：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="lineList.selected" theme="select2" ng-change="searchByLine()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+                <ui-select-choices repeat="item in (lineList | filter: $select.search) track by item.name">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">所在车站：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="stationList.selected" theme="select2" ng-change="searchByStation()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (stationList | filter: $select.search) track by item.name">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">所在车辆：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="trainList.selected" theme="select2" ng-change="searchByTrain()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (trainList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">控制器：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="controllerList.selected" theme="select2" ng-change="searchByController()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (controllerList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>   
+
+        <div class="form-group">
+          <span class="i-form-label ml10">开始时间：</span>
+          <div class="i-form-field search">
+            <input type="text" class="form-date form-control choosetime" style="text-indent: 2px;width: 300px;" ng-model="start_time" data-date-format="yyyy-mm-dd hh:ii" placeholder="开始时间" ng-change="searchByTime()"  >
+            <!-- <i class="icon icon-minus-sign" style="cursor: pointer;" ng-click="resetTime(1)"></i> -->
+            <span class="cancel" ng-click="resetTime(1)">&times;</span>
+          </div>
+          
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">结束时间：</span>
+          <div class="i-form-field search">
+            <input type="text" class="form-date form-control choosetime" style="text-indent: 2px; width: 300px;" ng-model="end_time" data-date-format="yyyy-mm-dd hh:ii" placeholder="结束时间" ng-change="searchByTime()" >
+            <span class="cancel" ng-click="resetTime(2)">&times;</span>
+          </div>
+        </div>
+      </div>
+      <!-- 下拉列表 -->
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel"> 控制器日志清单 </label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+
+      <div class="cItemBoxMine">
+        <table class="tbRow" border="0" cellpadding="0" cellspacing="0" style="width: 100%; table-layout: inherit;">
+          <thead>
+            <tr>
+              <th style="width: 6%">No.</th>
+              <th style="width: 10%">控制器编号</th>
+              <th style="width: 15%">时间</th>
+              <th style="width: 10%">级别</th>
+              <th style="width: 10%">类别</th>
+              <th style="width: 14%">标题</th>
+              <th style="width: 35%">内容</th>
+              
+            </tr>
+          </thead>
+          <!-- <tr><td class="ctdLine" colspan="15" rowspan="1" headers=""></td></tr> -->
+          <tr><td class="ctdLine" colspan="15" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in logList" class="hovershow trHover" style="color: {{item.color}}">
+              <td class="" style="text-align: center;">{{item.no}}</td>
+              <td class="" style="text-align: center;">{{item.controller_code}}</td>
+              <td class="" style="text-align: center;">{{item.sendTime}}</td>
+              <td class="" style="text-align: center;">{{item.level_name}}</td>
+              <td class="" style="text-align: center;">{{item.type_name}}</td>
+              <td class="" style="text-align: left;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.title}}</td>
+              <td class="" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{item.content}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+
+    <div class="footer">
+      <ul class="pager" id="pager">
+        <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+        <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+        <li ><a href="" id="beforeSL">...</a></li>
+        <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+        <li ><a href="" id="afterSL">...</a></li>
+        <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+        <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+        <li class="xColor" ng-show="totalPage">|</li>
+        <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 0,
+    forceParse: 0,
+    format: 'yyyy-mm-dd hh:ii',
+  });
+</script>
+
+

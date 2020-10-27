@@ -1,0 +1,187 @@
+
+<style>
+.break{
+    word-break: break-all;  
+    word-wrap: break-word; 
+}
+.xDetailPatBoxData .xDetailPatBoxDataTop div{
+  width:25%;
+}
+.xDetailPat a{
+  background: #4AB033;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 13px;
+}
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request" id="html5Form" validate>
+      
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail">
+              <li ng-class="{true: 'active'}[tab==0]" ng-click="changeTab(0)"><a href="#/accountManage">账户管理</a></li>
+              <li><span>></span></li>
+              <li><a href="" style="color: #4AB033;">创建账户</a></li>
+              <span  class="ml10" style="float:right;margin-left: 10px;"> 
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="goback()"><i class="icon icon-circle-arrow-left"></i> 返回</button>
+                <button type="button" class="bton green" data-dismiss="modal" ng-click="save()"><i class="icon icon-check"></i> 确定</button>
+              </span>
+            </ul>            
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row">
+          <div class="form-group xDetailPat">
+            <label class="i-form-label ml10 inline-title">基本信息</label>
+            <div class="xTriangle"></div>
+            <span  class="ml10" style="float:right;margin-left: 10px;"> 
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content xDetailPatBox clear_after">
+        <div class="xDetailPatBoxImgg">
+          <img src="{{account.photo_path}}">
+            <!-- <a  class="docbtn green" ng-click='changephoto()'> 上传头像</a> -->
+        </div>
+
+        <div class="xDetailPatBoxData" style="width:896px;">
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div><span>用&thinsp;   户&thinsp;   名：</span>
+              <input type="text" required class="form-control xEdit" ng-model="account.user_name" id="user_name" >
+            </div>
+
+            <div><span>用户姓名：</span>
+              <input type="text" required class="form-control xEdit" ng-model="account.name" id="name" >
+            </div>
+
+            <div style="width:50%;"><span>用&thinsp;  户&thinsp;  组：</span>
+              <input type="text" class="form-control xEdit" ng-model="account.groupNameList" style="width: 260px;" id="grouplist" readonly>
+              <button type="button" class="bton green" data-dismiss="modal" ng-click="selectUserGroup()" style="font-size: small;">选择用户组</button>
+            </div>  
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div><span>密&#12288;&#12288;码：</span>
+              <label for="secret">密码长度不能小于6位</label>
+              <input id="password"  type="password"  name="secret" ng-model="account.password" class="form-control xEdit" data-min="6" required>
+            </div>
+            <div><span>确认密码：</span>
+              <input id="password1" type="password"  ng-model="account.password1" type="text" class="form-control xEdit" data-min="6" required>
+            </div>
+
+          </div>
+        
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div id="smallsize"><span>所在公司：</span>
+              <input type="text" required class="form-control xEdit" ng-model="account.company" id="company" >
+            </div>
+            
+            <div><span>所在部门：</span>
+              <input type="text" required class="form-control xEdit" ng-model="account.dept_name" id="dept_name" >
+            </div>
+
+            <div><span>电话号码：</span>
+              <input type="text" required class="form-control xEdit" ng-model="account.mobile_phone1" id="phone1" >
+            </div>
+
+            <div><span>电话号码：</span>
+              <input type="text" required class="form-control xEdit" ng-model="account.mobile_phone2" id="phone2" >
+            </div>
+
+            <div><span>电子邮件：</span>
+              <input type="text" required class="form-control xEdit" ng-model="account.mailbox">
+            </div>
+            
+            <div style="width: 25%"><span>性&#12288;&#12288;别：</span>
+              <input type="radio" name="sex" value="1" ng-model="account.sex" required checked >男
+              <input type="radio" name="sex" value="2" ng-model="account.sex" style="margin-left: 10px">女
+            </div>
+            
+            <div style="width: 50%"><span>身&thinsp;   份&thinsp;   证：</span>
+              <input type="text" required class="form-control xEdit" ng-model="account.id_no" id="id_no" style="width: 77%">
+            </div>
+
+          </div>
+
+          <div class="xDetailPatBoxDataTop" style="margin-bottom: 5px;">
+            <div id="smallsize" style="width: 50%"><span>地&#12288;&#12288;址：</span>
+              <input type="text" required class="form-control xEdit" ng-model="account.address1" id="address1" style="width: 345px;margin-left: 2px;">
+            </div>
+
+            <div id="smallsize" style="width: 50%"><span>地&#12288;&#12288;址：</span>
+              <input type="text" required class="form-control xEdit" ng-model="account.address2" id="address2" style="width: 345px; margin-left: 2px;">
+            </div>
+          </div>
+        </div>
+      
+        <div class="xDetailDesc">
+          <span>个人简介：</span>
+          <textarea ng-model="account.description" style="width:100%;height:150px;resize: vertical;"></textarea>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+<div class="modal" id="selectUserGroup" tabindex="-1" role="dialog" aria-labelledby="resizedModalTitle" aria-hidden="true" >
+  <div class="xMask"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="resizedModalTitle">
+          <i class="icon icon-warning-sign"></i> 用户组<span id="warning" style="font-size:13px;">(至少选择一项)</span>
+        </h4>
+      </div>
+    
+      <div class="modal-body" style="min-height: 100px;">
+        <form class="form-horizontal" role="form" method='post'>
+          <div class="container" style="margin: 15px;">
+            <form>
+              <div  ng-repeat="group in groupList track by $index"  >
+                <div class="xMYSI" title="{{group.name}}">
+                   <input type="checkbox" name="group" value="{{group.name}} " id="{{group.id}} "/>
+                   <span>{{group.name}}</span>
+                 </div>
+               </div> 
+            </form>
+          </div>
+        </form>
+      </div>
+    
+      <div class="modal-footer" style="clear: both;">
+        <button type="button" class="bton green"  ng-click="saveUserGroup()">确定</button>
+        <button type="button" class="bton green" data-dismiss="modal" style="margin-left: 20px">取消</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+        {
+      language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            format: 'yyyy-mm-dd'
+        });
+</script>

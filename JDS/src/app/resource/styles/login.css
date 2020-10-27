@@ -1,0 +1,153 @@
+html{
+    height: 100%;
+}
+body{
+    width: 100%;
+    height: 100%;
+}
+.homepage{
+    width: 100%;
+    height: 100%;
+    background-image: url("/resource/images/background.png");
+    background-repeat:no-repeat;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+.header{
+    height: 50px;
+    width: 100%;
+    padding-top: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background-image: url("/resource/images/line_01_02.png");
+    background-repeat: no-repeat;
+}
+.header>img{
+    margin-left: 30px;
+}
+
+.loginOut{
+    width: 100%;
+    height:auto;
+    position: relative;
+    margin-top: 10%;
+}
+
+.login {
+    position: absolute;
+    left: 50%;
+    margin-left: -225px;
+    width: 450px;
+    height: 410px;
+    background-image: url("/resource/images/login222_03.png");
+    background-size: 100%;
+}
+.loginBoder{
+    padding: 10px;
+    height: 390px;
+    width: 430px;
+}
+.frmLogin{
+    width: 330px;
+    margin: 0 auto;
+}
+.logo{
+    width: 100%;
+    height: 100px;
+    padding-top: 10px;
+    line-height: 100px;
+    text-align: center;
+}
+.input-group-user{
+    margin: 11px 20px;
+    height: 20px;
+    width: 20px;
+}
+/*********************8*/
+.mylogin{
+    width: 100%;
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+.myUsername{
+    border-bottom: 1px solid #FFFFFF;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.myPassword{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.myUsername,.myPassword{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background: #BCBCBC;
+}
+.myUsername>label,.myPassword>label{
+    height: 50px;
+    width: 30px;
+    padding-left: 20px;
+    line-height: 50px;
+    color: #FFFFFF;
+}
+.myUsername>label>span, .myPassword>label>span{
+    padding-left: 10px;
+}
+.myUsername>input, .myPassword>input{
+    border: none;
+    outline: none;
+    background: #BCBCBC;
+    width: 356px;
+}
+input:-webkit-autofill{
+-webkit-box-shadow:0 0 0px 1000px #BCBCBC inset;
+border: 1px solid #BCBCBC !important;
+}
+
+.loginsTip{
+    height: 30px;
+    overflow: hidden;
+    color: red;
+    font-size: 12px;
+}
+.loginsTip>div{
+    float: left;
+}
+
+.regLink{
+    width: 100%;
+    font-size: 14px;
+    line-height:15px;
+    position: relative;
+}
+.regLink>a{
+    position: absolute;
+    right: 0;
+    color: #587DE2;
+}
+.loginButton{
+    width: 100%;
+    margin-top:40px;
+    line-height:40px;
+    font-size:18px;
+    letter-spacing:5px;
+    background-color:#587DE2 ;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    box-shadow: 5px 5px 5px #888888;
+}
+.downTip{
+    width: 100%;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+}
+.downTip a{
+    position: fixed;
+    bottom: 15px;
+    margin-left: -100px;
+    letter-spacing: 2px;
+}

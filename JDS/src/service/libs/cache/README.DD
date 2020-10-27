@@ -1,0 +1,44 @@
+# 400 【PYTHON】redis缓存接口
+
+<br/>
+
+## 接口说明
+后台数据缓存
+
+## 代码说明
+代码路径\src\service\libs\cache
+
+## 使用范例
+
+### 1 设置/获取缓存
+
+##### 函数说明：
+
+	from cache.redisCache import Cache
+
+	key = "kkkkkkkkkkkkkk"
+	value = "vvvvvvvvvvv"
+	obj = {
+		"ooooooooooooo" = "mmmmmmmmmmmmm"
+	}
+	expire = 100
+
+	c = Cache()
+
+	c.setItem(key, value, expire)
+	c.getItem(key)
+
+	c.setObject(key, obj, expire)
+	c.getObject(key)
+
+	c.setExpire(key, expire)
+	c.delete(key)
+
+##### 参数说明：
+> key：缓存对象名称
+> value：字符参数
+> obj：可被json转换为字符的对象参数
+> expire：超时时间，超时后自动删除；0为永不超时
+
+##注意事项
+代码未经测试

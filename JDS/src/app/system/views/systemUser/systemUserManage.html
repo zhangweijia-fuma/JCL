@@ -1,0 +1,94 @@
+<!-- 系统用户管理主页 -->
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .tds{
+    margin:15px;
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData()" >
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>系统用户管理</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 20px;">
+            <label class="clabel">系统用户清单</label>
+            <div class="cTriangle"></div>
+            <div class="form-group flright xHandle" style="top: 2px; right: 2px;">
+              <span class="ml10 "><button class="bton green"  ng-click="createService()"><i class="icon icon-list-alt"></i> 创建</button> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cItemBoxMine">
+        <table class="tbRow" border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+          <thead>
+            <tr>
+              <th style="width: 5%">No.</th>
+              <th style="width: 20%">系统用户中文名称</th>
+              <th style="width: 30%">系统用户英文名称</th>
+              <th style="width: 30%">业务系统名称</th>
+              <th style="width: 30%">管理员用户名</th>
+              <th style="width: 5%"></th>
+            </tr>
+          </thead>
+          <tr><td class="ctdLine" colspan="15" rowspan="1" headers=""></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in systemUserList" class="hovershow trHover" ng-dblclick="OnUpdate(item)">
+              <td class=" tds" style="text-align: center; margin: 5px;">{{item.no}}</td>
+              <td class=" tds" style="text-align: center;">{{item.user_name}}</td>
+              <td class=" tds" style="text-align: center;">{{item.user_name_en}}</td>
+              <td class=" tds" style="text-align: center;">{{item.user_service}}</td>
+              <td class=" tds" style="text-align: center;">{{item.admin_account_name}}</td>
+              <td class="showdelete">
+                <i class="icon icon-edit" style="margin-left: 0px" title="详情" ng-click="OnUpdate(item)"></i>
+              </td>
+              <td class="showdelete">
+                <i class="icon icon-trash" title="删除" ng-click="showDeleteDlg(item)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footer">
+        <ul class="pager" id="pager" style="margin-right: 10px;">
+          <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+          <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+          <li ><a href="" id="beforeSL">...</a></li>
+          <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+          <li ><a href="" id="afterSL">...</a></li>
+          <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+          <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+          <li class="xColor" ng-show="totalPage">|</li>
+          <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+        </ul>
+      </div>
+
+    </form>
+  </div>
+</div>
+

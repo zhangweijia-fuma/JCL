@@ -1,0 +1,223 @@
+<!-- 节目文件管理 -->
+
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+  .xDetailPos button
+  {
+    background: #4AB033;
+    color: white;
+    line-height: 5px;
+    /*width: 120px;*/
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+        <div class="row ">
+          <div class="form-group">
+            <ul class="xDetail" style="height: 40px;line-height: 40px">
+              <li>节目文件管理</li>
+            </ul>
+            <div class="form-group flright xHandle" style="top: 15px;">
+              <span class="ml10 "><button class="bton green"  ng-click="exportToFile()"><i class="icon icon-list-alt"></i> 导出清单</button> </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group">
+          <span class="i-form-label ml10">文件名称：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="nameList.selected" theme="select2" ng-change="search()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (nameList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <span class="i-form-label ml10">上传人员：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="uploaderList.selected" theme="select2" ng-change="search()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (uploaderList | filter: $select.search) track by item.id">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">上传日期：</span>
+          <div class="i-form-field search">
+            <input type="text" class="form-date form-control choosetime" style="text-indent: 2px;width: 300px;" ng-model="upload_time" data-date-format="yyyy-mm-dd" placeholder="上传时间" ng-change="search()">
+            <span class="cancel" ng-click="resetTime()">&times;</span>
+          </div>
+        </div>
+
+      </div>
+      <!-- 下拉列表 -->
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel">安全垫片</label>
+            <div class="cTriangle"></div>
+            <div class="form-group flright xDetailPos">
+              <button class="fileUpload bton green" style="cursor: pointer; width: 120px"><i class="icon icon-upload"></i> 上传安全垫片
+                <input type="file" class="upload" id="local_upload" nv-file-select uploader="safeFileUploader" multiple accept=".mp4">
+              </button>
+            </div>
+          </div>  
+        </div>
+      </div>
+
+
+      <div class="cItemBoxMine">
+        <table class="tbRow" border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+          <thead>
+            <tr>
+              <th style="width: 10%">序号</th>
+              <th style="width: 35%">文件名称</th>
+              <th style="width: 35%">上传人</th>
+              <th style="width: 20%">上传日期</th>
+            </tr>
+          </thead>
+          <tr><td class="ctdLine" colspan="30" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in safeFileList" name="item{{item.id}}" class="hovershow trHover" ng-click="previewFile(item)">
+              <td class="" style="text-align: center;">{{item.no}}</td>
+              <td class="" style="text-align: center;">{{item.file_name}}</td>
+              <td class="" style="text-align: center;">{{item.uploader_name}}</td>
+              <td class="" style="text-align: center;">{{item.upload_date}}</td>
+              <td class="showdelete">
+                <i class="icon icon-trash" title="删除" ng-click="showDeleteFormatFileDlg(item)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row text-center floatRight">
+          <ul class="pager" id="pager2">
+            <li class="previous" ><a href="" id="first" ng-click="page2($event)">首页</a></li>
+            <li class="previous" ><a href="" id="prev" ng-click="page2($event)">上一页</a></li>
+            <li ><a href="" id="beforeSL">...</a></li>
+            <li ng-repeat="pageNumber in pager2.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page2($event)">{{pageNumber}}</a></li>
+            <li ><a href="" id="afterSL">...</a></li>
+            <li class="next"><a href="" id="next" ng-click="page2($event)">下一页</a></li>
+            <li class="next"><a href="" id="last" ng-click="page2($event)">尾页</a></li>
+            <li class="xColor" ng-show="totalPage2">|</li>
+            <li class="xColor" ng-show="totalPage2">共{{totalPage2}}页</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel">节目文件清单</label>
+            <div class="cTriangle"></div>
+            <div class="form-group flright xDetailPos">
+              <button class="fileUpload bton green" style="cursor: pointer; width: 120px"><i class="icon icon-upload"></i> 上传文件
+                <input type="file" class="upload" id="local_upload" nv-file-select uploader="uploader" multiple accept=".mp4">
+              </button>
+            </div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="cItemBoxMine">
+        <table class="tbRow" border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+          <thead>
+            <tr>
+              <th style="width: 10%">序号</th>
+              <th style="width: 35%">文件名称</th>
+              <th style="width: 35%">上传人</th>
+              <th style="width: 20%">上传日期</th>
+            </tr>
+          </thead>
+          <tr><td class="ctdLine" colspan="30" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in programFileList" name="item{{item.id}}" class="hovershow trHover" ng-click="previewFile(item)">
+              <td class="" style="text-align: center;">{{item.no}}</td>
+              <td class="" style="text-align: center;">{{item.file_name}}</td>
+              <td class="" style="text-align: center;">{{item.uploader_name}}</td>
+              <td class="" style="text-align: center;">{{item.upload_date}}</td>
+              <td class="showdelete">
+                <i class="icon icon-trash" title="删除" ng-click="showDeleteFormatFileDlg(item)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="row text-center floatRight">
+          <ul class="pager" id="pager">
+            <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+            <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+            <li ><a href="" id="beforeSL">...</a></li>
+            <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+            <li ><a href="" id="afterSL">...</a></li>
+            <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+            <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+            <li class="xColor" ng-show="totalPage">|</li>
+            <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel">节目预览</label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>      
+      <div class="cItemBoxMine">
+        <div style="width: 100%;" ng-show="showVideo">
+          <video src="{{video_url}}" style="width: 100%" autoplay="autoplay" controls="controls" muted></video>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.form-date').datetimepicker(
+  {
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  0,
+    autoclose: 1,
+    todayHighlight: 0,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: 'yyyy-mm-dd',
+  });
+</script>
+

@@ -1,0 +1,140 @@
+
+<style>
+  *{
+      margin: 0;
+      padding: 0;
+  }
+
+  .row{
+      overflow: inherit;
+  }
+
+</style>
+
+<div class="container" data-ng-init="initialData()">
+  <div class="row nomargin">
+    <form class="form-horizontal form-condensed default-form" name="formRequest" role="form" ng-model="request">
+
+      <div class="sub-title form-condensed inline-form">
+          <div class="row ">
+              <div class="form-group">
+                  <ul class="xDetail" style="height: 40px;line-height: 40px">
+                    <li>供应商管理</li>
+                  </ul>
+                  <div class="form-group flright xHandle" style="top: 15px;">           
+                    <span class="ml10 "><button class="bton green"  ng-click="createVendor()"><i class="icon icon-list-alt"></i> 创建</button> </span>
+                    <span class="ml10 "><button class="bton green"  ng-click="exportToFile()"><i class="icon icon-download-alt"></i> 导出</button> </span>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- 下拉列表 -->
+      <div class="row xAcount">
+        <div class="form-group">
+          <span class="i-form-label ml10">供应商：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="allVendorList.selected" theme="select2" ng-change="searchVendor()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (allVendorList | filter: $select.search) track by item.name">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">合作状态：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="statusTypeList.selected" theme="select2" ng-change="searchVendor()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (statusTypeList | filter: $select.search) track by item.name">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="i-form-label ml10">供应商类型：</span>
+          <div class="i-form-field">
+            <ui-select ng-model="vendorTypeList.selected" theme="select2" ng-change="searchVendor()" style="width: 300px">
+              <ui-select-match placeholder="选择全部">
+                  <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="item in (vendorTypeList | filter: $select.search) track by item.code">
+                  <span ng-bind="item.name"></span>
+              </ui-select-choices>
+            </ui-select>
+          </div>
+        </div>
+      </div>      
+      <!-- 下拉列表 -->
+
+      <div class="sub-title form-condensed inline-form" >
+        <div class="row">
+          <div class="form-group cDetailPat" style="margin-top: 60px;">
+            <label class="clabel">供应商清单</label>
+            <div class="cTriangle"></div>
+          </div>  
+        </div>
+      </div>
+
+      <div class="cItemBoxMine">
+        <table class="table table-bordered tbRow">
+          <thead>
+            <tr>
+              <th style="width: 5%">序号</th>
+              <th style="width: 15%">编号</th>
+              <th style="width: 25%">名称</th>
+              <th style="width: 8%">供应商类型</th>
+              <th style="width: 8%">合作状态</th>
+              <th style="width: 8%">开始日期</th>
+              <th style="width: 8%">结束日期</th>
+              <th style="width: 6%">操作</th>
+            </tr>
+          </thead>
+          <tr><td class="ctdLine" colspan="19" rowspan="1" style="padding: 0px; border-top: 1px solid #ccc;"></td></tr>
+
+          <tbody>
+            <tr ng-repeat="item in vendorList" class="hovershow trHover" title="双击查看详情" ng-dblclick="updateVendorInfo(item)">
+              <td class="" style="text-align: center;">{{item.no}}</td>
+              <td class="" style="text-align: center;">{{item.vendor_code}}</td>
+              <td class="" style="text-align: center;">{{item.name}}</td>
+              <td class="" style="text-align: center;">{{item.vendor_type_name}}</td>
+              <td class="" style="text-align: center;">{{item.status_name}}</td>
+              <td class="" style="text-align: center;">{{item.start_date}}</td>
+              <td class="" style="text-align: center;">{{item.end_date}}</td>
+              <td class="showdelete">
+                <i class="icon icon-edit" title="详情" ng-click="updateVednorInfo(item)"></i>
+                <i class="icon icon-trash" title="删除" ng-click="showDeleteVendorDlg(item)" ng-show="item.certifaction_status !='CO' && item.certifaction_status !='CS' "></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+
+  </div>
+
+
+  <div class="footer">
+    <ul class="pager" id="pager">
+      <li class="previous" ><a href="" id="first" ng-click="page($event)">首页</a></li>
+      <li class="previous" ><a href="" id="prev" ng-click="page($event)">上一页</a></li>
+      <li ><a href="" id="beforeSL">...</a></li>
+      <li ng-repeat="pageNumber in pager.pageNumbers"><a href=""class=""id="{{pageNumber}}" ng-click="page($event)">{{pageNumber}}</a></li>
+      <li ><a href="" id="afterSL">...</a></li>
+      <li class="next"><a href="" id="next" ng-click="page($event)">下一页</a></li>
+      <li class="next"><a href="" id="last" ng-click="page($event)">尾页</a></li>
+      <li class="xColor" ng-show="totalPage">|</li>
+      <li class="xColor" ng-show="totalPage">共{{totalPage}}页</li>
+    </ul>
+  </div>
+
+</div>
+
